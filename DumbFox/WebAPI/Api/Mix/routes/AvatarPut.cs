@@ -113,7 +113,8 @@ namespace WebAPI.Api.Mix.routes
                         Mouth = new AvatarProperty { SelectionKey = loadedProfile.Mouth, TintIndex = loadedProfile.MouthTintIndex, XOffset = loadedProfile.MouthXOffeset, YOffset = loadedProfile.MouthYOffeset },
                         Skin = new AvatarProperty { SelectionKey = loadedProfile.Skin, TintIndex = loadedProfile.SkinTintIndex, XOffset = loadedProfile.SkinXOffeset, YOffset = loadedProfile.SkinYOffeset },
                         Hat = new AvatarProperty { SelectionKey = loadedProfile.Hat, TintIndex = loadedProfile.HatTintIndex, XOffset = loadedProfile.HatXOffeset, YOffset = loadedProfile.HatYOffeset }
-                    }, Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), NotificationId = 1, SequenceNumber = 3}
+                    }, Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), NotificationId = (long)session["seqcencenumber"], SequenceNumber = (long)session["seqcencenumber"]
+                }
             };
 
             var json = JsonSerializer.Serialize(result, options);

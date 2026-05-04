@@ -528,7 +528,7 @@ namespace Common.Utils.Mix
     public class BaseUserRequest
     {
         public string UserId { get; set; } = "999999999999";
-        public long? Timestamp { get; set; }
+        public long? Timestamp { get; set; } = 0L;
     }
 
     public class BaseNotification
@@ -585,6 +585,13 @@ namespace Common.Utils.Mix
         public string? HashedUserId { get; set; }
     }
 
+    public class GetStateRequest : BaseUserRequest
+    {
+        public long? GameStateSince { get; set; } = 10L;
+        public string? ClientVersion { get; set; }
+        public long? AvatarSince { get; set; } = 0L;
+    }
+
     public class GetStateResponse : BaseResponse
     {
         public List<User> Users { get; set; } = [];
@@ -605,6 +612,12 @@ namespace Common.Utils.Mix
         public long NotificationSequenceCounter { get; set; } = 10;
         public int NotificationSequenceThreshold { get; set; } = 7000;
         public int NotificationIntervalsJitter { get; set; } = 500;
+    }
+
+    public class GetNotificationsSinceSequenceRequest : BaseUserRequest
+    {
+        public long SequenceNumber { get; set; } = 10L;
+        public List<long> ExcludeNotificationSequenceNumbers { get; set; } = new List<long>();
     }
 
     public class GetNotificationsResponse : BaseResponse

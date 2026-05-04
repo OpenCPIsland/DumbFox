@@ -48,8 +48,8 @@ public class ChatThreadGameStateMessagePut
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<GameStateChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.GameName, "gamename", "isgame", ChatMessageTypes.GAME_STATE),
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = obj.ChatThreadId
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"]
             }
         };
 

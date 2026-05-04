@@ -48,8 +48,8 @@ public class ChatThreadPhotoMessagePut
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<PhotoChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.UgcMediaId, "photoflavorid", "isphoto", ChatMessageTypes.PHOTO),
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = obj.ChatThreadId
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"]
             }
         };
 

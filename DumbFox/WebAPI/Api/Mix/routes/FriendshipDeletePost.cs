@@ -66,8 +66,8 @@ public class FriendshipDeletePost
             {
                 FriendUserId = obj.FriendUserId,
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = friend.Id,
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"],
             }
         };
 

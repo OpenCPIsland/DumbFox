@@ -48,8 +48,8 @@ public class ChatThreadStickerMessagePut
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<StickerChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.ContentId, "contentid", "isticker", ChatMessageTypes.STICKER),
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = obj.ChatThreadId
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"]
             }
         };
 

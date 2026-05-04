@@ -34,6 +34,7 @@ namespace WebAPI.Api.Mix.routes
             };
 
             var session = await DatabaseManager.GetSessionAccessToken(ctx.Request.Headers["X-Mix-OneIdToken"].ToString());
+            GetStateRequest obj = JsonSerializer.Deserialize<GetStateRequest>((string)ctx.Items["DecryptedModel"]);
 
             if (session == null)
             {
@@ -54,7 +55,8 @@ namespace WebAPI.Api.Mix.routes
                 Friendships = await DatabaseManager.getFriendships((string)session["swid"]),
                 FriendshipInvitations = await DatabaseManager.getFriendshipInvations((string)session["swid"]),
                 Alerts = await DatabaseManager.getAlerts((string)session["swid"]),
-                ChatThreads = await DatabaseManager.getChatThreads((string)session["swid"], (string)session["aesSecret"])
+                ChatThreads = await DatabaseManager.getChatThreads((string)session["swid"], (string)session["aesSecret"]),
+                NotificationSequenceCounter = (long)session["seqcencenumber"]
             };
 
             var json = JsonSerializer.Serialize(result, options);

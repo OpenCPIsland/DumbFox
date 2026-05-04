@@ -80,13 +80,13 @@ namespace WebAPI.Api.Mix
 
                 PathString path = ctx.Request.Path;
 
-                if (path.StartsWithSegments("/mix/notifications/sinceSequence") || path.StartsWithSegments("/notifications/sinceSequence"))
+                /*if (path.StartsWithSegments("/mix/notifications/sinceSequence") || path.StartsWithSegments("/notifications/sinceSequence"))
                 {
                     JsonElement obj2 = JsonSerializer.Deserialize<JsonElement>(decrypted);
                     ctx.Items["DecryptedJson"] = obj2;
                     ctx.Items["DecryptedModel"] = decrypted;
                     return await next(context);
-                }
+                }*/
                 Console.WriteLine($"[WebAPI][MIX] Decrypted body: {decrypted}");
                 JsonElement obj = JsonSerializer.Deserialize<JsonElement>(decrypted);
 

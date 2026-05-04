@@ -38,8 +38,8 @@ public class ChatThreadGagMessagePut
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<GagChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.ContentId, "contentid", "isgag", ChatMessageTypes.GAG),
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = obj.ChatThreadId
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"]
             }
         };
 

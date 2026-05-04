@@ -94,8 +94,8 @@ public class FriendshipPut
                 FriendshipInvitationId = friend.Id,
                 IsTrusted = friend.istrusted,
                 Created = friend.timestamp,
-                NotificationId = friend.Id,
-                SequenceNumber = 3
+                NotificationId = (long)session["seqcencenumber"],
+                SequenceNumber = (long)session["seqcencenumber"]
 
             }
         };

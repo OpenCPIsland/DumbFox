@@ -176,7 +176,7 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(
-            "SELECT swid, access_token, refresh_token, aesSecret, aesSecretChat, aesSecretSfs2x, onquest, username, sessionId FROM sessionusers WHERE access_token = @token;",
+            "SELECT * FROM sessionusers WHERE access_token = @token;",
             conn);
 
         cmd.Parameters.AddWithValue("@token", accesstoken);
@@ -824,7 +824,7 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddAlertNotification>> getNotificationAlerts(string swid)
+    public static async Task<List<AddAlertNotification>> getNotificationAlerts(string swid, string accesstoken)
     {
         var result = new List<AddAlertNotification>();
 
@@ -837,6 +837,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var item = new AddAlertNotification
             {   
                 Alert = new Alert
@@ -847,8 +853,8 @@ public static class DatabaseManager
                     Timestamp = reader.GetInt64("timestamp")
                 },
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
+                NotificationId = (long)session["seqcencenumber"],
+                SequenceNumber = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -857,7 +863,7 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<ClearAlertNotification>> getNotificationAlertClears(string swid)
+    public static async Task<List<ClearAlertNotification>> getNotificationAlertClears(string swid, string accesstoken)
     {
         var result = new List<ClearAlertNotification>();
 
@@ -871,12 +877,18 @@ public static class DatabaseManager
         while (await reader.ReadAsync())
         {
 
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var item = new ClearAlertNotification
             {
                 AlertIds = [reader.GetInt64("id")],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
+                NotificationId = (long)session["seqcencenumber"],
+                SequenceNumber = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -885,7 +897,7 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddFriendshipNotification>> getNotificationFriendships(string swid, string aesSecret)
+    public static async Task<List<AddFriendshipNotification>> getNotificationFriendships(string swid, string aesSecret, string accesstoken)
     {
         var result = new List<AddFriendshipNotification>();
 
@@ -899,6 +911,12 @@ public static class DatabaseManager
         while (await reader.ReadAsync())
         {
             var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
+
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
 
             var item = new AddFriendshipNotification
             {
@@ -926,7 +944,7 @@ public static class DatabaseManager
                 IsTrusted = reader.GetBoolean("istrusted"),
                 Created = reader.GetInt64("timestamp"),
                 NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
+                SequenceNumber = reader.GetInt64("id")
             };
 
             result.Add(item);
@@ -935,12 +953,22 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<RemoveFriendshipNotification>> getNotificationFriendshipRemoves(string swid, string aesSecret)
+    public static async Task<List<RemoveFriendshipNotification>> getNotificationFriendshipRemoves(string swid, string aesSecret, string accesstoken)
     {
         var result = new List<RemoveFriendshipNotification>();
 
+        var ids = new List<long>();
+
         await using var conn = await OpenConnectionAsync();
-        await using var cmd = new MySqlCommand(@"SELECT id, meID, hisID, username, hisusername, isrequested, istrusted, isdeleted, timestamp FROM friends WHERE meID = @swid AND isfriend = 1 AND isdeleted = 1;", conn);
+        await using var transaction = await conn.BeginTransactionAsync();
+
+        await using var cmd = new MySqlCommand(@"
+        SELECT id, hisID, timestamp 
+        FROM friends 
+        WHERE meID = @swid 
+        AND isfriend = 1 
+        AND isdeleted = 1
+        FOR UPDATE;", conn, transaction);
 
         cmd.Parameters.AddWithValue("@swid", swid);
 
@@ -948,17 +976,30 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var id = reader.GetInt64("id");
+            ids.Add(id);
 
-            var item = new RemoveFriendshipNotification
+            result.Add(new RemoveFriendshipNotification
             {
                 FriendUserId = reader.GetString("hisID"),
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
-            };
-
-            result.Add(item);
+                NotificationId = id,
+                SequenceNumber = id
+            });
         }
+
+        await reader.CloseAsync();
+
+        if (ids.Count > 0)
+        {
+            var deleteCmd = new MySqlCommand(
+                $"DELETE FROM friends WHERE id IN ({string.Join(",", ids)})",
+                conn, transaction);
+
+            await deleteCmd.ExecuteNonQueryAsync();
+        }
+
+        await transaction.CommitAsync();
 
         return result;
     }
@@ -1031,7 +1072,7 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddFriendshipInvitationNotification>> getNotificationFriendshipInvations(string swid, string aesSecret)
+    public static async Task<List<AddFriendshipInvitationNotification>> getNotificationFriendshipInvations(string swid, string aesSecret, string accesstoken)
     {
         var result = new List<AddFriendshipInvitationNotification>();
 
@@ -1045,6 +1086,11 @@ public static class DatabaseManager
         while (await reader.ReadAsync())
         {
             var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
 
             var item = new AddFriendshipInvitationNotification
             {
@@ -1077,7 +1123,7 @@ public static class DatabaseManager
                 },
                 Created = reader.GetInt64("timestamp"),
                 NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
+                SequenceNumber = reader.GetInt64("id")
             };
 
             result.Add(item);
@@ -1086,7 +1132,7 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<RemoveFriendshipInvitationNotification>> getNotificationFriendshipInvationRemoves(string swid, string aesSecret)
+    public static async Task<List<RemoveFriendshipInvitationNotification>> getNotificationFriendshipInvationRemoves(string swid, string aesSecret, string accesstoken)
     {
         var result = new List<RemoveFriendshipInvitationNotification>();
 
@@ -1099,12 +1145,19 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var item = new RemoveFriendshipInvitationNotification
             {
                 InvitationId = reader.GetInt64("id"),
                 Created = reader.GetInt64("timestamp"),
                 NotificationId = reader.GetInt64("id"),
-                SequenceNumber = 3
+                SequenceNumber = reader.GetInt64("id")
             };
 
             result.Add(item);
@@ -1362,7 +1415,8 @@ public static class DatabaseManager
             TextChatMessage item;
 
             await using (var cmd2 = new MySqlCommand(@"
-            SELECT ct.*
+            SELECT ct.*,
+            ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
             FROM chatthreadchats ct
             WHERE ct.id = @id
               AND ct.swid = @swid
@@ -1387,7 +1441,7 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = reader.GetInt64("id"),
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "TEXT"
                 };
             }
@@ -1415,6 +1469,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }else if (typeof(T) == typeof(StickerChatMessage))
@@ -1427,6 +1482,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1440,6 +1496,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1475,6 +1532,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1501,6 +1559,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1515,6 +1574,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1529,6 +1589,7 @@ public static class DatabaseManager
                 ChatMessageId = reader.GetInt64("msgid"),
                 ChatThreadId = reader.GetInt64("id"),
                 SenderUserId = reader.GetString("swid"),
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
         }
@@ -1568,7 +1629,8 @@ public static class DatabaseManager
             T item;
 
             await using (var cmd2 = new MySqlCommand($@"
-            SELECT ct.*
+            SELECT ct.*,
+            ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
             FROM chatthreadchats ct
             WHERE ct.id = @id
               AND ct.swid = @swid
@@ -1674,7 +1736,7 @@ public static class DatabaseManager
 
 
 
-    public static async Task<List<AddChatThreadNotification>> getChatThreadNotifications(string swid, string aesSecret)
+    public static async Task<List<AddChatThreadNotification>> getChatThreadNotifications(string swid, string aesSecret, string accesstoken)
     {
         var result = new List<AddChatThreadNotification>();
 
@@ -1694,6 +1756,12 @@ public static class DatabaseManager
         {
             var threadId = reader.GetInt64("id");
 
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var item = new AddChatThreadNotification
             {
                 ChatThread = new ChatThread {
@@ -1703,9 +1771,9 @@ public static class DatabaseManager
                     Members = await getChatThreadsUsers(threadId, aesSecret)
                 },
                 WelcomingUserId = swid,
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -1722,7 +1790,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.`timestamp`) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1748,7 +1817,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "TEXT"
             };
 
@@ -1765,7 +1834,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1791,7 +1861,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "STICKER"
             };
 
@@ -1808,7 +1878,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1834,7 +1905,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "GAG"
             };
 
@@ -1851,7 +1922,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1899,7 +1971,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "VIDEO"
             };
 
@@ -1916,7 +1988,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1955,7 +2028,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "PHOTO"
             };
 
@@ -1972,7 +2045,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -1999,7 +2073,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "GAME_STATE"
             };
 
@@ -2016,7 +2090,8 @@ public static class DatabaseManager
         await using var conn = await OpenConnectionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2043,7 +2118,7 @@ public static class DatabaseManager
                 ClientChatMessageId = reader.GetInt64("sessionid"),
                 ChatThreadId = threadId,
                 SenderUserId = reader.GetString("swid"),
-                SequenceNumber = 3,
+                SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = "GAME_EVENT"
             };
 
@@ -2053,12 +2128,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadTextMessageNotification>> getChatThreadTextNotifications(string swid)
+    public static async Task<List<AddChatThreadTextMessageNotification>> getChatThreadTextNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadTextMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.`timestamp`) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2069,6 +2145,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadTextMessageNotification
             {
@@ -2081,13 +2163,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "TEXT"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2095,12 +2177,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadStickerMessageNotification>> getChatThreadStickerNotifications(string swid)
+    public static async Task<List<AddChatThreadStickerMessageNotification>> getChatThreadStickerNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadStickerMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2111,6 +2194,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadStickerMessageNotification
             {
@@ -2123,13 +2212,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "STICKER"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2137,12 +2226,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadGagMessageNotification>> getChatThreadGagNotifications(string swid)
+    public static async Task<List<AddChatThreadGagMessageNotification>> getChatThreadGagNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadGagMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2153,6 +2243,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGagMessageNotification
             {
@@ -2165,13 +2261,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "GAG"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2179,12 +2275,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadVideoMessageNotification>> getChatThreadVideoNotifications(string swid)
+    public static async Task<List<AddChatThreadVideoMessageNotification>> getChatThreadVideoNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadVideoMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2195,6 +2292,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadVideoMessageNotification
             {
@@ -2229,13 +2332,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "VIDEO"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2243,12 +2346,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadPhotoMessageNotification>> getChatThreadPhotoNotifications(string swid)
+    public static async Task<List<AddChatThreadPhotoMessageNotification>> getChatThreadPhotoNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadPhotoMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2259,6 +2363,12 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadPhotoMessageNotification
             {
@@ -2284,13 +2394,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "PHOTO"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2298,12 +2408,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadGameStateMessageNotification>> getChatThreadGameStateNotifications(string swid)
+    public static async Task<List<AddChatThreadGameStateMessageNotification>> getChatThreadGameStateNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadGameStateMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2314,6 +2425,13 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGameStateMessageNotification
             {
@@ -2327,13 +2445,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "GAME_STATE"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);
@@ -2341,12 +2459,13 @@ public static class DatabaseManager
         return result;
     }
 
-    public static async Task<List<AddChatThreadGameEventMessageNotification>> getChatThreadGameEventNotifications(string swid)
+    public static async Task<List<AddChatThreadGameEventMessageNotification>> getChatThreadGameEventNotifications(string swid, string accesstoken)
     {
         var result = new List<AddChatThreadGameEventMessageNotification>();
         await using var conn = await OpenConnectionAsync();
         await using var cmd = new MySqlCommand(@"
-        SELECT ct.*
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.timestamp) AS seq
         FROM chatthreadchats ct
         INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
         WHERE ctu.swid = @swid
@@ -2357,6 +2476,13 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGameEventMessageNotification
             {
@@ -2370,13 +2496,13 @@ public static class DatabaseManager
                     ClientChatMessageId = reader.GetInt64("sessionid"),
                     ChatThreadId = threadId,
                     SenderUserId = reader.GetString("swid"),
-                    SequenceNumber = 3,
+                    SequenceNumber = reader.GetInt64("msgid"),
                     MessageType = "GAME_EVENT"
 
                 },
-                SequenceNumber = 3,
+                SequenceNumber = (long)session["seqcencenumber"],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = threadId
+                NotificationId = (long)session["seqcencenumber"]
             };
 
             result.Add(item);

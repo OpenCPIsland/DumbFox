@@ -38,7 +38,7 @@ namespace WebAPI.Api.Mix.routes
             result = new OfficialAccountsResponse
             {
                 OfficialAccountIds = [
-                    //new GuestOfficialAccount { OaId = "OA-72844169130089556", OaName = "Mix Bot", IsAvailable = true, CanUnfollow = false },
+                    new GuestOfficialAccount { OaId = "OA-72844169130089556", OaName = "Mix Bot", IsAvailable = true, CanUnfollow = false },
                     new GuestOfficialAccount { OaId = "OA-284650157239423", OaName = "Disney Music", IsAvailable = true, CanUnfollow = true },
                     new GuestOfficialAccount { OaId = "OA-605752426948016", OaName = "Disney Movies", IsAvailable = true, CanUnfollow = true },
                     new GuestOfficialAccount { OaId = "OA-72844169130089556", OaName = "Disney LOL", IsAvailable = true, CanUnfollow = true },

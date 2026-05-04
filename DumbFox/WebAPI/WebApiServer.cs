@@ -134,11 +134,11 @@ public static class WebApiServer
             string method = ctx.Request.Method;
             PathString path = ctx.Request.Path;
 
-            if (path.StartsWithSegments("/mix/notifications/sinceSequence") || path.StartsWithSegments("/notifications/sinceSequence"))
+            /*if (path.StartsWithSegments("/mix/notifications/sinceSequence") || path.StartsWithSegments("/notifications/sinceSequence"))
             {
                 await next();
                 return;
-            }
+            }*/
 
             Console.WriteLine($"[WebAPI] --> {ip} {method} {path}");
 

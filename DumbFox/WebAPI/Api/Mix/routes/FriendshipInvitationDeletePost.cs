@@ -73,8 +73,8 @@ public class FriendshipInvitationDeletePost
             { 
                 InvitationId = obj.InvitationId,
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = 0L,
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"],
             }
         };
 

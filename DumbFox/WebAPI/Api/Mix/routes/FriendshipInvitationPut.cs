@@ -69,8 +69,8 @@ public class FriendshipInvitationPut
             Notification = new AddFriendshipInvitationNotification
             {
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = 3,
-                NotificationId = notfiid,
+                SequenceNumber = (long)session["seqcencenumber"],
+                NotificationId = (long)session["seqcencenumber"],
                 Invitation = new FriendshipInvitation { FriendDisplayName = (string)getUserName["username"], FriendshipInvitationId = notfiid, IsInviter = true, IsTrusted = false },
                 Friend = new User {
                 UserId = loadedOtherProfile.Swid,
