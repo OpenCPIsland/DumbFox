@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
 
 namespace DumbFoxWS.State;
 
@@ -10,6 +11,7 @@ public static class World
     public static ConcurrentDictionary<int, Room> RoomsById { get; } = new();
     public static Room GetOrCrateRoom(string name)
     {
+
         Room? room = RoomsById.FirstOrDefault((roomPair) => roomPair.Value.Name == name).Value;
         if (room != null) return room;
 

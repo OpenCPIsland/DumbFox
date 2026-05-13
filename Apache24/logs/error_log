@@ -1,0 +1,407 @@
+[Wed May 13 15:05:17.721803 2026] [mpm_winnt:notice] [pid 392644:tid 340] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:05:17.721803 2026] [mpm_winnt:notice] [pid 392644:tid 340] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:05:17.721803 2026] [core:notice] [pid 392644:tid 340] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:05:17.725310 2026] [mpm_winnt:notice] [pid 392644:tid 340] AH00418: Parent: Created child process 393244
+Apache server interrupted...
+026] [mpm_winnt:notice] [pid 393244:tid 360] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 15:08:12.051455 2026] [mpm_winnt:notice] [pid 392644:tid 340] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+Apache server interrupted...
+Apache server interrupted...
+Apache server interrupted...
+Apache server shutdown initiated...
+[Wed May 13 15:08:16.543539 2026] [mpm_winnt:notice] [pid 393244:tid 360] AH00364: Child: All worker threads have exited.
+[Wed May 13 15:08:16.590224 2026] [mpm_winnt:notice] [pid 392644:tid 340] AH00430: Parent: Child process 393244 exited successfully.
+[Wed May 13 15:20:29.612387 2026] [mpm_winnt:notice] [pid 393156:tid 348] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:20:29.612387 2026] [mpm_winnt:notice] [pid 393156:tid 348] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:20:29.612387 2026] [core:notice] [pid 393156:tid 348] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:20:29.615386 2026] [mpm_winnt:notice] [pid 393156:tid 348] AH00418: Parent: Created child process 395356
+Apache server interrupted...
+026] [mpm_winnt:notice] [pid 395356:tid 352] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 15:22:25.695494 2026] [mpm_winnt:notice] [pid 393156:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+Apache server shutdown initiated...
+[Wed May 13 15:22:27.708288 2026] [mpm_winnt:notice] [pid 395356:tid 352] AH00364: Child: All worker threads have exited.
+[Wed May 13 15:22:27.755548 2026] [mpm_winnt:notice] [pid 393156:tid 348] AH00430: Parent: Child process 395356 exited successfully.
+[Wed May 13 15:25:38.159570 2026] [proxy_html:notice] [pid 385360:tid 352] AH01425: I18n support in mod_proxy_html requires mod_xml2enc. Without it, non-ASCII characters in proxied pages are likely to display incorrectly.
+[Wed May 13 15:25:38.162570 2026] [proxy_balancer:emerg] [pid 385360:tid 352] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:25:38.162570 2026] [:emerg] [pid 385360:tid 352] AH00020: Configuration Failed, exiting
+[Wed May 13 15:27:05.358681 2026] [proxy_html:notice] [pid 375800:tid 356] AH01425: I18n support in mod_proxy_html requires mod_xml2enc. Without it, non-ASCII characters in proxied pages are likely to display incorrectly.
+[Wed May 13 15:27:05.362694 2026] [core:warn] [pid 375800:tid 356] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:27:05.363698 2026] [proxy_balancer:emerg] [pid 375800:tid 356] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:27:05.363698 2026] [:emerg] [pid 375800:tid 356] AH00020: Configuration Failed, exiting
+[Wed May 13 15:27:24.879774 2026] [proxy_html:notice] [pid 399064:tid 360] AH01425: I18n support in mod_proxy_html requires mod_xml2enc. Without it, non-ASCII characters in proxied pages are likely to display incorrectly.
+[Wed May 13 15:27:24.883918 2026] [core:warn] [pid 399064:tid 360] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:27:24.883918 2026] [proxy_balancer:emerg] [pid 399064:tid 360] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:27:24.883918 2026] [:emerg] [pid 399064:tid 360] AH00020: Configuration Failed, exiting
+[Wed May 13 15:28:07.884888 2026] [core:warn] [pid 399352:tid 376] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:28:07.885890 2026] [proxy_balancer:emerg] [pid 399352:tid 376] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:28:07.885890 2026] [:emerg] [pid 399352:tid 376] AH00020: Configuration Failed, exiting
+[Wed May 13 15:28:27.314103 2026] [core:warn] [pid 396156:tid 340] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:28:27.314103 2026] [proxy_balancer:emerg] [pid 396156:tid 340] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:28:27.314103 2026] [:emerg] [pid 396156:tid 340] AH00020: Configuration Failed, exiting
+[Wed May 13 15:30:43.210963 2026] [core:warn] [pid 384500:tid 384] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:30:43.211968 2026] [proxy_balancer:emerg] [pid 384500:tid 384] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:30:43.211968 2026] [:emerg] [pid 384500:tid 384] AH00020: Configuration Failed, exiting
+[Wed May 13 15:31:43.218043 2026] [core:warn] [pid 373292:tid 392] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:31:43.219049 2026] [proxy_balancer:emerg] [pid 373292:tid 392] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:31:43.219049 2026] [:emerg] [pid 373292:tid 392] AH00020: Configuration Failed, exiting
+[Wed May 13 15:32:08.614465 2026] [core:warn] [pid 391868:tid 344] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:32:08.615469 2026] [proxy_balancer:emerg] [pid 391868:tid 344] AH01177: Failed to lookup provider 'shm' for 'slotmem': is mod_slotmem_shm loaded??
+[Wed May 13 15:32:08.615469 2026] [:emerg] [pid 391868:tid 344] AH00020: Configuration Failed, exiting
+[Wed May 13 15:33:11.744737 2026] [core:warn] [pid 393044:tid 380] AH00098: pid file D:/CPI2023/WebApiAsync/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed May 13 15:33:11.746245 2026] [mpm_winnt:notice] [pid 393044:tid 380] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:33:11.746245 2026] [mpm_winnt:notice] [pid 393044:tid 380] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:33:11.746245 2026] [core:notice] [pid 393044:tid 380] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:33:11.749275 2026] [mpm_winnt:notice] [pid 393044:tid 380] AH00418: Parent: Created child process 399420
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 399420:tid 388] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 15:50:16.837701 2026] [mpm_winnt:notice] [pid 393044:tid 380] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 15:50:18.852630 2026] [mpm_winnt:notice] [pid 399420:tid 388] AH00364: Child: All worker threads have exited.
+[Wed May 13 15:50:18.904190 2026] [mpm_winnt:notice] [pid 393044:tid 380] AH00430: Parent: Child process 399420 exited successfully.
+[Wed May 13 15:50:36.115995 2026] [mpm_winnt:notice] [pid 401240:tid 368] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:50:36.115995 2026] [mpm_winnt:notice] [pid 401240:tid 368] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:50:36.115995 2026] [core:notice] [pid 401240:tid 368] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:50:36.120504 2026] [mpm_winnt:notice] [pid 401240:tid 368] AH00418: Parent: Created child process 392692
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 392692:tid 228] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 15:52:26.418619 2026] [mpm_winnt:notice] [pid 401240:tid 368] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 15:52:28.425345 2026] [mpm_winnt:notice] [pid 392692:tid 228] AH00364: Child: All worker threads have exited.
+[Wed May 13 15:52:28.477304 2026] [mpm_winnt:notice] [pid 401240:tid 368] AH00430: Parent: Child process 392692 exited successfully.
+[Wed May 13 15:52:33.179399 2026] [mpm_winnt:notice] [pid 403788:tid 392] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:52:33.180399 2026] [mpm_winnt:notice] [pid 403788:tid 392] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:52:33.180399 2026] [core:notice] [pid 403788:tid 392] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:52:33.183401 2026] [mpm_winnt:notice] [pid 403788:tid 392] AH00418: Parent: Created child process 403028
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 403028:tid 380] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 15:58:38.441863 2026] [mpm_winnt:notice] [pid 403788:tid 392] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 15:58:40.455448 2026] [mpm_winnt:notice] [pid 403028:tid 380] AH00364: Child: All worker threads have exited.
+[Wed May 13 15:58:40.507357 2026] [mpm_winnt:notice] [pid 403788:tid 392] AH00430: Parent: Child process 403028 exited successfully.
+[Wed May 13 15:59:10.088008 2026] [mpm_winnt:notice] [pid 393480:tid 172] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 15:59:10.088008 2026] [mpm_winnt:notice] [pid 393480:tid 172] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 15:59:10.088008 2026] [core:notice] [pid 393480:tid 172] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 15:59:10.092006 2026] [mpm_winnt:notice] [pid 393480:tid 172] AH00418: Parent: Created child process 377008
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 377008:tid 368] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:03:02.899987 2026] [mpm_winnt:notice] [pid 393480:tid 172] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:03:04.917406 2026] [mpm_winnt:notice] [pid 377008:tid 368] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:03:04.967642 2026] [mpm_winnt:notice] [pid 393480:tid 172] AH00430: Parent: Child process 377008 exited successfully.
+[Wed May 13 16:03:09.520157 2026] [mpm_winnt:notice] [pid 399824:tid 348] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 16:03:09.521157 2026] [mpm_winnt:notice] [pid 399824:tid 348] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:03:09.521157 2026] [core:notice] [pid 399824:tid 348] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:03:09.524158 2026] [mpm_winnt:notice] [pid 399824:tid 348] AH00418: Parent: Created child process 398212
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 398212:tid 348] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:04:15.407335 2026] [mpm_winnt:notice] [pid 399824:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:04:17.429092 2026] [mpm_winnt:notice] [pid 398212:tid 348] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:04:17.478833 2026] [mpm_winnt:notice] [pid 399824:tid 348] AH00430: Parent: Child process 398212 exited successfully.
+[Wed May 13 16:04:21.612735 2026] [mpm_winnt:notice] [pid 391776:tid 348] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 16:04:21.613735 2026] [mpm_winnt:notice] [pid 391776:tid 348] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:04:21.613735 2026] [core:notice] [pid 391776:tid 348] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:04:21.617240 2026] [mpm_winnt:notice] [pid 391776:tid 348] AH00418: Parent: Created child process 402312
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 402312:tid 380] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:04:52.980893 2026] [mpm_winnt:notice] [pid 391776:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:04:55.007154 2026] [mpm_winnt:notice] [pid 402312:tid 380] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:04:55.056288 2026] [mpm_winnt:notice] [pid 391776:tid 348] AH00430: Parent: Child process 402312 exited successfully.
+[Wed May 13 16:05:08.941376 2026] [mpm_winnt:notice] [pid 401948:tid 344] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 16:05:08.941376 2026] [mpm_winnt:notice] [pid 401948:tid 344] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:05:08.941376 2026] [core:notice] [pid 401948:tid 344] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:05:08.944535 2026] [mpm_winnt:notice] [pid 401948:tid 344] AH00418: Parent: Created child process 399800
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 399800:tid 364] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:06:48.539598 2026] [mpm_winnt:notice] [pid 401948:tid 344] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:06:50.557844 2026] [mpm_winnt:notice] [pid 399800:tid 364] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:06:50.608513 2026] [mpm_winnt:notice] [pid 401948:tid 344] AH00430: Parent: Child process 399800 exited successfully.
+[Wed May 13 16:06:54.417666 2026] [mpm_winnt:notice] [pid 403572:tid 396] AH00455: Apache/2.4.67 (Win64) configured -- resuming normal operations
+[Wed May 13 16:06:54.418743 2026] [mpm_winnt:notice] [pid 403572:tid 396] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:06:54.418743 2026] [core:notice] [pid 403572:tid 396] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:06:54.422246 2026] [mpm_winnt:notice] [pid 403572:tid 396] AH00418: Parent: Created child process 404396
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 404396:tid 372] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:15:22.808977 2026] [mpm_winnt:notice] [pid 403572:tid 396] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:15:24.820902 2026] [mpm_winnt:notice] [pid 404396:tid 372] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:15:24.870986 2026] [mpm_winnt:notice] [pid 403572:tid 396] AH00430: Parent: Child process 404396 exited successfully.
+[Wed May 13 16:15:37.847376 2026] [ssl:warn] [pid 386168:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:15:37.847376 2026] [ssl:warn] [pid 386168:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:15:37.858956 2026] [ssl:warn] [pid 386168:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:15:37.859956 2026] [ssl:warn] [pid 386168:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:15:37.859956 2026] [ssl:warn] [pid 386168:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:15:37.859956 2026] [mpm_winnt:notice] [pid 386168:tid 372] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 16:15:37.859956 2026] [mpm_winnt:notice] [pid 386168:tid 372] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:15:37.859956 2026] [core:notice] [pid 386168:tid 372] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:15:37.862955 2026] [mpm_winnt:notice] [pid 386168:tid 372] AH00418: Parent: Created child process 400888
+Apache server shutdown initiated...
+sl:warn] [pid 400888:tid 272] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:15:38.214319 2026] [ssl:warn] [pid 400888:tid 272] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:15:38.224851 2026] [ssl:warn] [pid 400888:tid 272] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:15:38.224851 2026] [ssl:warn] [pid 400888:tid 272] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:15:38.224851 2026] [ssl:warn] [pid 400888:tid 272] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:15:38.227361 2026] [mpm_winnt:notice] [pid 400888:tid 272] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:29:25.160219 2026] [mpm_winnt:notice] [pid 386168:tid 372] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:29:27.183435 2026] [mpm_winnt:notice] [pid 400888:tid 272] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:29:27.239475 2026] [mpm_winnt:notice] [pid 386168:tid 372] AH00430: Parent: Child process 400888 exited successfully.
+[Wed May 13 16:29:34.553822 2026] [ssl:warn] [pid 411612:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:29:34.554823 2026] [ssl:warn] [pid 411612:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:29:34.566844 2026] [ssl:warn] [pid 411612:tid 348] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:29:34.567841 2026] [ssl:warn] [pid 411612:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:29:34.567841 2026] [ssl:warn] [pid 411612:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:29:34.568841 2026] [mpm_winnt:notice] [pid 411612:tid 348] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 16:29:34.568841 2026] [mpm_winnt:notice] [pid 411612:tid 348] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:29:34.568841 2026] [core:notice] [pid 411612:tid 348] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:29:34.571842 2026] [mpm_winnt:notice] [pid 411612:tid 348] AH00418: Parent: Created child process 405172
+Apache server shutdown initiated...
+sl:warn] [pid 405172:tid 368] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:29:34.824220 2026] [ssl:warn] [pid 405172:tid 368] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:29:34.837753 2026] [ssl:warn] [pid 405172:tid 368] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:29:34.837753 2026] [ssl:warn] [pid 405172:tid 368] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:29:34.837753 2026] [ssl:warn] [pid 405172:tid 368] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:29:34.839752 2026] [mpm_winnt:notice] [pid 405172:tid 368] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:30:48.029046 2026] [mpm_winnt:notice] [pid 411612:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:30:50.049227 2026] [mpm_winnt:notice] [pid 405172:tid 368] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:30:50.100841 2026] [mpm_winnt:notice] [pid 411612:tid 348] AH00430: Parent: Child process 405172 exited successfully.
+[Wed May 13 16:30:53.827075 2026] [ssl:warn] [pid 376884:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:30:53.827075 2026] [ssl:warn] [pid 376884:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:30:53.840595 2026] [ssl:warn] [pid 376884:tid 348] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:30:53.840595 2026] [ssl:warn] [pid 376884:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:30:53.840595 2026] [ssl:warn] [pid 376884:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:30:53.841595 2026] [mpm_winnt:notice] [pid 376884:tid 348] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 16:30:53.841595 2026] [mpm_winnt:notice] [pid 376884:tid 348] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:30:53.841595 2026] [core:notice] [pid 376884:tid 348] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:30:53.844596 2026] [mpm_winnt:notice] [pid 376884:tid 348] AH00418: Parent: Created child process 398384
+Apache server shutdown initiated...
+sl:warn] [pid 398384:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:30:54.089523 2026] [ssl:warn] [pid 398384:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:30:54.101037 2026] [ssl:warn] [pid 398384:tid 392] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:30:54.102037 2026] [ssl:warn] [pid 398384:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:30:54.102037 2026] [ssl:warn] [pid 398384:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:30:54.103039 2026] [mpm_winnt:notice] [pid 398384:tid 392] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:41:07.461477 2026] [mpm_winnt:notice] [pid 376884:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:41:09.475119 2026] [mpm_winnt:notice] [pid 398384:tid 392] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:41:09.529201 2026] [mpm_winnt:notice] [pid 376884:tid 348] AH00430: Parent: Child process 398384 exited successfully.
+[Wed May 13 16:41:20.157956 2026] [ssl:warn] [pid 408552:tid 164] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:41:20.157956 2026] [ssl:warn] [pid 408552:tid 164] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:41:20.173475 2026] [ssl:warn] [pid 408552:tid 164] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:41:20.173475 2026] [ssl:warn] [pid 408552:tid 164] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:41:20.173475 2026] [ssl:warn] [pid 408552:tid 164] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:41:20.174478 2026] [mpm_winnt:notice] [pid 408552:tid 164] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 16:41:20.174478 2026] [mpm_winnt:notice] [pid 408552:tid 164] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:41:20.174478 2026] [core:notice] [pid 408552:tid 164] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:41:20.177479 2026] [mpm_winnt:notice] [pid 408552:tid 164] AH00418: Parent: Created child process 411152
+Apache server shutdown initiated...
+sl:warn] [pid 411152:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:41:20.422426 2026] [ssl:warn] [pid 411152:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:41:20.435937 2026] [ssl:warn] [pid 411152:tid 404] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:41:20.435937 2026] [ssl:warn] [pid 411152:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:41:20.435937 2026] [ssl:warn] [pid 411152:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:41:20.437937 2026] [mpm_winnt:notice] [pid 411152:tid 404] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 16:48:00.777625 2026] [mpm_winnt:notice] [pid 408552:tid 164] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 16:48:02.797564 2026] [mpm_winnt:notice] [pid 411152:tid 404] AH00364: Child: All worker threads have exited.
+[Wed May 13 16:48:02.857183 2026] [mpm_winnt:notice] [pid 408552:tid 164] AH00430: Parent: Child process 411152 exited successfully.
+[Wed May 13 16:48:07.378138 2026] [ssl:warn] [pid 401252:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:48:07.378138 2026] [ssl:warn] [pid 401252:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:48:07.393659 2026] [ssl:warn] [pid 401252:tid 352] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:48:07.394659 2026] [ssl:warn] [pid 401252:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:48:07.394659 2026] [ssl:warn] [pid 401252:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:48:07.394659 2026] [mpm_winnt:notice] [pid 401252:tid 352] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 16:48:07.394659 2026] [mpm_winnt:notice] [pid 401252:tid 352] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 16:48:07.394659 2026] [core:notice] [pid 401252:tid 352] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 16:48:07.397658 2026] [mpm_winnt:notice] [pid 401252:tid 352] AH00418: Parent: Created child process 404660
+Apache server shutdown initiated...
+sl:warn] [pid 404660:tid 364] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:48:07.652954 2026] [ssl:warn] [pid 404660:tid 364] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:48:07.665022 2026] [ssl:warn] [pid 404660:tid 364] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 16:48:07.665022 2026] [ssl:warn] [pid 404660:tid 364] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 16:48:07.665022 2026] [ssl:warn] [pid 404660:tid 364] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 16:48:07.667537 2026] [mpm_winnt:notice] [pid 404660:tid 364] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 17:51:52.595661 2026] [mpm_winnt:notice] [pid 401252:tid 352] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 17:51:54.634937 2026] [mpm_winnt:notice] [pid 404660:tid 364] AH00364: Child: All worker threads have exited.
+[Wed May 13 17:51:54.696462 2026] [mpm_winnt:notice] [pid 401252:tid 352] AH00430: Parent: Child process 404660 exited successfully.
+[Wed May 13 17:52:00.258785 2026] [ssl:warn] [pid 427536:tid 412] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:52:00.258785 2026] [ssl:warn] [pid 427536:tid 412] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:52:00.274928 2026] [ssl:warn] [pid 427536:tid 412] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:52:00.275432 2026] [ssl:warn] [pid 427536:tid 412] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:52:00.275432 2026] [ssl:warn] [pid 427536:tid 412] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:52:00.275432 2026] [mpm_winnt:notice] [pid 427536:tid 412] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 17:52:00.275432 2026] [mpm_winnt:notice] [pid 427536:tid 412] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 17:52:00.275432 2026] [core:notice] [pid 427536:tid 412] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 17:52:00.279457 2026] [mpm_winnt:notice] [pid 427536:tid 412] AH00418: Parent: Created child process 423496
+Apache server shutdown initiated...
+sl:warn] [pid 423496:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:52:00.533765 2026] [ssl:warn] [pid 423496:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:52:00.546861 2026] [ssl:warn] [pid 423496:tid 348] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:52:00.547865 2026] [ssl:warn] [pid 423496:tid 348] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:52:00.547865 2026] [ssl:warn] [pid 423496:tid 348] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:52:00.549377 2026] [mpm_winnt:notice] [pid 423496:tid 348] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 17:53:19.095884 2026] [mpm_winnt:notice] [pid 427536:tid 412] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 17:53:21.111591 2026] [mpm_winnt:notice] [pid 423496:tid 348] AH00364: Child: All worker threads have exited.
+[Wed May 13 17:53:21.165292 2026] [mpm_winnt:notice] [pid 427536:tid 412] AH00430: Parent: Child process 423496 exited successfully.
+[Wed May 13 17:53:35.106074 2026] [ssl:warn] [pid 399588:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:53:35.107073 2026] [ssl:warn] [pid 399588:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:53:35.122380 2026] [ssl:warn] [pid 399588:tid 376] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:53:35.123884 2026] [ssl:warn] [pid 399588:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:53:35.123884 2026] [ssl:warn] [pid 399588:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:53:35.124408 2026] [mpm_winnt:notice] [pid 399588:tid 376] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 17:53:35.124408 2026] [mpm_winnt:notice] [pid 399588:tid 376] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 17:53:35.124408 2026] [core:notice] [pid 399588:tid 376] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 17:53:35.127928 2026] [mpm_winnt:notice] [pid 399588:tid 376] AH00418: Parent: Created child process 424676
+Apache server shutdown initiated...
+sl:warn] [pid 424676:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:53:35.375975 2026] [ssl:warn] [pid 424676:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:53:35.387989 2026] [ssl:warn] [pid 424676:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:53:35.388993 2026] [ssl:warn] [pid 424676:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:53:35.388993 2026] [ssl:warn] [pid 424676:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:53:35.391502 2026] [mpm_winnt:notice] [pid 424676:tid 372] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 17:54:45.133512 2026] [mpm_winnt:notice] [pid 399588:tid 376] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 17:54:47.139191 2026] [mpm_winnt:notice] [pid 424676:tid 372] AH00364: Child: All worker threads have exited.
+[Wed May 13 17:54:47.194182 2026] [mpm_winnt:notice] [pid 399588:tid 376] AH00430: Parent: Child process 424676 exited successfully.
+[Wed May 13 17:54:55.862842 2026] [ssl:warn] [pid 426044:tid 396] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:54:55.862842 2026] [ssl:warn] [pid 426044:tid 396] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:54:55.878921 2026] [ssl:warn] [pid 426044:tid 396] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:54:55.880009 2026] [ssl:warn] [pid 426044:tid 396] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:54:55.880009 2026] [ssl:warn] [pid 426044:tid 396] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:54:55.881016 2026] [mpm_winnt:notice] [pid 426044:tid 396] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 17:54:55.881016 2026] [mpm_winnt:notice] [pid 426044:tid 396] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 17:54:55.881016 2026] [core:notice] [pid 426044:tid 396] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 17:54:55.884578 2026] [mpm_winnt:notice] [pid 426044:tid 396] AH00418: Parent: Created child process 423640
+Apache server shutdown initiated...
+sl:warn] [pid 423640:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:54:56.138302 2026] [ssl:warn] [pid 423640:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:54:56.151381 2026] [ssl:warn] [pid 423640:tid 388] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:54:56.152385 2026] [ssl:warn] [pid 423640:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:54:56.152385 2026] [ssl:warn] [pid 423640:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:54:56.154386 2026] [mpm_winnt:notice] [pid 423640:tid 388] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 17:58:35.480815 2026] [mpm_winnt:notice] [pid 426044:tid 396] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 17:58:37.497802 2026] [mpm_winnt:notice] [pid 423640:tid 388] AH00364: Child: All worker threads have exited.
+[Wed May 13 17:58:37.552071 2026] [mpm_winnt:notice] [pid 426044:tid 396] AH00430: Parent: Child process 423640 exited successfully.
+[Wed May 13 17:58:42.743363 2026] [ssl:warn] [pid 410400:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:58:42.743363 2026] [ssl:warn] [pid 410400:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:58:42.759554 2026] [ssl:warn] [pid 410400:tid 388] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:58:42.760554 2026] [ssl:warn] [pid 410400:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:58:42.760554 2026] [ssl:warn] [pid 410400:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:58:42.761057 2026] [mpm_winnt:notice] [pid 410400:tid 388] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 17:58:42.761057 2026] [mpm_winnt:notice] [pid 410400:tid 388] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 17:58:42.761057 2026] [core:notice] [pid 410400:tid 388] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 17:58:42.764563 2026] [mpm_winnt:notice] [pid 410400:tid 388] AH00418: Parent: Created child process 429544
+Apache server shutdown initiated...
+sl:warn] [pid 429544:tid 380] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:58:43.125926 2026] [ssl:warn] [pid 429544:tid 380] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:58:43.138390 2026] [ssl:warn] [pid 429544:tid 380] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 17:58:43.138390 2026] [ssl:warn] [pid 429544:tid 380] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 17:58:43.138390 2026] [ssl:warn] [pid 429544:tid 380] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 17:58:43.140916 2026] [mpm_winnt:notice] [pid 429544:tid 380] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:01:46.039007 2026] [mpm_winnt:notice] [pid 410400:tid 388] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:01:48.055915 2026] [mpm_winnt:notice] [pid 429544:tid 380] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:01:48.112013 2026] [mpm_winnt:notice] [pid 410400:tid 388] AH00430: Parent: Child process 429544 exited successfully.
+[Wed May 13 18:01:57.843651 2026] [ssl:warn] [pid 423048:tid 356] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:01:57.843651 2026] [ssl:warn] [pid 423048:tid 356] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:01:57.857193 2026] [ssl:warn] [pid 423048:tid 356] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:01:57.858199 2026] [ssl:warn] [pid 423048:tid 356] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:01:57.858199 2026] [ssl:warn] [pid 423048:tid 356] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:01:57.858199 2026] [mpm_winnt:notice] [pid 423048:tid 356] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:01:57.858199 2026] [mpm_winnt:notice] [pid 423048:tid 356] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:01:57.858199 2026] [core:notice] [pid 423048:tid 356] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:01:57.862236 2026] [mpm_winnt:notice] [pid 423048:tid 356] AH00418: Parent: Created child process 422088
+Apache server shutdown initiated...
+sl:warn] [pid 422088:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:01:58.111839 2026] [ssl:warn] [pid 422088:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:01:58.125408 2026] [ssl:warn] [pid 422088:tid 404] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:01:58.125408 2026] [ssl:warn] [pid 422088:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:01:58.125408 2026] [ssl:warn] [pid 422088:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:01:58.127434 2026] [mpm_winnt:notice] [pid 422088:tid 404] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:03:12.559169 2026] [mpm_winnt:notice] [pid 423048:tid 356] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:03:14.571884 2026] [mpm_winnt:notice] [pid 422088:tid 404] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:03:14.624843 2026] [mpm_winnt:notice] [pid 423048:tid 356] AH00430: Parent: Child process 422088 exited successfully.
+[Wed May 13 18:03:22.935436 2026] [ssl:warn] [pid 431760:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:03:22.935940 2026] [ssl:warn] [pid 431760:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:03:22.955533 2026] [ssl:warn] [pid 431760:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:03:22.956057 2026] [ssl:warn] [pid 431760:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:03:22.956057 2026] [ssl:warn] [pid 431760:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:03:22.956057 2026] [mpm_winnt:notice] [pid 431760:tid 372] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:03:22.956057 2026] [mpm_winnt:notice] [pid 431760:tid 372] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:03:22.957061 2026] [core:notice] [pid 431760:tid 372] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:03:22.960577 2026] [mpm_winnt:notice] [pid 431760:tid 372] AH00418: Parent: Created child process 431892
+Apache server shutdown initiated...
+sl:warn] [pid 431892:tid 180] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:03:23.227874 2026] [ssl:warn] [pid 431892:tid 180] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:03:23.241775 2026] [ssl:warn] [pid 431892:tid 180] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:03:23.242290 2026] [ssl:warn] [pid 431892:tid 180] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:03:23.242290 2026] [ssl:warn] [pid 431892:tid 180] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:03:23.244795 2026] [mpm_winnt:notice] [pid 431892:tid 180] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:07:02.884544 2026] [mpm_winnt:notice] [pid 431760:tid 372] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:07:04.906205 2026] [mpm_winnt:notice] [pid 431892:tid 180] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:07:04.981184 2026] [mpm_winnt:notice] [pid 431760:tid 372] AH00430: Parent: Child process 431892 exited successfully.
+[Wed May 13 18:08:59.150889 2026] [ssl:warn] [pid 421300:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:08:59.150889 2026] [ssl:warn] [pid 421300:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:08:59.167182 2026] [ssl:warn] [pid 421300:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:08:59.168188 2026] [ssl:warn] [pid 421300:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:08:59.168188 2026] [ssl:warn] [pid 421300:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:08:59.168188 2026] [mpm_winnt:notice] [pid 421300:tid 372] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:08:59.168188 2026] [mpm_winnt:notice] [pid 421300:tid 372] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:08:59.168188 2026] [core:notice] [pid 421300:tid 372] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:08:59.171733 2026] [mpm_winnt:notice] [pid 421300:tid 372] AH00418: Parent: Created child process 412868
+Apache server shutdown initiated...
+sl:warn] [pid 412868:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:08:59.436665 2026] [ssl:warn] [pid 412868:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:08:59.450286 2026] [ssl:warn] [pid 412868:tid 352] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:08:59.451292 2026] [ssl:warn] [pid 412868:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:08:59.451292 2026] [ssl:warn] [pid 412868:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:08:59.453794 2026] [mpm_winnt:notice] [pid 412868:tid 352] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:11:24.963118 2026] [mpm_winnt:notice] [pid 421300:tid 372] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:11:26.970032 2026] [mpm_winnt:notice] [pid 412868:tid 352] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:11:27.029260 2026] [mpm_winnt:notice] [pid 421300:tid 372] AH00430: Parent: Child process 412868 exited successfully.
+[Wed May 13 18:11:36.191614 2026] [ssl:warn] [pid 432712:tid 408] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:11:36.191614 2026] [ssl:warn] [pid 432712:tid 408] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:11:36.207968 2026] [ssl:warn] [pid 432712:tid 408] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:11:36.207968 2026] [ssl:warn] [pid 432712:tid 408] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:11:36.207968 2026] [ssl:warn] [pid 432712:tid 408] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:11:36.208969 2026] [mpm_winnt:notice] [pid 432712:tid 408] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:11:36.208969 2026] [mpm_winnt:notice] [pid 432712:tid 408] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:11:36.208969 2026] [core:notice] [pid 432712:tid 408] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:11:36.213033 2026] [mpm_winnt:notice] [pid 432712:tid 408] AH00418: Parent: Created child process 433284
+Apache server shutdown initiated...
+sl:warn] [pid 433284:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:11:36.475546 2026] [ssl:warn] [pid 433284:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:11:36.488631 2026] [ssl:warn] [pid 433284:tid 352] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:11:36.489632 2026] [ssl:warn] [pid 433284:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:11:36.489632 2026] [ssl:warn] [pid 433284:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:11:36.491140 2026] [mpm_winnt:notice] [pid 433284:tid 352] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:13:19.286520 2026] [mpm_winnt:notice] [pid 432712:tid 408] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:13:21.301601 2026] [mpm_winnt:notice] [pid 433284:tid 352] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:13:21.355405 2026] [mpm_winnt:notice] [pid 432712:tid 408] AH00430: Parent: Child process 433284 exited successfully.
+[Wed May 13 18:14:04.412907 2026] [ssl:warn] [pid 430988:tid 260] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:14:04.413911 2026] [ssl:warn] [pid 430988:tid 260] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:14:04.429987 2026] [ssl:warn] [pid 430988:tid 260] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:14:04.429987 2026] [ssl:warn] [pid 430988:tid 260] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:14:04.429987 2026] [ssl:warn] [pid 430988:tid 260] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:14:04.430987 2026] [mpm_winnt:notice] [pid 430988:tid 260] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:14:04.430987 2026] [mpm_winnt:notice] [pid 430988:tid 260] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:14:04.430987 2026] [core:notice] [pid 430988:tid 260] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:14:04.434001 2026] [mpm_winnt:notice] [pid 430988:tid 260] AH00418: Parent: Created child process 425368
+Apache server shutdown initiated...
+sl:warn] [pid 425368:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:14:04.753336 2026] [ssl:warn] [pid 425368:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:14:04.766887 2026] [ssl:warn] [pid 425368:tid 376] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:14:04.767890 2026] [ssl:warn] [pid 425368:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:14:04.767890 2026] [ssl:warn] [pid 425368:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:14:04.769393 2026] [mpm_winnt:notice] [pid 425368:tid 376] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:19:38.372245 2026] [mpm_winnt:notice] [pid 430988:tid 260] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:19:40.386848 2026] [mpm_winnt:notice] [pid 425368:tid 376] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:19:40.439937 2026] [mpm_winnt:notice] [pid 430988:tid 260] AH00430: Parent: Child process 425368 exited successfully.
+[Wed May 13 18:20:31.764415 2026] [ssl:warn] [pid 382352:tid 344] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:20:31.764937 2026] [ssl:warn] [pid 382352:tid 344] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:20:31.778981 2026] [ssl:warn] [pid 382352:tid 344] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:20:31.780420 2026] [ssl:warn] [pid 382352:tid 344] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:20:31.780420 2026] [ssl:warn] [pid 382352:tid 344] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:20:31.780420 2026] [mpm_winnt:notice] [pid 382352:tid 344] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Wed May 13 18:20:31.780420 2026] [mpm_winnt:notice] [pid 382352:tid 344] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Wed May 13 18:20:31.780420 2026] [core:notice] [pid 382352:tid 344] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Wed May 13 18:20:31.784448 2026] [mpm_winnt:notice] [pid 382352:tid 344] AH00418: Parent: Created child process 434300
+Apache server shutdown initiated...
+sl:warn] [pid 434300:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:20:32.043387 2026] [ssl:warn] [pid 434300:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:20:32.056003 2026] [ssl:warn] [pid 434300:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed May 13 18:20:32.058039 2026] [ssl:warn] [pid 434300:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Wed May 13 18:20:32.058039 2026] [ssl:warn] [pid 434300:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Wed May 13 18:20:32.059047 2026] [mpm_winnt:notice] [pid 434300:tid 372] AH00354: Child: Starting 64 worker threads.
+[Wed May 13 18:34:21.111731 2026] [mpm_winnt:notice] [pid 382352:tid 344] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 13 18:34:23.136515 2026] [mpm_winnt:notice] [pid 434300:tid 372] AH00364: Child: All worker threads have exited.
+[Wed May 13 18:34:23.187943 2026] [mpm_winnt:notice] [pid 382352:tid 344] AH00430: Parent: Child process 434300 exited successfully.

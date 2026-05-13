@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "DumbFoxWS/1.0.0": {
+        "dependencies": {
+          "SmartFox2X": "1.8.5.0"
+        },
+        "runtime": {
+          "DumbFoxWS.dll": {}
+        }
+      },
+      "SmartFox2X/1.8.5.0": {
+        "runtime": {
+          "SmartFox2X.dll": {
+            "assemblyVersion": "1.8.5.0",
+            "fileVersion": "1.8.5.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DumbFoxWS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SmartFox2X/1.8.5.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

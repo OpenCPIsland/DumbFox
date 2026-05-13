@@ -1,0 +1,14 @@
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\bin\Debug\net9.0\DumbFoxWS.deps.json
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\bin\Debug\net9.0\DumbFoxWS.dll
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\bin\Debug\net9.0\DumbFoxWS.pdb
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\bin\Debug\net9.0\SmartFox2X.dll
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.csproj.AssemblyReference.cache
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.GeneratedMSBuildEditorConfig.editorconfig
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.AssemblyInfoInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.AssemblyInfo.cs
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.csproj.CoreCompileInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.csproj.Up2Date
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.dll
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\refint\DumbFoxWS.dll
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\DumbFoxWS.pdb
+D:\CPI2023\WebApiAsync\DumbFox\DumbFoxWS\obj\Debug\net9.0\ref\DumbFoxWS.dll

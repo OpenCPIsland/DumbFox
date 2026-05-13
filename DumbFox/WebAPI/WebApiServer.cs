@@ -1,5 +1,4 @@
-﻿
-using Common.Utils;
+﻿using Common.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Hosting;
@@ -28,10 +27,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI;
 
-public static class WebApiServer
+public class WebApiServer
 {
-
-    
     public static string MakeFakeUploadId()
     {
         byte[] bytes = RandomNumberGenerator.GetBytes(73);
@@ -83,20 +80,12 @@ public static class WebApiServer
         return Convert.ToBase64String(bytes);
     }
 
-    private static string GetSiteConfig()
-    {
-        Console.WriteLine("[WebAPI][JGC] Loaded site config, caching");
-        string configPath = Path.Combine(AppContext.BaseDirectory, "Config/__mapping_mix_prod.json");
-        string config = File.ReadAllText(configPath);
-        return config;
-    }
-
     public static async Task RunAsync(CancellationToken ct = default)
-	{
-		WebApplicationBuilder builder = WebApplication.CreateBuilder();
+    {
+        WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
         await using var conn = await DatabaseManager.OpenConnectionAsync();
-       // await using var cmd = new MySqlCommand("DELETE FROM sessions;",conn);
+        // await using var cmd = new MySqlCommand("DELETE FROM sessions;",conn);
         //await cmd.ExecuteNonQueryAsync();
         await using var cmd0 = new MySqlCommand("DELETE FROM rooms;", conn);
         await cmd0.ExecuteNonQueryAsync();
@@ -107,19 +96,10 @@ public static class WebApiServer
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
-            kestrelOptions.ListenAnyIP(9934, listOptions =>
-            {
-                //TODO: implement proper cert management, this uses a dev cert
-                listOptions.UseHttps();
-                listOptions.Protocols = HttpProtocols.Http1AndHttp2;
-            });
-
-            kestrelOptions.ListenAnyIP(5782); // optional HTTP
+            kestrelOptions.ListenAnyIP(80);
         });
 
-        Console.WriteLine($"DumbFox WebServer/WebAPI for HTTP started on port {5782}");
-        Console.WriteLine($"DumbFox WebServer/WebAPI for HTTPS started on port {9934}");
-
+        Console.WriteLine($"DumbFox WEB API for Apache/Nginx on port {80}");
         WebApplication app = builder.Build();
 
 
@@ -154,39 +134,11 @@ public static class WebApiServer
 
             string? requestPath = context.Request.Path.Value;
 
-
-            if (requestPath.EndsWith(".br"))
-            {
-                context.Response.Headers["Content-Encoding"] = "br";
-                await next();
-                return;
-            }
-
-            if (requestPath.EndsWith(".gz"))
-            {
-                context.Response.Headers["Content-Encoding"] = "gzip";
-                await next();
-                return;
-            }
-
             await next();
         });
 
         app.MapGet("/", () => Results.Text("Hello over HTTPS!"));
-        object? configJson = JsonSerializer.Deserialize<object>(GetSiteConfig());
-        var options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = null,
-            DefaultIgnoreCondition = JsonIgnoreCondition.Never,
-            WriteIndented = true,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        };
-        app.MapGet("/serve/mix/prod", () => Results.Json(configJson, options));
         var provider = new FileExtensionContentTypeProvider();
-        provider.Mappings[".br"] = "application/octet-stream";
-        provider.Mappings[".gz"] = "application/octet-stream";
-        provider.Mappings[".wasm"] = "application/wasm";
-        provider.Mappings[".unity3d"] = "application/octet-stream";
         app.UseStaticFiles(new StaticFileOptions
         {
             FileProvider = new PhysicalFileProvider(
@@ -222,7 +174,8 @@ public static class WebApiServer
 
             }
         });
-        
+
         await app.StartAsync(ct);
-	}
+    }
 }
+

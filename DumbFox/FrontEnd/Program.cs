@@ -16,13 +16,16 @@ Console.CancelKeyPress += (_, e) =>
 };
 
 //TODO: handle better running of clients, use a config to determine what clients to run
-Task webTask = WebApiServer.RunAsync(cts.Token);
+Task jgcTask = JgcApiServer.RunAsync(cts.Token);
+Task mixTask = MixApiServer.RunAsync(cts.Token);
+Task gameTask = GameApiServer.RunAsync(cts.Token);
 Task tcpTask = DumbFoxServer.RunAsync(9933, cts.Token);
 Task wsTask = DumbFoxWSServer.RunAsync(8080, cts.Token);
 
 try
 {
-	await Task.WhenAll(webTask, tcpTask, wsTask);
+	DatabaseCleaner();
+    await Task.WhenAll(jgcTask, mixTask, gameTask, wsTask, tcpTask);
 }
 catch (OperationCanceledException)
 {
@@ -33,8 +36,8 @@ return;
 async void DatabaseCleaner()
 {
     await using var conn = await DatabaseManager.OpenConnectionAsync();
-   // await using var cmd = new MySqlCommand("DELETE FROM sessions;", conn);
-  //  await cmd.ExecuteNonQueryAsync();
+    await using var cmd = new MySqlCommand("DELETE FROM sessions;", conn);
+    await cmd.ExecuteNonQueryAsync();
     await using var cmd0 = new MySqlCommand("DELETE FROM rooms;", conn);
     await cmd0.ExecuteNonQueryAsync();
     await using var cmd1 = new MySqlCommand("DELETE FROM room_users;", conn);

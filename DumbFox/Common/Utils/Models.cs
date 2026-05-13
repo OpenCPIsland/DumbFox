@@ -129,7 +129,7 @@ namespace Common.Utils.Game
     public class JoinRoomData
     {
         public string swid { get; set; } = "999999999999999";
-        public string host { get; set; } = "127.0.0.1";
+        public string host { get; set; } = "192.168.178.49";
         public int tcpPort { get; set; } = 9933;
         public int httpsPort { get; set; } = 9934;
         public string room { get; set; } = "Alpine:en_US:Boardwalk::1.0.0;Offline;2016-11-30;NONE";

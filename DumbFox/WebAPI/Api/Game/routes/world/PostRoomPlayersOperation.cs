@@ -58,7 +58,7 @@ public static class PostRoomPlayersOperation
             data = new JoinRoomData
             {
                 swid = loadedProfile.Swid,
-                room = world + ":" + langID + ":" + room + "::" + ctx.Request.Headers["X-CP-Client-Version"] + ";Offline;2016-11-28;NONE",// + GameRoutes.formatted + ";NONE",
+                room = world + ":" + langID + ":" + room + "::" + "1.13.0" + ";offline;" + GameRoutes.formatted + ";NONE",//world + ":" + langID + ":" + room + "::" + ctx.Request.Headers["X-CP-Client-Version"] + ";offline;" + GameRoutes.formatted + ";NONE",
                 sessionId = (long)session["sessionId"],
                 playerRoomData = new PlayerRoomData
                 {
