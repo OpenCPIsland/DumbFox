@@ -12,29 +12,18 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Common.Utils;
 
-/// <summary>
-/// Minimal MySQL / MariaDB access. Configure once at startup, then create connections as needed
-/// (ADO.NET pools connections when the same connection string is reused).
-/// </summary>
 public static class DatabaseManager
 {
 	private static string? _connectionString;
-
 	public static bool IsConfigured => !string.IsNullOrWhiteSpace(_connectionString);
-
 	public static string? ConnectionString => _connectionString;
 
-	/// <summary>Sets the connection string used by <see cref="CreateConnection"/>.</summary>
 	public static void Configure(string connectionString)
 	{
 		ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
 		_connectionString = connectionString;
 	}
 
-	/// <summary>
-	/// Reads <c>MYSQL_CONNECTION_STRING</c> from the environment and configures the manager if set.
-	/// Example: <c>Server=localhost;Port=3306;Database=mydb;User Id=app;Password=secret;</c>
-	/// </summary>
 	public static bool TryConfigureFromEnvironment()
 	{
 		string? cs = Environment.GetEnvironmentVariable("MYSQL_CONNECTION_STRING");
@@ -44,14 +33,12 @@ public static class DatabaseManager
 		return true;
 	}
 
-	/// <summary>Returns a new connection (not opened). Caller must dispose.</summary>
 	public static MySqlConnection CreateConnection()
 	{
 		EnsureConfigured();
 		return new MySqlConnection(_connectionString);
 	}
 
-	/// <summary>Opens a new connection. Caller must dispose (or await using).</summary>
 	public static async Task<MySqlConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)
 	{
 		MySqlConnection conn = CreateConnection();
@@ -67,7 +54,6 @@ public static class DatabaseManager
 		}
 	}
 
-	/// <summary>Quick connectivity check; returns false if not configured or connection fails.</summary>
 	public static async Task<bool> TestConnectionAsync(CancellationToken cancellationToken = default)
 	{
 		if (!IsConfigured)
@@ -743,6 +729,23 @@ public static class DatabaseManager
         return null;
     }
 
+    public static async Task<ServerSettingsDB?> GetServerSettings()
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var cmd = new MySqlCommand(@"SELECT * FROM serversettings;",conn);
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        if (await reader.ReadAsync())
+        {
+            return new ServerSettingsDB
+            {
+                Sequence = reader.GetInt64("sequence"),
+            };
+        }
+
+        return null;
+    }
+
     public static async Task<List<Friendship>> getFriendships(string swid)
     {
         var result = new List<Friendship>();
@@ -843,6 +846,10 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedProfile = await GetProfilesSwid(reader.GetString("swid"));
+
+            var getSrvSett = await GetServerSettings();
+
             var item = new AddAlertNotification
             {   
                 Alert = new Alert
@@ -853,8 +860,8 @@ public static class DatabaseManager
                     Timestamp = reader.GetInt64("timestamp")
                 },
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"],
-                SequenceNumber = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -883,12 +890,16 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedProfile = await GetProfilesSwid(reader.GetString("swid"));
+
+            var getSrvSett = await GetServerSettings();
+
             var item = new ClearAlertNotification
             {
                 AlertIds = [reader.GetInt64("id")],
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"],
-                SequenceNumber = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -910,13 +921,15 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
-            var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
 
             var session = await GetSessionAccessToken(accesstoken);
             if (session == null)
             {
                 throw new Exception("Current Session not found");
             }
+
+            var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
+            var getSrvSett = await GetServerSettings();
 
             var item = new AddFriendshipNotification
             {
@@ -943,8 +956,8 @@ public static class DatabaseManager
                 FriendshipInvitationId = reader.GetInt64("id"),
                 IsTrusted = reader.GetBoolean("istrusted"),
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = reader.GetInt64("id")
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -963,7 +976,7 @@ public static class DatabaseManager
         await using var transaction = await conn.BeginTransactionAsync();
 
         await using var cmd = new MySqlCommand(@"
-        SELECT id, hisID, timestamp 
+        SELECT id, meID, hisID, timestamp 
         FROM friends 
         WHERE meID = @swid 
         AND isfriend = 1 
@@ -976,6 +989,9 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
+
+            var getSrvSett = await GetServerSettings();
+
             var id = reader.GetInt64("id");
             ids.Add(id);
 
@@ -983,8 +999,8 @@ public static class DatabaseManager
             {
                 FriendUserId = reader.GetString("hisID"),
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = id,
-                SequenceNumber = id
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             });
         }
 
@@ -1085,12 +1101,14 @@ public static class DatabaseManager
 
         while (await reader.ReadAsync())
         {
-            var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
             var session = await GetSessionAccessToken(accesstoken);
             if (session == null)
             {
                 throw new Exception("Current Session not found");
             }
+
+            var loadedProfile = await GetProfilesSwid(reader.GetString("hisID"));
+            var getSrvSett = await GetServerSettings();
 
             var item = new AddFriendshipInvitationNotification
             {
@@ -1122,8 +1140,8 @@ public static class DatabaseManager
                     }
                 },
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = reader.GetInt64("id")
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -1152,12 +1170,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var getSrvSett = await GetServerSettings();
+
             var item = new RemoveFriendshipInvitationNotification
             {
                 InvitationId = reader.GetInt64("id"),
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = reader.GetInt64("id"),
-                SequenceNumber = reader.GetInt64("id")
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -1762,6 +1782,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var item = new AddChatThreadNotification
             {
                 ChatThread = new ChatThread {
@@ -1771,9 +1799,9 @@ public static class DatabaseManager
                     Members = await getChatThreadsUsers(threadId, aesSecret)
                 },
                 WelcomingUserId = swid,
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2151,6 +2179,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadTextMessageNotification
             {
@@ -2167,9 +2203,9 @@ public static class DatabaseManager
                     MessageType = "TEXT"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2200,6 +2236,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadStickerMessageNotification
             {
@@ -2216,9 +2260,9 @@ public static class DatabaseManager
                     MessageType = "STICKER"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2249,6 +2293,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGagMessageNotification
             {
@@ -2265,9 +2317,9 @@ public static class DatabaseManager
                     MessageType = "GAG"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2297,6 +2349,14 @@ public static class DatabaseManager
             {
                 throw new Exception("Current Session not found");
             }
+
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
 
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadVideoMessageNotification
@@ -2336,9 +2396,9 @@ public static class DatabaseManager
                     MessageType = "VIDEO"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2369,6 +2429,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadPhotoMessageNotification
             {
@@ -2398,9 +2466,9 @@ public static class DatabaseManager
                     MessageType = "PHOTO"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2432,6 +2500,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGameStateMessageNotification
             {
@@ -2449,9 +2525,9 @@ public static class DatabaseManager
                     MessageType = "GAME_STATE"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);
@@ -2483,6 +2559,14 @@ public static class DatabaseManager
                 throw new Exception("Current Session not found");
             }
 
+            var loadedprofile = await GetProfilesSwid((string)session["swid"]);
+            if (loadedprofile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await GetServerSettings();
+
             var threadId = reader.GetInt64("id");
             var item = new AddChatThreadGameEventMessageNotification
             {
@@ -2500,9 +2584,9 @@ public static class DatabaseManager
                     MessageType = "GAME_EVENT"
 
                 },
-                SequenceNumber = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
                 Created = reader.GetInt64("timestamp"),
-                NotificationId = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence
             };
 
             result.Add(item);

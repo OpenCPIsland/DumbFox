@@ -35,10 +35,23 @@ namespace WebAPI.Api.Mix.routes
             var session = await DatabaseManager.GetSessionAccessToken(ctx.Request.Headers["X-Mix-OneIdToken"].ToString());
             GetNotificationsSinceSequenceRequest obj = JsonSerializer.Deserialize<GetNotificationsSinceSequenceRequest>((string)ctx.Items["DecryptedModel"]);
 
+            var loadedProfile = await DatabaseManager.GetProfilesSwid((string)session["swid"]);
+
+            if (loadedProfile == null)
+            {
+                throw new Exception("From Given Swid from Profile not found");
+            }
+
+            var getSrvSett = await DatabaseManager.GetServerSettings();
+            if (getSrvSett == null)
+            {
+                throw new Exception("No Server Settings is found?");
+            }
+
 
             result = new GetNotificationsResponse
             {
-                NotificationSequenceCounter = obj.SequenceNumber,
+                NotificationSequenceCounter = getSrvSett.Sequence,
                 AddFriendship = await DatabaseManager.getNotificationFriendships((string)session["swid"], (string)session["aesSecret"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
                 RemoveFriendship = await DatabaseManager.getNotificationFriendshipRemoves((string)session["swid"], (string)session["aesSecret"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
                 AddFriendshipInvitation = await DatabaseManager.getNotificationFriendshipInvations((string)session["swid"], (string)session["aesSecret"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
@@ -56,9 +69,8 @@ namespace WebAPI.Api.Mix.routes
             };
 
             await using var conn = await DatabaseManager.OpenConnectionAsync();
-            await using var cmd0 = new MySqlCommand("UPDATE sessionusers SET seqcencenumber = @seq WHERE access_token = @AccessToken;", conn);
-            cmd0.Parameters.AddWithValue("@seq", result.NotificationSequenceCounter);
-            cmd0.Parameters.AddWithValue("@AccessToken", ctx.Request.Headers["X-Mix-OneIdToken"].ToString());
+            await using var cmd0 = new MySqlCommand("UPDATE serversettings SET sequence = @seq;", conn);
+            cmd0.Parameters.AddWithValue("@seq", obj.SequenceNumber);
             await cmd0.ExecuteNonQueryAsync();
 
             var json = JsonSerializer.Serialize(result, options);

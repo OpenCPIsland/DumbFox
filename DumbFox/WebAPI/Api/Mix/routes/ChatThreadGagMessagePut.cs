@@ -32,14 +32,28 @@ public class ChatThreadGagMessagePut
             throw new Exception("Current Session not found");
         }
 
+        var loadedProfile = await DatabaseManager.GetProfilesSwid((string)session["swid"]);
+
+        if (loadedProfile == null)
+        {
+            throw new Exception("From Given Swid from Profile not found");
+        }
+
+
+        var getSrvSett = await DatabaseManager.GetServerSettings();
+        if (getSrvSett == null)
+        {
+            throw new Exception("No Server Settings is found?");
+        }
+
         result = new AddChatThreadGagMessageResponse
         {
             Notification = new AddChatThreadGagMessageNotification
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<GagChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.ContentId, "contentid", "isgag", ChatMessageTypes.GAG),
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = (long)session["seqcencenumber"],
-                NotificationId = (long)session["seqcencenumber"]
+                SequenceNumber = getSrvSett.Sequence,
+                NotificationId = getSrvSett.Sequence
             }
         };
 

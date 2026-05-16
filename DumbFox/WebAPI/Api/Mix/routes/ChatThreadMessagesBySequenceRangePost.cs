@@ -42,6 +42,8 @@ public class ChatThreadMessagesBySequenceRangePost
             throw new Exception("Current Session not found");
         }
 
+
+
         result = new GetChatThreadMessagesResponse
         {
             Text = await DatabaseManager.getChatThreadTexts(obj.ChatThreadId, (string)session["swid"]),

@@ -11,7 +11,7 @@
  Target Server Version : 110202 (11.2.2-MariaDB)
  File Encoding         : 65001
 
- Date: 04/05/2026 19:35:10
+ Date: 16/05/2026 15:41:47
 */
 
 SET NAMES utf8mb4;
@@ -185,7 +185,7 @@ CREATE TABLE `friends`  (
   `timestamp` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_friends_me_lookup`(`meID` ASC, `isfriend` ASC, `isdeleted` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 123 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for inventorycostumes
@@ -363,6 +363,19 @@ CREATE TABLE `rooms`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for serversettings
+-- ----------------------------
+DROP TABLE IF EXISTS `serversettings`;
+CREATE TABLE `serversettings`  (
+  `sequence` bigint NOT NULL DEFAULT 1
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of serversettings
+-- ----------------------------
+INSERT INTO `serversettings` VALUES (1);
+
+-- ----------------------------
 -- Table structure for sessions
 -- ----------------------------
 DROP TABLE IF EXISTS `sessions`;
@@ -371,7 +384,7 @@ CREATE TABLE `sessions`  (
   `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 1 day),
   PRIMARY KEY (`seeid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sessionusers
@@ -389,8 +402,6 @@ CREATE TABLE `sessionusers`  (
   `username` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `sessionId` bigint NULL DEFAULT 0,
   `isclient` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'CLUBPENGUINISLAND',
-  `seqcencenumber` bigint NOT NULL DEFAULT 10,
-  `notificationid` bigint NOT NULL DEFAULT 10,
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 1 day),
   INDEX `test`(`seeid` ASC) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`seeid`) REFERENCES `sessions` (`seeid`) ON DELETE CASCADE ON UPDATE RESTRICT

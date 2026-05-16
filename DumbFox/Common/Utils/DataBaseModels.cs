@@ -20,6 +20,11 @@ namespace Common.Utils
         public long timestamp { get; set; } = 0;
     }
 
+    public class ServerSettingsDB
+    {
+        public long Sequence { get; set; } = 0L;
+    }
+
     public class ProfilesDB
     {
         public string Swid { get; set; } = "999999999999999";

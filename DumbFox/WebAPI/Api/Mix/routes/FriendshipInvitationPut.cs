@@ -64,13 +64,15 @@ public class FriendshipInvitationPut
             throw new Exception("From Given Swid from Profile not found");
         }
 
+        var getSrvSett = await DatabaseManager.GetServerSettings();
+
         result = new AddFriendshipInvitationResponse
         {
             Notification = new AddFriendshipInvitationNotification
             {
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = (long)session["seqcencenumber"],
-                NotificationId = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
+                NotificationId = getSrvSett.Sequence,
                 Invitation = new FriendshipInvitation { FriendDisplayName = (string)getUserName["username"], FriendshipInvitationId = notfiid, IsInviter = true, IsTrusted = false },
                 Friend = new User {
                 UserId = loadedOtherProfile.Swid,

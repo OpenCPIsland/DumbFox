@@ -48,6 +48,12 @@ namespace WebAPI.Api.Mix.routes
                 throw new Exception("From Given Swid from Profile not found");
             }
 
+            var getSrvSett = await DatabaseManager.GetServerSettings();
+            if (getSrvSett == null)
+            {
+                throw new Exception("No Server Settings is found?");
+            }
+
 
             result = new GetStateResponse
             {
@@ -56,7 +62,7 @@ namespace WebAPI.Api.Mix.routes
                 FriendshipInvitations = await DatabaseManager.getFriendshipInvations((string)session["swid"]),
                 Alerts = await DatabaseManager.getAlerts((string)session["swid"]),
                 ChatThreads = await DatabaseManager.getChatThreads((string)session["swid"], (string)session["aesSecret"]),
-                NotificationSequenceCounter = (long)session["seqcencenumber"]
+                NotificationSequenceCounter = getSrvSett.Sequence
             };
 
             var json = JsonSerializer.Serialize(result, options);

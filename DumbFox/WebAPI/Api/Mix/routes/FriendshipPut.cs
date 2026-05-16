@@ -56,6 +56,14 @@ public class FriendshipPut
             throw new Exception("From Given Swid from Profile not found");
         }
 
+        var loadedOtherProfile = await DatabaseManager.GetProfilesSwid((string)session["swid"]);
+
+        if (loadedOtherProfile == null)
+        {
+            throw new Exception("From Given Swid from Profile not found");
+        }
+
+        var getSrvSett = await DatabaseManager.GetServerSettings();
 
         await using var cmd0 = new MySqlCommand(@"UPDATE friends SET isfriend = 1 WHERE meID = @swid AND id= @id;", conn);
         cmd0.Parameters.AddWithValue("@swid", friend.meID);
@@ -94,8 +102,8 @@ public class FriendshipPut
                 FriendshipInvitationId = friend.Id,
                 IsTrusted = friend.istrusted,
                 Created = friend.timestamp,
-                NotificationId = (long)session["seqcencenumber"],
-                SequenceNumber = (long)session["seqcencenumber"]
+                NotificationId = getSrvSett.Sequence,
+                SequenceNumber = getSrvSett.Sequence
 
             }
         };

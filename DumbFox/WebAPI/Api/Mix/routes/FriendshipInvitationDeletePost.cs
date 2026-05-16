@@ -57,6 +57,8 @@ public class FriendshipInvitationDeletePost
         }
 
 
+        var getSrvSett = await DatabaseManager.GetServerSettings();
+
         await using var cmd0 = new MySqlCommand(@"UPDATE friends SET isdeleted = 1 WHERE meID = @swid AND id= @id;", conn);
         cmd0.Parameters.AddWithValue("@swid", friend.meID);
         cmd0.Parameters.AddWithValue("@id", friend.Id);
@@ -73,8 +75,8 @@ public class FriendshipInvitationDeletePost
             { 
                 InvitationId = obj.InvitationId,
                 Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SequenceNumber = (long)session["seqcencenumber"],
-                NotificationId = (long)session["seqcencenumber"],
+                SequenceNumber = getSrvSett.Sequence,
+                NotificationId = getSrvSett.Sequence,
             }
         };
 
