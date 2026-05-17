@@ -62,7 +62,8 @@ namespace WebAPI.Api.Mix.routes
                 FriendshipInvitations = await DatabaseManager.getFriendshipInvations((string)session["swid"]),
                 Alerts = await DatabaseManager.getAlerts((string)session["swid"]),
                 ChatThreads = await DatabaseManager.getChatThreads((string)session["swid"], (string)session["aesSecret"]),
-                NotificationSequenceCounter = getSrvSett.Sequence
+                NotificationSequenceCounter = getSrvSett.Sequence,
+                Timestamp = (long)session["timestamp"]
             };
 
             var json = JsonSerializer.Serialize(result, options);

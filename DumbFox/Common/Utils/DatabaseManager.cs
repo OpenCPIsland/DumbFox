@@ -859,7 +859,7 @@ public static class DatabaseManager
                     Text = reader.GetString("message"),
                     Timestamp = reader.GetInt64("timestamp")
                 },
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             };
@@ -897,7 +897,7 @@ public static class DatabaseManager
             var item = new ClearAlertNotification
             {
                 AlertIds = [reader.GetInt64("id")],
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             };
@@ -955,7 +955,7 @@ public static class DatabaseManager
 
                 FriendshipInvitationId = reader.GetInt64("id"),
                 IsTrusted = reader.GetBoolean("istrusted"),
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             };
@@ -990,6 +990,12 @@ public static class DatabaseManager
         while (await reader.ReadAsync())
         {
 
+            var session = await GetSessionAccessToken(accesstoken);
+            if (session == null)
+            {
+                throw new Exception("Current Session not found");
+            }
+
             var getSrvSett = await GetServerSettings();
 
             var id = reader.GetInt64("id");
@@ -998,7 +1004,7 @@ public static class DatabaseManager
             result.Add(new RemoveFriendshipNotification
             {
                 FriendUserId = reader.GetString("hisID"),
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             });
@@ -1139,7 +1145,7 @@ public static class DatabaseManager
                         Hat = new AvatarProperty { SelectionKey = loadedProfile.Hat, TintIndex = loadedProfile.HatTintIndex, XOffset = loadedProfile.HatXOffeset, YOffset = loadedProfile.HatYOffeset }
                     }
                 },
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             };
@@ -1175,7 +1181,7 @@ public static class DatabaseManager
             var item = new RemoveFriendshipInvitationNotification
             {
                 InvitationId = reader.GetInt64("id"),
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
             };
@@ -1800,7 +1806,7 @@ public static class DatabaseManager
                 },
                 WelcomingUserId = swid,
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2204,7 +2210,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2261,7 +2267,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2318,7 +2324,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2397,7 +2403,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2467,7 +2473,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2526,7 +2532,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 
@@ -2585,7 +2591,7 @@ public static class DatabaseManager
 
                 },
                 SequenceNumber = getSrvSett.Sequence,
-                Created = reader.GetInt64("timestamp"),
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence
             };
 

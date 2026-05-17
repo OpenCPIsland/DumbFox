@@ -60,7 +60,7 @@ public class ChatThreadVideoMessagePut
             Notification = new AddChatThreadVideoMessageNotification
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<VideoChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.UgcMediaId, "videoflavorid", "isvideo", ChatMessageTypes.VIDEO),
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence
             }

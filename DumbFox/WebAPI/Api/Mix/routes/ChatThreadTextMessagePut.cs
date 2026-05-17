@@ -60,7 +60,7 @@ public class ChatThreadTextMessagePut
             Notification = new AddChatThreadTextMessageNotification
             {
                 Message = await DatabaseManager.InsertChatThreadTextMessage(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.Text),
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence
             }

@@ -1988,3 +1988,216 @@ sl:warn] [pid 222900:tid 368] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server ce
 [Sat May 16 15:45:31.892307 2026] [mpm_winnt:notice] [pid 217680:tid 348] AH00422: Parent: Received shutdown signal -- Shutting down the server.
 [Sat May 16 15:45:33.909478 2026] [mpm_winnt:notice] [pid 222900:tid 368] AH00364: Child: All worker threads have exited.
 [Sat May 16 15:45:33.963326 2026] [mpm_winnt:notice] [pid 217680:tid 348] AH00430: Parent: Child process 222900 exited successfully.
+[Sat May 16 18:14:10.648547 2026] [ssl:warn] [pid 259056:tid 400] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:14:10.648547 2026] [ssl:warn] [pid 259056:tid 400] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:14:10.664414 2026] [ssl:warn] [pid 259056:tid 400] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:14:10.665919 2026] [ssl:warn] [pid 259056:tid 400] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:14:10.665919 2026] [ssl:warn] [pid 259056:tid 400] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:14:10.666925 2026] [mpm_winnt:notice] [pid 259056:tid 400] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sat May 16 18:14:10.666925 2026] [mpm_winnt:notice] [pid 259056:tid 400] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sat May 16 18:14:10.666925 2026] [core:notice] [pid 259056:tid 400] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sat May 16 18:14:10.669113 2026] [mpm_winnt:notice] [pid 259056:tid 400] AH00418: Parent: Created child process 255248
+Apache server shutdown initiated...
+sl:warn] [pid 255248:tid 400] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:14:10.973275 2026] [ssl:warn] [pid 255248:tid 400] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:14:10.988161 2026] [ssl:warn] [pid 255248:tid 400] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:14:10.989159 2026] [ssl:warn] [pid 255248:tid 400] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:14:10.989159 2026] [ssl:warn] [pid 255248:tid 400] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:14:10.990247 2026] [mpm_winnt:notice] [pid 255248:tid 400] AH00354: Child: Starting 64 worker threads.
+[Sat May 16 18:16:55.101207 2026] [mpm_winnt:notice] [pid 259056:tid 400] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat May 16 18:16:57.111339 2026] [mpm_winnt:notice] [pid 255248:tid 400] AH00364: Child: All worker threads have exited.
+[Sat May 16 18:16:57.160458 2026] [mpm_winnt:notice] [pid 259056:tid 400] AH00430: Parent: Child process 255248 exited successfully.
+[Sat May 16 18:17:09.281856 2026] [ssl:warn] [pid 258856:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:17:09.281856 2026] [ssl:warn] [pid 258856:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:17:09.298367 2026] [ssl:warn] [pid 258856:tid 392] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:17:09.299372 2026] [ssl:warn] [pid 258856:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:17:09.299372 2026] [ssl:warn] [pid 258856:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:17:09.299372 2026] [mpm_winnt:notice] [pid 258856:tid 392] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sat May 16 18:17:09.299372 2026] [mpm_winnt:notice] [pid 258856:tid 392] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sat May 16 18:17:09.299372 2026] [core:notice] [pid 258856:tid 392] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sat May 16 18:17:09.303392 2026] [mpm_winnt:notice] [pid 258856:tid 392] AH00418: Parent: Created child process 253060
+Apache server shutdown initiated...
+sl:warn] [pid 253060:tid 368] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:17:09.610131 2026] [ssl:warn] [pid 253060:tid 368] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:17:09.624348 2026] [ssl:warn] [pid 253060:tid 368] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:17:09.625853 2026] [ssl:warn] [pid 253060:tid 368] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:17:09.625853 2026] [ssl:warn] [pid 253060:tid 368] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:17:09.627915 2026] [mpm_winnt:notice] [pid 253060:tid 368] AH00354: Child: Starting 64 worker threads.
+[Sat May 16 18:31:06.118546 2026] [mpm_winnt:notice] [pid 258856:tid 392] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat May 16 18:31:08.147923 2026] [mpm_winnt:notice] [pid 253060:tid 368] AH00364: Child: All worker threads have exited.
+[Sat May 16 18:31:08.189011 2026] [mpm_winnt:notice] [pid 258856:tid 392] AH00430: Parent: Child process 253060 exited successfully.
+[Sat May 16 18:31:22.956922 2026] [ssl:warn] [pid 264512:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:31:22.956922 2026] [ssl:warn] [pid 264512:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:31:22.970314 2026] [ssl:warn] [pid 264512:tid 392] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:31:22.971816 2026] [ssl:warn] [pid 264512:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:31:22.971816 2026] [ssl:warn] [pid 264512:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:31:22.971816 2026] [mpm_winnt:notice] [pid 264512:tid 392] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sat May 16 18:31:22.971816 2026] [mpm_winnt:notice] [pid 264512:tid 392] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sat May 16 18:31:22.971816 2026] [core:notice] [pid 264512:tid 392] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sat May 16 18:31:22.975357 2026] [mpm_winnt:notice] [pid 264512:tid 392] AH00418: Parent: Created child process 262284
+Apache server shutdown initiated...
+sl:warn] [pid 262284:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:31:23.219217 2026] [ssl:warn] [pid 262284:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:31:23.231928 2026] [ssl:warn] [pid 262284:tid 376] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 18:31:23.231928 2026] [ssl:warn] [pid 262284:tid 376] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 18:31:23.231928 2026] [ssl:warn] [pid 262284:tid 376] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 18:31:23.233932 2026] [mpm_winnt:notice] [pid 262284:tid 376] AH00354: Child: Starting 64 worker threads.
+[Sat May 16 19:10:36.787742 2026] [mpm_winnt:notice] [pid 264512:tid 392] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat May 16 19:10:38.793740 2026] [mpm_winnt:notice] [pid 262284:tid 376] AH00364: Child: All worker threads have exited.
+[Sat May 16 19:10:38.836699 2026] [mpm_winnt:notice] [pid 264512:tid 392] AH00430: Parent: Child process 262284 exited successfully.
+[Sat May 16 20:28:28.293813 2026] [ssl:warn] [pid 280760:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 20:28:28.295317 2026] [ssl:warn] [pid 280760:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 20:28:28.311413 2026] [ssl:warn] [pid 280760:tid 392] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 20:28:28.313016 2026] [ssl:warn] [pid 280760:tid 392] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 20:28:28.313016 2026] [ssl:warn] [pid 280760:tid 392] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 20:28:28.313016 2026] [mpm_winnt:notice] [pid 280760:tid 392] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sat May 16 20:28:28.313016 2026] [mpm_winnt:notice] [pid 280760:tid 392] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sat May 16 20:28:28.313016 2026] [core:notice] [pid 280760:tid 392] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sat May 16 20:28:28.316150 2026] [mpm_winnt:notice] [pid 280760:tid 392] AH00418: Parent: Created child process 242224
+Apache server shutdown initiated...
+sl:warn] [pid 242224:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 20:28:28.579366 2026] [ssl:warn] [pid 242224:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 20:28:28.593614 2026] [ssl:warn] [pid 242224:tid 352] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat May 16 20:28:28.594119 2026] [ssl:warn] [pid 242224:tid 352] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sat May 16 20:28:28.594119 2026] [ssl:warn] [pid 242224:tid 352] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sat May 16 20:28:28.595639 2026] [mpm_winnt:notice] [pid 242224:tid 352] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 01:12:30.300598 2026] [mpm_winnt:notice] [pid 280760:tid 392] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 01:12:32.312609 2026] [mpm_winnt:notice] [pid 242224:tid 352] AH00364: Child: All worker threads have exited.
+[Sun May 17 01:12:32.357891 2026] [mpm_winnt:notice] [pid 280760:tid 392] AH00430: Parent: Child process 242224 exited successfully.
+[Sun May 17 01:32:11.170441 2026] [ssl:warn] [pid 276784:tid 264] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 01:32:11.171583 2026] [ssl:warn] [pid 276784:tid 264] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 01:32:11.186151 2026] [ssl:warn] [pid 276784:tid 264] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 01:32:11.187148 2026] [ssl:warn] [pid 276784:tid 264] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 01:32:11.187148 2026] [ssl:warn] [pid 276784:tid 264] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 01:32:11.188150 2026] [mpm_winnt:notice] [pid 276784:tid 264] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sun May 17 01:32:11.188150 2026] [mpm_winnt:notice] [pid 276784:tid 264] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sun May 17 01:32:11.188150 2026] [core:notice] [pid 276784:tid 264] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sun May 17 01:32:11.191657 2026] [mpm_winnt:notice] [pid 276784:tid 264] AH00418: Parent: Created child process 321376
+Apache server shutdown initiated...
+sl:warn] [pid 321376:tid 360] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 01:32:11.538613 2026] [ssl:warn] [pid 321376:tid 360] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 01:32:11.550141 2026] [ssl:warn] [pid 321376:tid 360] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 01:32:11.551148 2026] [ssl:warn] [pid 321376:tid 360] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 01:32:11.551148 2026] [ssl:warn] [pid 321376:tid 360] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 01:32:11.553148 2026] [mpm_winnt:notice] [pid 321376:tid 360] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 01:32:19.102309 2026] [proxy:error] [pid 321376:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5782 (127.0.0.1:5782) failed
+[Sun May 17 01:32:19.102309 2026] [proxy_http:error] [pid 321376:tid 1380] [client 127.0.0.1:58687] AH01114: HTTP: failed to make connection to backend: 127.0.0.1, referer: http://127.0.0.1/test4/
+[Sun May 17 01:52:11.727096 2026] [mpm_winnt:notice] [pid 276784:tid 264] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 01:52:13.744421 2026] [mpm_winnt:notice] [pid 321376:tid 360] AH00364: Child: All worker threads have exited.
+[Sun May 17 01:52:13.790475 2026] [mpm_winnt:notice] [pid 276784:tid 264] AH00430: Parent: Child process 321376 exited successfully.
+[Sun May 17 02:14:49.944016 2026] [ssl:warn] [pid 326872:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 02:14:49.945521 2026] [ssl:warn] [pid 326872:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 02:14:49.962381 2026] [ssl:warn] [pid 326872:tid 372] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 02:14:49.963381 2026] [ssl:warn] [pid 326872:tid 372] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 02:14:49.963381 2026] [ssl:warn] [pid 326872:tid 372] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 02:14:49.963381 2026] [mpm_winnt:notice] [pid 326872:tid 372] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sun May 17 02:14:49.963381 2026] [mpm_winnt:notice] [pid 326872:tid 372] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sun May 17 02:14:49.963381 2026] [core:notice] [pid 326872:tid 372] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sun May 17 02:14:49.967407 2026] [mpm_winnt:notice] [pid 326872:tid 372] AH00418: Parent: Created child process 326852
+Apache server shutdown initiated...
+sl:warn] [pid 326852:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 02:14:50.221394 2026] [ssl:warn] [pid 326852:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 02:14:50.233748 2026] [ssl:warn] [pid 326852:tid 404] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 02:14:50.233748 2026] [ssl:warn] [pid 326852:tid 404] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 02:14:50.233748 2026] [ssl:warn] [pid 326852:tid 404] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 02:14:50.237741 2026] [mpm_winnt:notice] [pid 326852:tid 404] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 02:29:53.629996 2026] [proxy_http:error] [pid 326852:tid 1372] [client 127.0.0.1:56127] AH01086: read less bytes of request body than expected (got 0, expected 1268)
+[Sun May 17 02:29:53.629996 2026] [proxy_http:error] [pid 326852:tid 1372] [client 127.0.0.1:56127] AH10154: pass request body failed to 127.0.0.1:5784 (127.0.0.1) from 127.0.0.1 () with status 500
+[Sun May 17 03:35:23.152278 2026] [mpm_winnt:notice] [pid 326872:tid 372] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 03:35:25.179764 2026] [mpm_winnt:notice] [pid 326852:tid 404] AH00364: Child: All worker threads have exited.
+[Sun May 17 03:35:25.234127 2026] [mpm_winnt:notice] [pid 326872:tid 372] AH00430: Parent: Child process 326852 exited successfully.
+[Sun May 17 11:17:29.224156 2026] [ssl:warn] [pid 387192:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 11:17:29.225156 2026] [ssl:warn] [pid 387192:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 11:17:29.239211 2026] [ssl:warn] [pid 387192:tid 388] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 11:17:29.240251 2026] [ssl:warn] [pid 387192:tid 388] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 11:17:29.240251 2026] [ssl:warn] [pid 387192:tid 388] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 11:17:29.240251 2026] [mpm_winnt:notice] [pid 387192:tid 388] AH00455: Apache/2.4.67 (Win64) OpenSSL/3.6.2 configured -- resuming normal operations
+[Sun May 17 11:17:29.240251 2026] [mpm_winnt:notice] [pid 387192:tid 388] AH00456: Apache Lounge VS18 Server built: Apr 30 2026 10:48:38
+[Sun May 17 11:17:29.240251 2026] [core:notice] [pid 387192:tid 388] AH00094: Command line: 'D:\\CPI2023\\WebApiAsync\\Apache24\\bin\\httpd.exe -d D:/CPI2023/WebApiAsync/Apache24'
+[Sun May 17 11:17:29.243765 2026] [mpm_winnt:notice] [pid 387192:tid 388] AH00418: Parent: Created child process 390860
+Apache server shutdown initiated...
+sl:warn] [pid 390860:tid 384] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 11:17:29.489981 2026] [ssl:warn] [pid 390860:tid 384] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 11:17:29.502599 2026] [ssl:warn] [pid 390860:tid 384] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sun May 17 11:17:29.502599 2026] [ssl:warn] [pid 390860:tid 384] AH01906: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Sun May 17 11:17:29.502599 2026] [ssl:warn] [pid 390860:tid 384] AH01909: DESKTOP-IBF8S1N.fritz.box:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 11:17:29.505110 2026] [mpm_winnt:notice] [pid 390860:tid 384] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 13:24:01.917854 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:01.917854 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55837] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:03.961584 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:03.961584 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55841] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:06.825608 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:06.825608 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55846] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:08.879480 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:08.879480 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55849] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:11.605030 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:11.605030 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55854] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:13.646823 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:13.646823 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55859] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:14.544608 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:14.544608 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55861] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:16.576115 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:16.576115 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55866] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:16.775041 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:16.775041 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55868] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:18.819625 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:18.819625 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55872] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:19.392582 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:19.392582 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55875] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:21.437886 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:21.437886 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55879] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:21.545141 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:21.545141 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55881] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:23.585286 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:23.585286 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55885] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:24.416026 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:24.416026 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55888] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:26.344170 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:26.344170 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55892] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:26.452173 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:26.452173 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55894] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:28.396013 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:28.396013 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55898] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:29.644510 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:29.644510 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55901] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:31.574098 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:31.574098 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55905] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:31.696103 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:31.696103 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55908] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:33.620077 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:33.620077 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55911] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:34.657595 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:34.657595 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55914] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:36.387861 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:36.387861 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55917] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:36.698245 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:36.698245 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55920] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:38.434332 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:38.434332 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55924] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:39.564231 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:39.564231 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55926] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:41.565895 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:41.565895 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55931] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:41.597431 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:41.597431 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55933] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:43.609697 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:43.609697 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55939] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:44.612624 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:44.612624 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55942] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:46.518394 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:46.518394 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55946] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:46.659692 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:46.659692 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55948] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:48.545286 2026] [proxy:error] [pid 390860:tid 1380] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:48.545286 2026] [proxy_http:error] [pid 390860:tid 1380] [client 127.0.0.1:55951] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:49.687738 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:49.687738 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55955] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:51.735380 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:51.735380 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55959] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:54.917966 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:54.917966 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55964] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:24:56.981341 2026] [proxy:error] [pid 390860:tid 1368] (OS 10061)No connection could be made because the target machine actively refused it.  : AH00957: http: attempt to connect to 127.0.0.1:5783 (127.0.0.1:5783) failed
+[Sun May 17 13:24:56.981341 2026] [proxy_http:error] [pid 390860:tid 1368] [client 127.0.0.1:55968] AH01114: HTTP: failed to make connection to backend: 127.0.0.1
+[Sun May 17 13:30:11.128175 2026] [mpm_winnt:notice] [pid 387192:tid 388] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 13:30:13.137071 2026] [mpm_winnt:notice] [pid 390860:tid 384] AH00364: Child: All worker threads have exited.
+[Sun May 17 13:30:13.192476 2026] [mpm_winnt:notice] [pid 387192:tid 388] AH00430: Parent: Child process 390860 exited successfully.

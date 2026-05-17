@@ -60,7 +60,7 @@ public class ChatThreadStickerMessagePut
             Notification = new AddChatThreadStickerMessageNotification
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<StickerChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.ContentId, "contentid", "isticker", ChatMessageTypes.STICKER),
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence
             }

@@ -11,7 +11,7 @@
  Target Server Version : 110202 (11.2.2-MariaDB)
  File Encoding         : 65001
 
- Date: 16/05/2026 15:41:47
+ Date: 17/05/2026 13:28:06
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,7 @@ CREATE TABLE `accounts`  (
   `birthday` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1970-01-01',
   `region` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for alerts
@@ -84,7 +84,7 @@ CREATE TABLE `chatthreadchats`  (
   PRIMARY KEY (`msgid`) USING BTREE,
   INDEX `id`(`id` ASC) USING BTREE,
   CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `chatthreads` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 216 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 219 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for chatthreads
@@ -100,7 +100,7 @@ CREATE TABLE `chatthreads`  (
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 30 day),
   `seq` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for chatthreadsusers
@@ -185,7 +185,7 @@ CREATE TABLE `friends`  (
   `timestamp` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_friends_me_lookup`(`meID` ASC, `isfriend` ASC, `isdeleted` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 123 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 129 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for inventorycostumes
@@ -312,7 +312,7 @@ CREATE TABLE `quests`  (
   `timesCompleted` tinyint NOT NULL DEFAULT 0,
   `unlockTime` varchar(13) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for room_users
@@ -384,7 +384,7 @@ CREATE TABLE `sessions`  (
   `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 1 day),
   PRIMARY KEY (`seeid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sessionusers
@@ -402,6 +402,7 @@ CREATE TABLE `sessionusers`  (
   `username` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `sessionId` bigint NULL DEFAULT 0,
   `isclient` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'CLUBPENGUINISLAND',
+  `timestamp` bigint NOT NULL DEFAULT 0,
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 1 day),
   INDEX `test`(`seeid` ASC) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`seeid`) REFERENCES `sessions` (`seeid`) ON DELETE CASCADE ON UPDATE RESTRICT

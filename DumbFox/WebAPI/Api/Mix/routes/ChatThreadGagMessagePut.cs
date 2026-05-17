@@ -51,7 +51,7 @@ public class ChatThreadGagMessagePut
             Notification = new AddChatThreadGagMessageNotification
             {
                 Message = await DatabaseManager.InsertChatThreadTypeMessage<GagChatMessage>(obj.ChatThreadId, obj.ClientChatMessageId, (string)session["swid"], (string)session["username"], obj.ContentId, "contentid", "isgag", ChatMessageTypes.GAG),
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence
             }

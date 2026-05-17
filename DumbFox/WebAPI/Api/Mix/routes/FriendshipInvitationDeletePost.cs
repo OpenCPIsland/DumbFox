@@ -74,7 +74,7 @@ public class FriendshipInvitationDeletePost
             Notification = new RemoveFriendshipInvitationNotification 
             { 
                 InvitationId = obj.InvitationId,
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence,
             }

@@ -16,16 +16,20 @@ Console.CancelKeyPress += (_, e) =>
 };
 
 //TODO: handle better running of clients, use a config to determine what clients to run
-Task jgcTask = JgcApiServer.RunAsync(cts.Token);
-Task mixTask = MixApiServer.RunAsync(cts.Token);
-Task gameTask = GameApiServer.RunAsync(cts.Token);
+Task webTask = WebApiServer.RunAsync(cts.Token); //ALL in One uses port 80 for you local testing
+
+//Task jgcTask = JgcApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
+//Task mixTask = MixApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
+//Task gameTask = GameApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
+
 Task tcpTask = DumbFoxServer.RunAsync(9933, cts.Token);
 Task wsTask = DumbFoxWSServer.RunAsync(8080, cts.Token);
 
 try
 {
 	DatabaseCleaner();
-    await Task.WhenAll(jgcTask, mixTask, gameTask, wsTask, tcpTask);
+    //await Task.WhenAll(jgcTask, mixTask, gameTask, wsTask, tcpTask);
+    await Task.WhenAll(webTask, wsTask, tcpTask);
 }
 catch (OperationCanceledException)
 {

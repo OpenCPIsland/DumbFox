@@ -101,7 +101,7 @@ public class FriendshipPut
 
                 FriendshipInvitationId = friend.Id,
                 IsTrusted = friend.istrusted,
-                Created = friend.timestamp,
+                Created = (long)session["timestamp"],
                 NotificationId = getSrvSett.Sequence,
                 SequenceNumber = getSrvSett.Sequence
 

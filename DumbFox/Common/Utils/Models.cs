@@ -20,7 +20,7 @@ namespace Common.Utils
 namespace Common.Utils.Game
 {
     //GameAPI Models
-    public enum GameApiErrorCodes { INVAILDOREXPIREDACCESSTOKEN = 3, UNKOWN10001 = 10001, UNKOWN10002 = 10002, UNKOWN10003 = 10003 }
+    public enum GameApiErrorCodes { INVAILDOREXPIREDACCESSTOKEN = 3, UNKOWN10000 = 10000, UNKOWN10001 = 10001, UNKOWN10002 = 10002, UNKOWN10003 = 10003 }
     public class BaseCodeError
     {
         public int Code { get; set; } = 3;
@@ -129,10 +129,10 @@ namespace Common.Utils.Game
     public class JoinRoomData
     {
         public string swid { get; set; } = "999999999999999";
-        public string host { get; set; } = "192.168.178.49";
+        public string host { get; set; } = "127.0.0.1";
         public int tcpPort { get; set; } = 9933;
         public int httpsPort { get; set; } = 9934;
-        public string room { get; set; } = "Alpine:en_US:Boardwalk::1.0.0;Offline;2016-11-30;NONE";
+        public string room { get; set; } = "Alpine:en_US:Boardwalk::1.0.0;Offline;2016-11-28;NONE";
         public long sessionId { get; set; } = 1L;
         public PlayerRoomData playerRoomData { get; set; } = new PlayerRoomData();
         public object earnedRewards { get; set; } = new { };
@@ -609,21 +609,21 @@ namespace Common.Utils.Mix
         public List<int?> PollIntervals { get; set; } = [5, 10, 30];
         public List<int?> PokeIntervals { get; set; } = [30];
         public long Timestamp { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        public long NotificationSequenceCounter { get; set; } = 10;
+        public long NotificationSequenceCounter { get; set; } = 1L;
         public int NotificationSequenceThreshold { get; set; } = 7000;
         public int NotificationIntervalsJitter { get; set; } = 500;
     }
 
     public class GetNotificationsSinceSequenceRequest : BaseUserRequest
     {
-        public long SequenceNumber { get; set; } = 10L;
+        public long SequenceNumber { get; set; } = 1L;
         public List<long> ExcludeNotificationSequenceNumbers { get; set; } = new List<long>();
     }
 
     public class GetNotificationsResponse : BaseResponse
     {
         public long LastNotificationTimestamp { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        public long NotificationSequenceCounter { get; set; } = 0;
+        public long NotificationSequenceCounter { get; set; } = 1L;
         public List<AddChatThreadNotification> AddChatThread { get; set; } = [];
         public List<AddChatThreadMembershipNotification> AddChatThreadMembership { get; set; } = [];
         public List<AddChatThreadGagMessageNotification> AddChatThreadGagMessage { get; set; } = [];

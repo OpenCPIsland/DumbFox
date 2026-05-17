@@ -70,7 +70,7 @@ public class FriendshipInvitationPut
         {
             Notification = new AddFriendshipInvitationNotification
             {
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence,
                 Invitation = new FriendshipInvitation { FriendDisplayName = (string)getUserName["username"], FriendshipInvitationId = notfiid, IsInviter = true, IsTrusted = false },

@@ -1,0 +1,14 @@
+D:\CPI2023\WebApiAsync\DumbFox\Common\bin\Release\net9.0\Common.deps.json
+D:\CPI2023\WebApiAsync\DumbFox\Common\bin\Release\net9.0\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox\Common\bin\Release\net9.0\Common.pdb
+D:\CPI2023\WebApiAsync\DumbFox\Common\bin\Release\net9.0\SmartFox2X.dll
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.csproj.AssemblyReference.cache
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.AssemblyInfoInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.AssemblyInfo.cs
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.csproj.CoreCompileInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.csproj.Up2Date
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\refint\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\Common.pdb
+D:\CPI2023\WebApiAsync\DumbFox\Common\obj\Release\net9.0\ref\Common.dll

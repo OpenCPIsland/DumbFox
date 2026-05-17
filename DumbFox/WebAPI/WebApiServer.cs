@@ -99,7 +99,7 @@ public class WebApiServer
             kestrelOptions.ListenAnyIP(80);
         });
 
-        Console.WriteLine($"DumbFox WEB API for Apache/Nginx on port {80}");
+        Console.WriteLine($"DumbFox WEBAPI on port {80} in browser http://127.0.0.1 same goes for jgc mix game api in cpi or disneymix");
         WebApplication app = builder.Build();
 
 

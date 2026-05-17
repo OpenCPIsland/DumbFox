@@ -66,12 +66,18 @@ namespace WebAPI.Api.Mix.routes
                 AddChatThreadPhotoMessage = await DatabaseManager.getChatThreadPhotoNotifications((string)session["swid"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
                 AddChatThreadGameStateMessage = await DatabaseManager.getChatThreadGameStateNotifications((string)session["swid"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
                 AddChatThreadGameEventMessage = await DatabaseManager.getChatThreadGameEventNotifications((string)session["swid"], ctx.Request.Headers["X-Mix-OneIdToken"].ToString()),
+                LastNotificationTimestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             };
 
             await using var conn = await DatabaseManager.OpenConnectionAsync();
             await using var cmd0 = new MySqlCommand("UPDATE serversettings SET sequence = @seq;", conn);
             cmd0.Parameters.AddWithValue("@seq", obj.SequenceNumber);
             await cmd0.ExecuteNonQueryAsync();
+
+            await using var cmd1 = new MySqlCommand("UPDATE sessionusers SET timestamp = @timestamp WHERE swid = @swid;", conn);
+            cmd1.Parameters.AddWithValue("@swid", (string)session["swid"]);
+            cmd1.Parameters.AddWithValue("@timestamp", result.LastNotificationTimestamp);
+            await cmd1.ExecuteNonQueryAsync();
 
             var json = JsonSerializer.Serialize(result, options);
             byte[] encrypted = DumbfoxEncryption.EncryptToIvPrependedBytes(json, Convert.FromBase64String((string)session["aesSecret"]));

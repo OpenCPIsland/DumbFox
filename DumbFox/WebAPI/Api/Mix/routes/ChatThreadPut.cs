@@ -61,7 +61,7 @@ public class ChatThreadPut
             {
                 ChatThread = await DatabaseManager.InsertChatThread(obj.ChatThreadType, obj.MemberUserIds, (string)session["swid"], (string)session["aesSecret"]),
                 WelcomingUserId = obj.UserId,
-                Created = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                Created = (long)session["timestamp"],
                 SequenceNumber = getSrvSett.Sequence,
                 NotificationId = getSrvSett.Sequence
             }
