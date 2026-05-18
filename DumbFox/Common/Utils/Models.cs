@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Common.Utils
 {
-    //for DumbFox and DumbFoxWS and Webapi GameAPI
+    //For DumbFox, DumbFoxWS, and WebAPI GameAPI
     public class SignedResponse<T>
     {
         public long goodUntil { get; set; } = 0L;

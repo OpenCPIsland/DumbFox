@@ -9,9 +9,10 @@ public static class DumbFoxServer
 	{
 		TcpListener listener = new TcpListener(IPAddress.Any, port);
 		listener.Start();
-		Console.WriteLine($"DumbFox Server started on port {port}");
+		Console.WriteLine($"DumbFox SFS2x API TCP Server started on port {port}");
+        Console.WriteLine($" ");
 
-		try
+        try
 		{
 			while (!ct.IsCancellationRequested)
 			{

@@ -68,7 +68,7 @@ public static class JgcApiServer
         return Convert.ToBase64String(bytes);
     }
 
-    public static async Task RunAsync(CancellationToken ct = default)
+    public static async Task RunAsync(int port, CancellationToken ct = default)
 	{
 		WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
@@ -76,10 +76,11 @@ public static class JgcApiServer
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
-            kestrelOptions.ListenAnyIP(5782);
+            kestrelOptions.ListenAnyIP(port);
         });
 
-        Console.WriteLine($"DumbFox JGC API for Apache/Nginx on port {5782}");
+        Console.WriteLine($"DumbFox JGC API for Apache/Nginx vhosts or proxypass on port {port}");
+        Console.WriteLine($" ");
         WebApplication app = builder.Build();
 
         app.Use(async (ctx, next) =>

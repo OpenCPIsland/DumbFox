@@ -13,7 +13,7 @@ namespace WebAPI;
 
 public class GameApiServer
 {
-    public static async Task RunAsync(CancellationToken ct = default)
+    public static async Task RunAsync(int port, CancellationToken ct = default)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
@@ -21,10 +21,11 @@ public class GameApiServer
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
-            kestrelOptions.ListenAnyIP(5784);
+            kestrelOptions.ListenAnyIP(port);
         });
 
-        Console.WriteLine($"DumbFox GAME API for Apache/Nginx on port {5784}");
+        Console.WriteLine($"DumbFox GAME API for Apache/Nginx vhosts or proxypass on port {port}");
+        Console.WriteLine($" ");
         WebApplication app = builder.Build();
 
         app.Use(async (ctx, next) =>

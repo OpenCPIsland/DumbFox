@@ -80,7 +80,7 @@ public class WebApiServer
         return Convert.ToBase64String(bytes);
     }
 
-    public static async Task RunAsync(CancellationToken ct = default)
+    public static async Task RunAsync(int port, int porthttps,  CancellationToken ct = default)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
 
@@ -96,10 +96,71 @@ public class WebApiServer
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
-            kestrelOptions.ListenAnyIP(80);
+            kestrelOptions.ListenAnyIP(porthttps, listOptions =>
+            {
+                listOptions.UseHttps();
+                listOptions.Protocols = HttpProtocols.Http1AndHttp2;
+            });
+
+            kestrelOptions.ListenAnyIP(port);
         });
 
-        Console.WriteLine($"DumbFox WEBAPI on port {80} in browser http://127.0.0.1 same goes for jgc mix game api in cpi or disneymix");
+        if (port == 80 && porthttps == 443)
+        {
+            Console.WriteLine($"DumbFox WebAPI: In your browser, open the URL, http://127.0.0.1");
+            Console.WriteLine($"Club Penguin Island In-Game Setup Debug Menu > Network > Web Services");
+            Console.WriteLine($"Account: http://127.0.0.1/mix");
+            Console.WriteLine($"Game: http://127.0.0.1");
+            Console.WriteLine($"Login: http://127.0.0.1");
+            Console.WriteLine($"Login Part 2: http://127.0.0.1");
+
+            Console.WriteLine($" ");
+
+            Console.WriteLine($"And for https WARN: IT REQUIRES A VALID CERT AND KEY or domain with like CLOUDFLARE or with LetsEncrypt will not work with openssl(these remain still a not valid certificates)");
+            Console.WriteLine($" ");
+            Console.WriteLine($"DumbFox WEBAPI in browser you can open as https://127.0.0.1");
+            Console.WriteLine($"Club Penguin Island In-Game Setup Debug Menu > Network > Web Services");
+            Console.WriteLine($"Account: https://127.0.0.1/mix");
+            Console.WriteLine($"Game: https://127.0.0.1");
+            Console.WriteLine($"Login: https://127.0.0.1");
+            Console.WriteLine($"Login Part 2: https://127.0.0.1");
+
+            Console.WriteLine($" ");
+        }
+        else
+        {
+            Console.WriteLine($"DumbFox WebAPI: In your browser, open the URL, http://127.0.0.1:{port}");
+            Console.WriteLine($"Club Penguin Island In-Game Setup Debug Menu > Network > Web Services");
+            Console.WriteLine($"Account: http://127.0.0.1:{port}/mix");
+            Console.WriteLine($"Game: http://127.0.0.1:{port}");
+            Console.WriteLine($"Login: http://127.0.0.1:{port}");
+            Console.WriteLine($"Login Part 2: http://127.0.0.1:{port}");
+            Console.WriteLine($" ");
+            if (porthttps == 443)
+            {
+                Console.WriteLine($"And for https WARN: IT REQUIRES A VALID CERT AND KEY or domain with like CLOUDFLARE or with LetsEncrypt will not work with openssl(these remain still a not valid certificates)");
+                Console.WriteLine($" ");
+                Console.WriteLine($"DumbFox WebAPI: In your browser, open the URL, https://127.0.0.1");
+                Console.WriteLine($"Club Penguin Island In-Game Setup Debug Menu > Network > Web Services");
+                Console.WriteLine($"Account: https://127.0.0.1/mix");
+                Console.WriteLine($"Game: https://127.0.0.1");
+                Console.WriteLine($"Login: https://127.0.0.1");
+                Console.WriteLine($"Login Part 2: https://127.0.0.1");
+                Console.WriteLine($" ");
+            }
+            else
+            {
+                Console.WriteLine($"And for https WARN: IT REQUIRES A VALID CERT AND KEY or domain with like CLOUDFLARE or with LetsEncrypt will not work with openssl(these remain still a not valid certificates)");
+                Console.WriteLine($" ");
+                Console.WriteLine($"DumbFox WebAPI: In your browser, open the URL, https://127.0.0.1:{porthttps}");
+                Console.WriteLine($"Club Penguin Island In-Game Setup Debug Menu > Network > Web Services");
+                Console.WriteLine($"Account: https://127.0.0.1:{porthttps}/mix");
+                Console.WriteLine($"Game: https://127.0.0.1:{porthttps}");
+                Console.WriteLine($"Login: https://127.0.0.1:{porthttps}");
+                Console.WriteLine($"Login Part 2: https://127.0.0.1:{porthttps}");
+                Console.WriteLine($" ");
+            }
+        }
         WebApplication app = builder.Build();
 
 

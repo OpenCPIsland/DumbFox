@@ -10,17 +10,18 @@ namespace WebAPI;
 
 public class MixApiServer
 {
-    public static async Task RunAsync(CancellationToken ct = default)
+    public static async Task RunAsync(int port, CancellationToken ct = default)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
         builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
-            kestrelOptions.ListenAnyIP(5783);
+            kestrelOptions.ListenAnyIP(port);
         });
 
-        Console.WriteLine($"DumbFox MIX API for Apache/Nginx on port {5783}");
+        Console.WriteLine($"DumbFox MIX API for Apache/Nginx vhosts or proxypass on port {port}");
+        Console.WriteLine($" ");
         WebApplication app = builder.Build();
 
         app.Use(async (ctx, next) =>

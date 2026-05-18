@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DumbFoxWS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d08be59a5ff2802fa22146311d229de4bf33949f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DumbFoxWS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DumbFoxWS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

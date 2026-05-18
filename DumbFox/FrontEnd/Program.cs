@@ -16,14 +16,14 @@ Console.CancelKeyPress += (_, e) =>
 };
 
 //TODO: handle better running of clients, use a config to determine what clients to run
-Task webTask = WebApiServer.RunAsync(cts.Token); //ALL in One uses port 80 for you local testing
+Task webTask = WebApiServer.RunAsync(80, 443,  cts.Token); //ALL in One for your local testing
 
-//Task jgcTask = JgcApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
-//Task mixTask = MixApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
-//Task gameTask = GameApiServer.RunAsync(cts.Token); // for public server under NGINX or Apache or other
+//Task jgcTask = JgcApiServer.RunAsync(5782, cts.Token); // For public server under NGINX, Apache, or other
+//Task mixTask = MixApiServer.RunAsync(5783, cts.Token); // For public server under NGINX, Apache, or other
+//Task gameTask = GameApiServer.RunAsync(5784, cts.Token); // For public server under NGINX, Apache, or other
 
 Task tcpTask = DumbFoxServer.RunAsync(9933, cts.Token);
-Task wsTask = DumbFoxWSServer.RunAsync(8080, cts.Token);
+Task wsTask = DumbFoxWSServer.RunAsync(8080, 8443, cts.Token);
 
 try
 {
