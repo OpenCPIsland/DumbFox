@@ -62,6 +62,8 @@ namespace WebAPI.Api.Mix.routes
                 FriendshipInvitations = await DatabaseManager.getFriendshipInvations((string)session["swid"]),
                 Alerts = await DatabaseManager.getAlerts((string)session["swid"]),
                 ChatThreads = await DatabaseManager.getChatThreads((string)session["swid"], (string)session["aesSecret"]),
+                ChatThreadLatestMessageSequenceNumbers = await DatabaseManager.GetChatThreadMsgIds((string)session["swid"]),
+                ChatThreadLastSeenMessageSequenceNumbers = await DatabaseManager.GetChatThreadMsgIds((string)session["swid"]),
                 NotificationSequenceCounter = getSrvSett.Sequence,
                 Timestamp = (long)session["timestamp"]
             };

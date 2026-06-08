@@ -24,6 +24,7 @@ namespace FrontEnd
         public TcpConfig Tcp { get; set; } = new();
         public WebSocketConfig WebSocket { get; set; } = new();
         public bool IsIntimate { get; set; }
+        public string hostname { get; set; } = "127.0.0.1";
     }
 
     public class WebApiConfig

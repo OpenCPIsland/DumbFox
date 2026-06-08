@@ -17,6 +17,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -96,9 +97,14 @@ public class WebApiServer
 
         builder.WebHost.ConfigureKestrel(kestrelOptions =>
         {
+            var cert = X509Certificate2.CreateFromPemFile("cert.pem", "key.pem");
+
+            // Important: on Linux you often must re-import for compatibility
+            cert = new X509Certificate2(cert.Export(X509ContentType.Pkcs12));
+
             kestrelOptions.ListenAnyIP(porthttps, listOptions =>
             {
-                listOptions.UseHttps();
+                listOptions.UseHttps(cert);
                 listOptions.Protocols = HttpProtocols.Http1AndHttp2;
             });
 

@@ -25,6 +25,19 @@ namespace Common.Utils
         public long Sequence { get; set; } = 0L;
     }
 
+    public class WorldsDB
+    {
+        public long Id { get; set; } = 1;
+        public string Name { get; set; } = "Alpine";
+        public int LangId { get; set; } = 1;
+        public int UserCount { get; set; } = 0;
+        public string Host { get; set; } = "localhost";
+        public int TcpPort { get; set; } = 9933;
+        public int HttpsPort { get; set; } = 8443;
+        public int WsPort { get; set; } = 8080; 
+        public int WssPort { get; set; } = 8443; 
+    }
+
     public class ProfilesDB
     {
         public string Swid { get; set; } = "999999999999999";

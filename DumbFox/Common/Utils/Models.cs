@@ -270,6 +270,14 @@ namespace Common.Utils.Game
         public int colour { get; set; } = 0;
         public int daysOld { get; set; } = 0;
     }
+    public class EquipTubeResponse
+    {
+        public int tubeId { get; set; } = 0;
+    }
+    public class  EquipDurableResponse
+    {
+        public int propId { get; set; } = 0;
+    }
     public class MinigameProgress
     {
         public string gameId { get; set; } = "";
@@ -601,8 +609,8 @@ namespace Common.Utils.Mix
         public List<ChatThread> ChatThreads { get; set; } = [];
         public List<ChatThreadNickname> ChatThreadNicknames { get; set; } = [];
         public List<ChatThreadUnreadMessageCount> ChatThreadUnreadMessageCount { get; set; } = [];
-        public List<long?> ChatThreadLatestMessageSequenceNumbers { get; set; } = [];
-        public List<long?> ChatThreadLastSeenMessageSequenceNumbers { get; set; } = [];
+        public List<long> ChatThreadLatestMessageSequenceNumbers { get; set; } = [];
+        public List<long> ChatThreadLastSeenMessageSequenceNumbers { get; set; } = [];
         public List<FriendshipInvitation> FriendshipInvitations { get; set; } = [];
         public List<GameStateChatMessage> GameStateChatMessages { get; set; } = [];
         public List<Alert> Alerts { get; set; } = [];

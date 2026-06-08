@@ -42,7 +42,7 @@ public static class GetRoomsOperation
         RoomsFound.Add(new RoomIdentifier
         {
             zoneId = new ZoneId { name = ctx.Request.Query["rooms"] },
-            contentIdentifier = "1.13.0" + ";offline;" + GameRoutes.formatted + ";NONE", //ctx.Request.Headers["X-CP-Client-Version"] + ";offline;" + GameRoutes.formatted + ";NONE",
+            contentIdentifier = "1.13.0" + ";online;" + GameRoutes.formatted + ";NONE", //ctx.Request.Headers["X-CP-Client-Version"] + ";offline;" + GameRoutes.formatted + ";NONE",
             room = ctx.Request.Query["rooms"]
         });
 

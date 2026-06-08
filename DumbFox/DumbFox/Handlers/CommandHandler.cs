@@ -11,8 +11,8 @@ public static class CommandHandler
     {
         await (command switch
         {
-            "!ac" => AddCoins(session, args),
-            "!help" => HelpCommand(session, args),
+            ":ac" => AddCoins(session, args),
+            ":help" => HelpCommand(session, args),
             _ => Task.Run(() => Console.WriteLine($"Unhandled command: {command}"))
         });
     }

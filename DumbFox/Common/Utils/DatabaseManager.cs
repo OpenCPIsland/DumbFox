@@ -14,60 +14,60 @@ namespace Common.Utils;
 
 public static class DatabaseManager
 {
-	private static string? _connectionString;
-	public static bool IsConfigured => !string.IsNullOrWhiteSpace(_connectionString);
-	public static string? ConnectionString => _connectionString;
+    private static string? _connectionString;
+    public static bool IsConfigured => !string.IsNullOrWhiteSpace(_connectionString);
+    public static string? ConnectionString => _connectionString;
 
-	public static void Configure(string connectionString)
-	{
-		ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
-		_connectionString = connectionString;
-	}
+    public static void Configure(string connectionString)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
+        _connectionString = connectionString;
+    }
 
-	public static bool TryConfigureFromEnvironment()
-	{
-		string? cs = Environment.GetEnvironmentVariable("MYSQL_CONNECTION_STRING");
-		if (string.IsNullOrWhiteSpace(cs))
-			return false;
-		_connectionString = cs;
-		return true;
-	}
+    public static bool TryConfigureFromEnvironment()
+    {
+        string? cs = Environment.GetEnvironmentVariable("MYSQL_CONNECTION_STRING");
+        if (string.IsNullOrWhiteSpace(cs))
+            return false;
+        _connectionString = cs;
+        return true;
+    }
 
-	public static MySqlConnection CreateConnection()
-	{
-		EnsureConfigured();
-		return new MySqlConnection(_connectionString);
-	}
+    public static MySqlConnection CreateConnection()
+    {
+        EnsureConfigured();
+        return new MySqlConnection(_connectionString);
+    }
 
-	public static async Task<MySqlConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)
-	{
-		MySqlConnection conn = CreateConnection();
-		try
-		{
-			await conn.OpenAsync(cancellationToken).ConfigureAwait(false);
-			return conn;
-		}
-		catch
-		{
-			await conn.DisposeAsync().ConfigureAwait(false);
-			throw;
-		}
-	}
+    public static async Task<MySqlConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)
+    {
+        MySqlConnection conn = CreateConnection();
+        try
+        {
+            await conn.OpenAsync(cancellationToken).ConfigureAwait(false);
+            return conn;
+        }
+        catch
+        {
+            await conn.DisposeAsync().ConfigureAwait(false);
+            throw;
+        }
+    }
 
-	public static async Task<bool> TestConnectionAsync(CancellationToken cancellationToken = default)
-	{
-		if (!IsConfigured)
-			return false;
-		try
-		{
-			await using MySqlConnection conn = await OpenConnectionAsync(cancellationToken).ConfigureAwait(false);
-			return conn.State == ConnectionState.Open;
-		}
-		catch
-		{
-			return false;
-		}
-	}
+    public static async Task<bool> TestConnectionAsync(CancellationToken cancellationToken = default)
+    {
+        if (!IsConfigured)
+            return false;
+        try
+        {
+            await using MySqlConnection conn = await OpenConnectionAsync(cancellationToken).ConfigureAwait(false);
+            return conn.State == ConnectionState.Open;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
     public static async Task GetSessionApiKeyAndAddtoSessionUsers(string apikey, string accessToken, string swid, string refreshToken, string username)
     {
@@ -238,6 +238,34 @@ public static class DatabaseManager
         return null;
     }
 
+    public static async Task<WorldsDB?> GetWorldByWorld(string world)
+    {
+        await using var conn = await OpenConnectionAsync();
+
+        await using var cmd = new MySqlCommand(@"SELECT * FROM worlds WHERE name = @world;", conn);
+
+        cmd.Parameters.AddWithValue("@world", world);
+
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        if (await reader.ReadAsync())
+        {
+            return new WorldsDB
+            {
+                Id = reader.GetInt64("id"),
+                Name = reader.GetString("name"),
+                LangId = reader.GetInt32("langid"),
+                UserCount = reader.GetInt32("usercount"),
+                Host = reader.GetString("host"),
+                TcpPort = reader.GetInt32("tcpport"),
+                HttpsPort = reader.GetInt32("httpsport"),
+                WsPort = reader.GetInt32("wsport"),
+                WssPort = reader.GetInt32("wssport")
+            };
+        }
+
+        return null;
+    }
 
     public static async Task<ProfilesDB?> GetProfilesSwid(string userId)
     {
@@ -344,7 +372,8 @@ public static class DatabaseManager
             insertCmd.Parameters.AddWithValue("@definitionid", equipment.definitionId);
             insertCmd.Parameters.AddWithValue("@datetimecreated", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
             insertCmd.Parameters.AddWithValue("@source", $"Used ClothingDesinger to create by {displayname}");
-            if (equipment.sourceId == null || equipment.sourceId == 0) {
+            if (equipment.sourceId == null || equipment.sourceId == 0)
+            {
                 insertCmd.Parameters.AddWithValue("@sourceid", 0);
             }
             else
@@ -352,7 +381,7 @@ public static class DatabaseManager
                 insertCmd.Parameters.AddWithValue("@sourceid", equipment.sourceId);
             }
 
-                var currentInsertId = Convert.ToInt64(await insertCmd.ExecuteScalarAsync());
+            var currentInsertId = Convert.ToInt64(await insertCmd.ExecuteScalarAsync());
             foreach (var part in equipment.parts ?? [])
             {
                 foreach (var custom in part.customizations ?? [])
@@ -390,7 +419,7 @@ public static class DatabaseManager
         }
     }
 
-    public static async Task<long> InsertFriend(string hisID, string hisdisplayname, string meID, string meDisplayName )
+    public static async Task<long> InsertFriend(string hisID, string hisdisplayname, string meID, string meDisplayName)
     {
         await using var conn = await OpenConnectionAsync();
         await using var transaction = await conn.BeginTransactionAsync();
@@ -411,7 +440,7 @@ public static class DatabaseManager
             insertCmd.Parameters.AddWithValue("@isrequested", true);
             insertCmd.Parameters.AddWithValue("@isdeleted", false);
             insertCmd.Parameters.AddWithValue("@timestamp", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-            
+
             var currentInsertId = Convert.ToInt64(await insertCmd.ExecuteScalarAsync());
 
             await using var insertCmd1 = new MySqlCommand(@"
@@ -459,7 +488,7 @@ public static class DatabaseManager
                 submissionReward = new Reward
                 {
                     coins = reader.GetInt64("coins"),
-                    currency = new 
+                    currency = new
                     {
                         coins = reader.GetInt64("coins")
                     }
@@ -732,7 +761,7 @@ public static class DatabaseManager
     public static async Task<ServerSettingsDB?> GetServerSettings()
     {
         await using var conn = await OpenConnectionAsync();
-        await using var cmd = new MySqlCommand(@"SELECT * FROM serversettings;",conn);
+        await using var cmd = new MySqlCommand(@"SELECT * FROM serversettings;", conn);
         await using var reader = await cmd.ExecuteReaderAsync();
 
         if (await reader.ReadAsync())
@@ -851,7 +880,7 @@ public static class DatabaseManager
             var getSrvSett = await GetServerSettings();
 
             var item = new AddAlertNotification
-            {   
+            {
                 Alert = new Alert
                 {
                     AlertId = reader.GetInt64("id"),
@@ -1037,12 +1066,12 @@ public static class DatabaseManager
 
         var me = new Mix.User
         {
-          UserId = loadedProfile.Swid,
-          HashedUserId = DumbfoxEncryption.EncryptB64(loadedProfile.Swid,Convert.FromBase64String(aesSecret)),
-          DisplayName = (string)loadedAccountSwid["username"],
-          FirstName = (string)loadedAccountSwid["username"],
-          Avatar = new Avatar
-          {
+            UserId = loadedProfile.Swid,
+            HashedUserId = DumbfoxEncryption.EncryptB64(loadedProfile.Swid, Convert.FromBase64String(aesSecret)),
+            DisplayName = (string)loadedAccountSwid["username"],
+            FirstName = (string)loadedAccountSwid["username"],
+            Avatar = new Avatar
+            {
                 Accessory = new AvatarProperty { SelectionKey = loadedProfile.Accessory, TintIndex = loadedProfile.AccessoryTintIndex, XOffset = loadedProfile.AccessoryXOffeset, YOffset = loadedProfile.AccessoryYOffeset },
                 Costume = new AvatarProperty { SelectionKey = loadedProfile.Costume, TintIndex = loadedProfile.CostumeTintIndex, XOffset = loadedProfile.CostumeXOffeset, YOffset = loadedProfile.CostumeYOffeset },
                 Brow = new AvatarProperty { SelectionKey = loadedProfile.Brow, TintIndex = loadedProfile.BrowTintIndex, XOffset = loadedProfile.BrowXOffeset, YOffset = loadedProfile.BrowYOffeset },
@@ -1052,11 +1081,11 @@ public static class DatabaseManager
                 Mouth = new AvatarProperty { SelectionKey = loadedProfile.Mouth, TintIndex = loadedProfile.MouthTintIndex, XOffset = loadedProfile.MouthXOffeset, YOffset = loadedProfile.MouthYOffeset },
                 Skin = new AvatarProperty { SelectionKey = loadedProfile.Skin, TintIndex = loadedProfile.SkinTintIndex, XOffset = loadedProfile.SkinXOffeset, YOffset = loadedProfile.SkinYOffeset },
                 Hat = new AvatarProperty { SelectionKey = loadedProfile.Hat, TintIndex = loadedProfile.HatTintIndex, XOffset = loadedProfile.HatXOffeset, YOffset = loadedProfile.HatYOffeset }
-          }
+            }
         };
 
         result.Add(me);
-            
+
 
         await using var cmd = new MySqlCommand(@"SELECT id, meID, hisID, username, hisusername, isrequested, istrusted, isdeleted, timestamp FROM friends WHERE meID = @swid AND isfriend = 1 AND isdeleted = 0;", conn);
 
@@ -1070,22 +1099,22 @@ public static class DatabaseManager
 
             var item = new Mix.User
             {
-                    UserId = loadedotherProfile.Swid,
-                    HashedUserId = DumbfoxEncryption.EncryptB64(loadedotherProfile.Swid, Convert.FromBase64String(aesSecret)),
-                    DisplayName = reader.GetString("hisusername"),
-                    FirstName = reader.GetString("hisusername"),
-                    Avatar = new Avatar
-                    {
-                        Accessory = new AvatarProperty { SelectionKey = loadedotherProfile.Accessory, TintIndex = loadedotherProfile.AccessoryTintIndex, XOffset = loadedotherProfile.AccessoryXOffeset, YOffset = loadedotherProfile.AccessoryYOffeset },
-                        Costume = new AvatarProperty { SelectionKey = loadedotherProfile.Costume, TintIndex = loadedotherProfile.CostumeTintIndex, XOffset = loadedotherProfile.CostumeXOffeset, YOffset = loadedotherProfile.CostumeYOffeset },
-                        Brow = new AvatarProperty { SelectionKey = loadedotherProfile.Brow, TintIndex = loadedotherProfile.BrowTintIndex, XOffset = loadedotherProfile.BrowXOffeset, YOffset = loadedotherProfile.BrowYOffeset },
-                        Eyes = new AvatarProperty { SelectionKey = loadedotherProfile.Eyes, TintIndex = loadedotherProfile.EyesTintIndex, XOffset = loadedotherProfile.EyesXOffeset, YOffset = loadedotherProfile.EyesYOffeset },
-                        Hair = new AvatarProperty { SelectionKey = loadedotherProfile.Hair, TintIndex = loadedotherProfile.HairTintIndex, XOffset = loadedotherProfile.HairXOffeset, YOffset = loadedotherProfile.HairYOffeset },
-                        Nose = new AvatarProperty { SelectionKey = loadedotherProfile.Nose, TintIndex = loadedotherProfile.NoseTintIndex, XOffset = loadedotherProfile.NoseXOffeset, YOffset = loadedotherProfile.NoseYOffeset },
-                        Mouth = new AvatarProperty { SelectionKey = loadedotherProfile.Mouth, TintIndex = loadedotherProfile.MouthTintIndex, XOffset = loadedotherProfile.MouthXOffeset, YOffset = loadedotherProfile.MouthYOffeset },
-                        Skin = new AvatarProperty { SelectionKey = loadedotherProfile.Skin, TintIndex = loadedotherProfile.SkinTintIndex, XOffset = loadedotherProfile.SkinXOffeset, YOffset = loadedotherProfile.SkinYOffeset },
-                        Hat = new AvatarProperty { SelectionKey = loadedotherProfile.Hat, TintIndex = loadedotherProfile.HatTintIndex, XOffset = loadedotherProfile.HatXOffeset, YOffset = loadedotherProfile.HatYOffeset }
-                    }
+                UserId = loadedotherProfile.Swid,
+                HashedUserId = DumbfoxEncryption.EncryptB64(loadedotherProfile.Swid, Convert.FromBase64String(aesSecret)),
+                DisplayName = reader.GetString("hisusername"),
+                FirstName = reader.GetString("hisusername"),
+                Avatar = new Avatar
+                {
+                    Accessory = new AvatarProperty { SelectionKey = loadedotherProfile.Accessory, TintIndex = loadedotherProfile.AccessoryTintIndex, XOffset = loadedotherProfile.AccessoryXOffeset, YOffset = loadedotherProfile.AccessoryYOffeset },
+                    Costume = new AvatarProperty { SelectionKey = loadedotherProfile.Costume, TintIndex = loadedotherProfile.CostumeTintIndex, XOffset = loadedotherProfile.CostumeXOffeset, YOffset = loadedotherProfile.CostumeYOffeset },
+                    Brow = new AvatarProperty { SelectionKey = loadedotherProfile.Brow, TintIndex = loadedotherProfile.BrowTintIndex, XOffset = loadedotherProfile.BrowXOffeset, YOffset = loadedotherProfile.BrowYOffeset },
+                    Eyes = new AvatarProperty { SelectionKey = loadedotherProfile.Eyes, TintIndex = loadedotherProfile.EyesTintIndex, XOffset = loadedotherProfile.EyesXOffeset, YOffset = loadedotherProfile.EyesYOffeset },
+                    Hair = new AvatarProperty { SelectionKey = loadedotherProfile.Hair, TintIndex = loadedotherProfile.HairTintIndex, XOffset = loadedotherProfile.HairXOffeset, YOffset = loadedotherProfile.HairYOffeset },
+                    Nose = new AvatarProperty { SelectionKey = loadedotherProfile.Nose, TintIndex = loadedotherProfile.NoseTintIndex, XOffset = loadedotherProfile.NoseXOffeset, YOffset = loadedotherProfile.NoseYOffeset },
+                    Mouth = new AvatarProperty { SelectionKey = loadedotherProfile.Mouth, TintIndex = loadedotherProfile.MouthTintIndex, XOffset = loadedotherProfile.MouthXOffeset, YOffset = loadedotherProfile.MouthYOffeset },
+                    Skin = new AvatarProperty { SelectionKey = loadedotherProfile.Skin, TintIndex = loadedotherProfile.SkinTintIndex, XOffset = loadedotherProfile.SkinXOffeset, YOffset = loadedotherProfile.SkinYOffeset },
+                    Hat = new AvatarProperty { SelectionKey = loadedotherProfile.Hat, TintIndex = loadedotherProfile.HatTintIndex, XOffset = loadedotherProfile.HatXOffeset, YOffset = loadedotherProfile.HatYOffeset }
+                }
             };
 
             result.Add(item);
@@ -1498,7 +1527,8 @@ public static class DatabaseManager
                 SequenceNumber = reader.GetInt64("msgid"),
                 MessageType = type.ToString()
             };
-        }else if (typeof(T) == typeof(StickerChatMessage))
+        }
+        else if (typeof(T) == typeof(StickerChatMessage))
         {
             return (T)(BaseChatMessage)new StickerChatMessage
             {
@@ -1760,6 +1790,32 @@ public static class DatabaseManager
         return result;
     }
 
+    public static async Task<List<long>> GetChatThreadMsgIds(string swid)
+    {
+        var result = new List<long>();
+
+        await using var conn = await OpenConnectionAsync();
+
+        await using var cmd = new MySqlCommand(@"
+        SELECT ct.*, 
+        ROW_NUMBER() OVER (ORDER BY ct.`timestamp`) AS seq
+        FROM chatthreadchats ct
+        INNER JOIN chatthreadsusers ctu ON ct.id = ctu.id
+        WHERE ctu.swid = @swid;", conn);
+
+        cmd.Parameters.AddWithValue("@swid", swid);
+
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var msgId = reader.GetInt64("msgid");
+            result.Add(msgId);
+        }
+
+        return result;
+    }
+
 
 
     public static async Task<List<AddChatThreadNotification>> getChatThreadNotifications(string swid, string aesSecret, string accesstoken)
@@ -1798,7 +1854,8 @@ public static class DatabaseManager
 
             var item = new AddChatThreadNotification
             {
-                ChatThread = new ChatThread {
+                ChatThread = new ChatThread
+                {
                     ChatThreadId = threadId,
                     ChatThreadType = reader.GetString("type"),
                     IsTrusted = reader.GetBoolean("istrusted"),
@@ -2055,7 +2112,7 @@ public static class DatabaseManager
                         Encoding = "PNG",
                         Url = "http://127.0.0.1/test.png"
                     }
-                }, 
+                },
 
                 Created = reader.GetInt64("timestamp"),
                 ChatMessageId = reader.GetInt64("msgid"),
@@ -2388,7 +2445,7 @@ public static class DatabaseManager
                             VideoFlavorId = reader.GetString("videoflavorid"),
                             Width = 140,
                             Height = 90,
-                            Format = "MP4",            
+                            Format = "MP4",
                             Bitrate = 300
                         }
                     },
@@ -2600,9 +2657,9 @@ public static class DatabaseManager
         return result;
     }
     private static void EnsureConfigured()
-	{
-		if (string.IsNullOrWhiteSpace(_connectionString))
-			throw new InvalidOperationException(
-				"Database not configured. Call DatabaseManager.Configure(connectionString) or TryConfigureFromEnvironment() first.");
-	}
+    {
+        if (string.IsNullOrWhiteSpace(_connectionString))
+            throw new InvalidOperationException(
+                "Database not configured. Call DatabaseManager.Configure(connectionString) or TryConfigureFromEnvironment() first.");
+    }
 }

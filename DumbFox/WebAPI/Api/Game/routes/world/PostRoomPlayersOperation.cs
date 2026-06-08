@@ -53,12 +53,17 @@ public static class PostRoomPlayersOperation
         var langID = ctx.Request.RouteValues["langID"]?.ToString();
         var room = ctx.Request.RouteValues["Room"]?.ToString();
 
+        var worldData = await DatabaseManager.GetWorldByWorld(world);
+
         result = new SignedResponse<JoinRoomData> 
         {
             data = new JoinRoomData
             {
+                host = worldData.Host,
+                tcpPort = worldData.TcpPort,
+                httpsPort = worldData.HttpsPort,
                 swid = loadedProfile.Swid,
-                room = world + ":" + langID + ":" + room + "::" + "1.13.0" + ";offline;" + GameRoutes.formatted + ";NONE",//world + ":" + langID + ":" + room + "::" + ctx.Request.Headers["X-CP-Client-Version"] + ";offline;" + GameRoutes.formatted + ";NONE",
+                room = world + ":" + langID + ":" + room + "::" + "1.13.0" + ";online;" + GameRoutes.formatted + ";NONE",//world + ":" + langID + ":" + room + "::" + ctx.Request.Headers["X-CP-Client-Version"] + ";offline;" + GameRoutes.formatted + ";NONE",
                 sessionId = (long)session["sessionId"],
                 playerRoomData = new PlayerRoomData
                 {

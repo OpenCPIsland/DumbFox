@@ -83,7 +83,10 @@ public static class GameRoutes
         app.MapPost("/player/v1/id/online", GetOnlinePlayersBySwidsOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
         app.MapPost("/player/v1/id", GetOtherPlayerDataBySwidsOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
         app.MapPost("/player/v1/names", GetOtherPlayerDataByDisplayNamesOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
+        app.MapPost("/player/v1/profile", SetProfileOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
         app.MapGet("/inventory/v1/equipment", GetInventoryOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
+        app.MapGet("/player/v1/durable/equip/{type}", EquipDurableOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
+        app.MapPost("/tube/v1/equip/{type}", EquipTubeOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
         app.MapPost("/inventory/v1/equipment", CreateCustomEquipmentOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
         app.MapPost("/inventory/v1/equipment/{equipmentId}", DeleteCustomEquipmentOperation.Handle).AddEndpointFilter(async (context, next) => { return await GameAPIMiddleWare(context, next); });
 

@@ -183,7 +183,7 @@ public static class ExtensionHandler
 		bool moderated = reqData.GetBool("moderated");
 		string message = reqData.GetUtfString("message");
 
-		if (message.StartsWith('!'))
+		if (message.StartsWith(':'))
 		{
 			string[] args = message.Split(" ");
 			string cmd = args[0];

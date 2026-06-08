@@ -41,6 +41,14 @@ if (config.Servers.WebSocket.Enabled)
     tasks.Add(DumbFoxWSServer.RunAsync(config.Servers.WebSocket.WsPort,config.Servers.WebSocket.WssPort,cts.Token));
 }
 
+await using var conn = await DatabaseManager.OpenConnectionAsync();
+await using var cmd0 = new MySqlCommand("UPDATE worlds SET host = @host, tcpport = @tcpPort, wssport = @WssPort, wsport = @WsPort", conn);
+cmd0.Parameters.AddWithValue("@host", config.Servers.hostname);
+cmd0.Parameters.AddWithValue("@tcpPort", config.Servers.Tcp.Port);
+cmd0.Parameters.AddWithValue("@WssPort", config.Servers.WebSocket.WssPort);
+cmd0.Parameters.AddWithValue("@WsPort", config.Servers.WebSocket.WsPort);
+await cmd0.ExecuteNonQueryAsync();
+
 try
 {
     await DatabaseCleaner();
