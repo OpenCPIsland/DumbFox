@@ -28,7 +28,7 @@ public static class UserVariables
 		content.PutSFSArray(SetUserVariablesRequest.KEY_VAR_LIST, MakeUserVarList(vars));
 
 		// controller=0, action=12 (SetUserVariables)
-		return SfsWire.WriteMessageAsync(session.Stream, controller: 0, action: (short)RequestType.SetUserVariables, parameters: content);
+		return SfsWire.WriteMessageAsync(session, controller: 0, action: (short)RequestType.SetUserVariables, parameters: content);
 	}
 	
 	public static Task SendUserVariablesTo(Session receiver, Session target) =>

@@ -1,7 +1,6 @@
 using Common.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
-using System.Net.Sockets;
 using System.Text.Json;
 
 namespace DumbFox.Utils;
@@ -59,7 +58,7 @@ public static class RoomUtils
 		}
 	}
 	
-	public static async Task SendJoinRoom(NetworkStream stream, Room room, string groupId, Session session)
+	public static async Task SendJoinRoom(Room room, string groupId, Session session)
     {
         session.CurrentRoomId = room.RoomId;
         
@@ -71,7 +70,7 @@ public static class RoomUtils
         content.PutSFSArray("r", roomDesc);
         content.PutSFSArray("ul", new SFSArray());
 
-        await SfsWire.WriteMessageAsync(stream, controller: 0, action: 4, parameters: content);
+        await SfsWire.WriteMessageAsync(session, controller: 0, action: 4, parameters: content);
         
         foreach (KeyValuePair<int, Session> kv in room.Users)
             await UserVariables.SendUserVariablesTo(session, kv.Value);
@@ -88,7 +87,7 @@ public static class RoomUtils
         setUserPositionRequest.PutSFSArray("p", positionsPayload);
         setUserPositionRequest.PutInt("r", room.RoomId);
 		
-        await SfsWire.WriteMessageAsync(joined. Stream, 0, (short)RequestType.SetUserPosition, setUserPositionRequest);
+        await SfsWire.WriteMessageAsync(joined, 0, (short)RequestType.SetUserPosition, setUserPositionRequest);
         
         await HandleUserJoinedNotifications(room, joined);
     }
@@ -114,9 +113,9 @@ public static class RoomUtils
             syncNewPlayerPosRequest.PutInt("r", room.RoomId);
 		
             if (target.UserId == joined.UserId) continue;
-            await SfsWire.WriteMessageAsync(target.Stream, 0, (short)RequestType.SetUserPosition, syncNewPlayerPosRequest);
-            await SfsWire.WriteMessageAsync(target.Stream, 0, 1000, joinedPayload); //alert of join
-            await SfsWire.WriteMessageAsync(target.Stream, 0, 1001, parameters: userCountPayload); //update user count
+            await SfsWire.WriteMessageAsync(target, 0, (short)RequestType.SetUserPosition, syncNewPlayerPosRequest);
+            await SfsWire.WriteMessageAsync(target, 0, 1000, joinedPayload);
+            await SfsWire.WriteMessageAsync(target, 0, 1001, parameters: userCountPayload);
             
             await UserVariables.SendUserVariablesTo(target, joined);
         }

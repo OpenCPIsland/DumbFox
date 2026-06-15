@@ -125,8 +125,8 @@ public static class CommandHandler
         joinedPayload2.PutSFSArray("p", u3);
         joinedPayload2.PutInt("r", session.CurrentRoomId??0);
 
-        await SfsWire.WriteMessageAsync(session.Stream, 0, (short)RequestType.SetUserPosition, joinedPayload2);
-        await SfsWire.WriteMessageAsync(session.Stream, 0, 1000, joinedPayload);
+        await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.SetUserPosition, joinedPayload2);
+        await SfsWire.WriteMessageAsync(session, 0, 1000, joinedPayload);
         
 
         SFSObject resMsg = new SFSObject();

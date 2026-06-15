@@ -364,16 +364,6 @@
         },
         "runtime": {
           "bin/placeholder/DumbFox.dll": {}
-        }
-      },
-      "DumbFoxWS/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "compile": {
-          "bin/placeholder/DumbFoxWS.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DumbFoxWS.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -1044,11 +1034,6 @@
       "path": "../DumbFox/DumbFox.csproj",
       "msbuildProject": "../DumbFox/DumbFox.csproj"
     },
-    "DumbFoxWS/1.0.0": {
-      "type": "project",
-      "path": "../DumbFoxWS/DumbFoxWS.csproj",
-      "msbuildProject": "../DumbFoxWS/DumbFoxWS.csproj"
-    },
     "WebAPI/1.0.0": {
       "type": "project",
       "path": "../WebAPI/WebAPI.csproj",
@@ -1059,7 +1044,6 @@
     "net9.0": [
       "Common >= 1.0.0",
       "DumbFox >= 1.0.0",
-      "DumbFoxWS >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 10.0.8",
       "Microsoft.Extensions.Configuration.Binder >= 10.0.8",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 10.0.8",
@@ -1102,9 +1086,6 @@
           "projectReferences": {
             "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Common.csproj": {
               "projectPath": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Common.csproj"
-            },
-            "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFoxWS\\DumbFoxWS.csproj": {
-              "projectPath": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFoxWS\\DumbFoxWS.csproj"
             },
             "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFox.csproj": {
               "projectPath": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFox.csproj"

@@ -3,7 +3,6 @@ using DumbFox.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
-using System.Net.Sockets;
 
 namespace DumbFox.Handlers;
 
@@ -15,7 +14,7 @@ public static class RequestHandler
 
         return requestType switch
         {
-            RequestType.Handshake       => HandleHandshake(session.Stream),
+            RequestType.Handshake       => HandleHandshake(session),
             RequestType.Login           => HandleLogin(parameters, session),
             RequestType.JoinRoom        => HandleJoin(parameters, session),
             RequestType.CallExtension   => HandleCallExtension(parameters, session),
@@ -32,14 +31,14 @@ public static class RequestHandler
         await Task.CompletedTask;
     }
 
-    private static async Task HandleHandshake(NetworkStream stream)
+    private static async Task HandleHandshake(Session session)
     {
         SFSObject payload = new SFSObject();
         payload.PutUtfString("tk", Guid.NewGuid().ToString("N"));
         payload.PutInt("ct", 1_000_000);
         payload.PutInt("ms", 65_535);
 
-        await SfsWire.WriteMessageAsync(stream, 0, (short)RequestType.Handshake, payload);
+        await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.Handshake, payload);
     }
 
     private static async Task HandleLogin(SFSObject req, Session session)
@@ -90,10 +89,10 @@ public static class RequestHandler
         payload.PutUtfString("_sid", "node-1");
         res.PutSFSObject("p", payload);
 
-        await SfsWire.WriteMessageAsync(session.Stream, controller: 0, action: 1, parameters: res);
+        await SfsWire.WriteMessageAsync(session, controller: 0, action: 1, parameters: res);
         Console.WriteLine($"Login OK -> userId={userId} room='{room.Name}' sessionId={cpSessionId}");
         
-        await RoomUtils.SendJoinRoom(session.Stream, room, "default", session);
+        await RoomUtils.SendJoinRoom(room, "default", session);
     }
 
     private static Task HandleJoin(SFSObject req, Session session)
@@ -104,7 +103,7 @@ public static class RequestHandler
         
         Room room = World.GetOrCrateRoom(roomName);
         
-        return RoomUtils.SendJoinRoom(session.Stream, room, "default", session);
+        return RoomUtils.SendJoinRoom(room, "default", session);
     }
 
     private static Task HandleCallExtension(SFSObject req, Session session)
@@ -119,7 +118,7 @@ public static class RequestHandler
     private static Task HandlePingPong(Session session)
     {
         SFSObject res = new SFSObject();
-        return SfsWire.WriteMessageAsync(session.Stream, controller: 0, action: (short)RequestType.PingPong, parameters: res);
+        return SfsWire.WriteMessageAsync(session, controller: 0, action: (short)RequestType.PingPong, parameters: res);
     }
 
     private static async Task HandleSetUserVariables(SFSObject req, Session session)

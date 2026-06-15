@@ -1,8 +1,7 @@
-using System;
 using System.Buffers.Binary;
 using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Net.WebSockets;
+using Common.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Util;
 
@@ -12,32 +11,29 @@ public static class SfsWire
 {
 	private const byte FlagBinary = 0x80;
 
-	public static async Task WriteMessageAsync(
-		NetworkStream stream,
+	public static Task WriteMessageAsync(
+		Session session,
 		byte controller,
 		short action,
 		SFSObject parameters,
 		CancellationToken ct = default)
 	{
-		if (stream is null) throw new ArgumentNullException(nameof(stream));
-		if (parameters is null) throw new ArgumentNullException(nameof(parameters));
+		ArgumentNullException.ThrowIfNull(session);
+		ArgumentNullException.ThrowIfNull(parameters);
 
 		var outer = new SFSObject();
 		outer.PutByte("c", controller);
 		outer.PutShort("a", action);
 		outer.PutSFSObject("p", (SFSObject)parameters);
 
-		await WritePacketAsync(stream, outer, ct);
+		return WritePacketAsync(session, outer, ct);
 	}
 
-	private static async Task WritePacketAsync(NetworkStream stream, ISFSObject obj, CancellationToken ct = default)
+	private static async Task WritePacketAsync(Session session, ISFSObject obj, CancellationToken ct = default)
 	{
-		if (stream is null) throw new ArgumentNullException(nameof(stream));
-		if (obj is null) throw new ArgumentNullException(nameof(obj));
+		ArgumentNullException.ThrowIfNull(obj);
 
 		ByteArray ba = obj.ToBinary();
-
-		// Common SmartFox ByteArray has ToArray(); if yours doesn’t, replace with ba.Bytes or ba.Buffer
 		byte[] payload = ba.Bytes;
 		int len = payload.Length;
 
@@ -50,9 +46,18 @@ public static class SfsWire
 
 		byte[] packet = header.Concat(payload).ToArray();
 
-		await stream.WriteAsync(packet, ct);
-		//Old method of multiple writes
-		//await stream.WriteAsync(header, 0, header.Length, ct);
-		//await stream.WriteAsync(payload, 0, len, ct);
+		if (session.Socket is not null)
+		{
+			await session.Socket.SendAsync(packet, WebSocketMessageType.Binary, endOfMessage: true, cancellationToken: ct);
+			return;
+		}
+
+		if (session.Stream is not null)
+		{
+			await session.Stream.WriteAsync(packet, ct);
+			return;
+		}
+
+		throw new InvalidOperationException("Session has no active transport.");
 	}
 }

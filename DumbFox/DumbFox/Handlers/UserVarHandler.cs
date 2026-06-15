@@ -54,7 +54,7 @@ public static class UserVarHandler
 		payload.PutInt("u", session.UserId);
 		payload.PutSFSArray("vl", UserVariables.MakeUserVarList(var));
 		foreach (KeyValuePair<int, Session> kv in World.RoomsById[session.CurrentRoomId ?? 0].Users)
-			await SfsWire.WriteMessageAsync(kv.Value.Stream, 0, (short)RequestType.SetUserVariables, payload);
+			await SfsWire.WriteMessageAsync(kv.Value, 0, (short)RequestType.SetUserVariables, payload);
 		session.SetUserVar(new SFSUserVariable(var.Name, var.Value));
 	}
 }

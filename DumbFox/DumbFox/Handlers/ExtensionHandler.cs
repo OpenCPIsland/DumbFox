@@ -2,7 +2,6 @@ using Common.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
-using System.Net.Sockets;
 using System.Security.Cryptography;
 
 namespace DumbFox.Handlers;
@@ -125,7 +124,7 @@ public static class ExtensionHandler
 
 		SFSObject res = new SFSObject();
 		res.PutText("zn", "ClubPenguin");
-		await SfsWire.WriteMessageAsync(session.Stream, 0, 2, res);
+		await SfsWire.WriteMessageAsync(session, 0, 2, res);
 
 		SFSObject userCountPayload = new SFSObject();
 		userCountPayload.PutInt("r", roomId);
@@ -135,10 +134,10 @@ public static class ExtensionHandler
 		setUserPosition.PutInt("r", roomId);
 		setUserPosition.PutIntArray("m", [session.UserId]);
 		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
-			await SfsWire.WriteMessageAsync(ji.Value.Stream, 0, 30, setUserPosition);
+			await SfsWire.WriteMessageAsync(ji.Value, 0, 30, setUserPosition);
 
 		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
-			await SfsWire.WriteMessageAsync(ji.Value.Stream, 0, 1001, userCountPayload);
+			await SfsWire.WriteMessageAsync(ji.Value, 0, 1001, userCountPayload);
 
 
 	}
@@ -476,6 +475,6 @@ private static async Task HandleConsumableUse(Session session, int roomId, SFSOb
 		res.PutInt("r", roomId);
 		res.PutSFSObject("p", payload);
 
-		await SfsWire.WriteMessageAsync(session.Stream, controller: 1, action: (short)RequestType.CallExtension, parameters: res);
+		await SfsWire.WriteMessageAsync(session, controller: 1, action: (short)RequestType.CallExtension, parameters: res);
 	}
 }

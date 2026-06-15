@@ -1,6 +1,5 @@
 using Common.Utils;
 using DumbFox;
-using DumbFoxWS;
 using FrontEnd;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
@@ -38,7 +37,7 @@ if (config.Servers.Tcp.Enabled)
 
 if (config.Servers.WebSocket.Enabled)
 {
-    tasks.Add(DumbFoxWSServer.RunAsync(config.Servers.WebSocket.WsPort,config.Servers.WebSocket.WssPort,cts.Token));
+    tasks.Add(DumbFoxServer.RunWebSocketAsync(config.Servers.WebSocket.WsPort,config.Servers.WebSocket.WssPort,cts.Token));
 }
 
 await using var conn = await DatabaseManager.OpenConnectionAsync();

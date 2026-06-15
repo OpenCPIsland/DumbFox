@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
-      <ProjectReference Include="..\DumbFoxWS\DumbFoxWS.csproj" />
       <ProjectReference Include="..\DumbFox\DumbFox.csproj" />
       <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
     </ItemGroup>

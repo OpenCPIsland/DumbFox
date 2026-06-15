@@ -10,7 +10,6 @@
         "dependencies": {
           "Common": "1.0.0",
           "DumbFox": "1.0.0",
-          "DumbFoxWS": "1.0.0",
           "Microsoft.Extensions.Configuration": "10.0.8",
           "Microsoft.Extensions.Configuration.Binder": "10.0.8",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "10.0.8",
@@ -237,14 +236,6 @@
           }
         }
       },
-      "DumbFoxWS/1.0.0": {
-        "runtime": {
-          "DumbFoxWS.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "WebAPI/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.1.0",
@@ -406,11 +397,6 @@
       "sha512": ""
     },
     "DumbFox/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DumbFoxWS/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
