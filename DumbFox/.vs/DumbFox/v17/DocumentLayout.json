@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "D:\\CPI2023\\WebApiAsync\\DumbFox\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\common\\utils\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|solutionrelative:common\\utils\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\common\\utils\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|solutionrelative:common\\utils\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\sfswire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\sfswire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\handlers\\extensionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\handlers\\extensionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\handlers\\requesthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\handlers\\requesthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\sfsread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\sfsread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\roomutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\roomutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\uservariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\uservariables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\common\\utils\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|solutionrelative:common\\utils\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\dumbfoxserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\clientmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\clientmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\common\\utils\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|solutionrelative:common\\utils\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D47A21E-45C8-49FF-8170-093F057B6B1B}|Common\\Common.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\common\\utils\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\handlers\\commandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\handlers\\commandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\handlers\\extensionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\handlers\\extensionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\webapi\\webapiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -235,10 +247,6 @@
       "RelativeMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\api\\mix\\routes\\officialaccountallpost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\roomutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\roomutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\webapi\\api\\jgc\\routes\\databasetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\api\\jgc\\routes\\databasetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -353,14 +361,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\webapi\\api\\jgc\\routes\\validate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4978079C-4ED5-4EEF-AC0F-2ED3B64BE532}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\api\\jgc\\routes\\validate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\sfswire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\sfswire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|d:\\cpi2023\\webapiasync\\dumbfox\\dumbfox\\utils\\sfsread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7945101A-6691-4952-A29D-3104D59E0491}|DumbFox\\DumbFox.csproj|solutionrelative:dumbfox\\utils\\sfsread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -370,11 +370,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "World.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\World.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\World.cs",
@@ -387,44 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DumbFoxServer.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFoxServer.cs",
-              "RelativeDocumentMoniker": "DumbFox\\DumbFoxServer.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFoxServer.cs",
-              "RelativeToolTip": "DumbFox\\DumbFoxServer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T20:19:02.215Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "GameApiServer.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\GameApiServer.cs",
-              "RelativeDocumentMoniker": "WebAPI\\GameApiServer.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\GameApiServer.cs",
-              "RelativeToolTip": "WebAPI\\GameApiServer.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAABcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T12:30:21.719Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "SetProfileOperation.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
-              "RelativeToolTip": "WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-06T12:22:04.46Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "JgcApiServer.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\JgcApiServer.cs",
               "RelativeDocumentMoniker": "WebAPI\\JgcApiServer.cs",
@@ -436,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "WebApiServer.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\WebApiServer.cs",
               "RelativeDocumentMoniker": "WebAPI\\WebApiServer.cs",
@@ -448,20 +411,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Session.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\Session.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\Session.cs",
               "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\Session.cs",
               "RelativeToolTip": "Common\\Utils\\Session.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-21T00:24:38.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Room.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\Room.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\Room.cs",
@@ -469,12 +432,11 @@
               "RelativeToolTip": "Common\\Utils\\Room.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T22:04:12.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T22:04:12.137Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "ClientManager.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\ClientManager.cs",
               "RelativeDocumentMoniker": "DumbFox\\ClientManager.cs",
@@ -482,38 +444,125 @@
               "RelativeToolTip": "DumbFox\\ClientManager.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T20:18:47.784Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-19T20:18:47.784Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "UserVariables.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\UserVariables.cs",
               "RelativeDocumentMoniker": "DumbFox\\Utils\\UserVariables.cs",
               "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\UserVariables.cs",
               "RelativeToolTip": "DumbFox\\Utils\\UserVariables.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAjwCcAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-20T21:48:41.207Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "RequestHandler.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\RequestHandler.cs",
               "RelativeDocumentMoniker": "DumbFox\\Handlers\\RequestHandler.cs",
               "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\RequestHandler.cs",
               "RelativeToolTip": "DumbFox\\Handlers\\RequestHandler.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAjwDwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAjwDQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-20T21:47:29.613Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
+              "Title": "ExtensionHandler.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\ExtensionHandler.cs",
+              "RelativeDocumentMoniker": "DumbFox\\Handlers\\ExtensionHandler.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\ExtensionHandler.cs",
+              "RelativeToolTip": "DumbFox\\Handlers\\ExtensionHandler.cs",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAjwNYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T21:38:54.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SfsWire.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsWire.cs",
+              "RelativeDocumentMoniker": "DumbFox\\Utils\\SfsWire.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsWire.cs",
+              "RelativeToolTip": "DumbFox\\Utils\\SfsWire.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAwFQAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T23:06:42.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RoomUtils.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\RoomUtils.cs",
+              "RelativeDocumentMoniker": "DumbFox\\Utils\\RoomUtils.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\RoomUtils.cs",
+              "RelativeToolTip": "DumbFox\\Utils\\RoomUtils.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAADAAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T21:46:46.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SfsRead.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsRead.cs",
+              "RelativeDocumentMoniker": "DumbFox\\Utils\\SfsRead.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsRead.cs",
+              "RelativeToolTip": "DumbFox\\Utils\\SfsRead.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-21T00:25:42.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "SetProfileOperation.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
+              "RelativeToolTip": "WebAPI\\Api\\Game\\routes\\penguin\\SetProfileOperation.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T12:22:04.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GameApiServer.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\GameApiServer.cs",
+              "RelativeDocumentMoniker": "WebAPI\\GameApiServer.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\GameApiServer.cs",
+              "RelativeToolTip": "WebAPI\\GameApiServer.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAABcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T12:30:21.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DumbFoxServer.cs",
+              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFoxServer.cs",
+              "RelativeDocumentMoniker": "DumbFox\\DumbFoxServer.cs",
+              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\DumbFoxServer.cs",
+              "RelativeToolTip": "DumbFox\\DumbFoxServer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T20:19:02.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Models.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\Models.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\Models.cs",
@@ -525,7 +574,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\FrontEnd\\Program.cs",
               "RelativeDocumentMoniker": "FrontEnd\\Program.cs",
@@ -537,7 +586,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "DatabaseManager.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\DatabaseManager.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\DatabaseManager.cs",
@@ -549,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "VerifyChatMessageOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\chat\\VerifyChatMessageOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\chat\\VerifyChatMessageOperation.cs",
@@ -561,7 +610,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "CommandHandler.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\CommandHandler.cs",
               "RelativeDocumentMoniker": "DumbFox\\Handlers\\CommandHandler.cs",
@@ -573,7 +622,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "MixApiServer.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\MixApiServer.cs",
               "RelativeDocumentMoniker": "WebAPI\\MixApiServer.cs",
@@ -585,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "JgcRoutes.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\JgcRoutes.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\JgcRoutes.cs",
@@ -597,19 +646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ExtensionHandler.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\ExtensionHandler.cs",
-              "RelativeDocumentMoniker": "DumbFox\\Handlers\\ExtensionHandler.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Handlers\\ExtensionHandler.cs",
-              "RelativeToolTip": "DumbFox\\Handlers\\ExtensionHandler.cs",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAgwLkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T21:38:54.085Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "GameRoutes.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\GameRoutes.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\GameRoutes.cs",
@@ -621,7 +658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "GetRoomsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\world\\GetRoomsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\world\\GetRoomsOperation.cs",
@@ -633,7 +670,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "AvatarPut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\AvatarPut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\AvatarPut.cs",
@@ -645,7 +682,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "GetInventoryOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetInventoryOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetInventoryOperation.cs",
@@ -657,7 +694,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "PostRoomPlayersOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\world\\PostRoomPlayersOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\world\\PostRoomPlayersOperation.cs",
@@ -669,7 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "EquipTubeOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\EquipTubeOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\EquipTubeOperation.cs",
@@ -681,7 +718,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "EquipDurableOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\EquipDurableOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\EquipDurableOperation.cs",
@@ -693,7 +730,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "DeleteCustomEquipmentOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\DeleteCustomEquipmentOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\DeleteCustomEquipmentOperation.cs",
@@ -705,7 +742,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "GetLocalPlayerDataOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetLocalPlayerDataOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetLocalPlayerDataOperation.cs",
@@ -717,7 +754,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "SetOutfitOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\SetOutfitOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\SetOutfitOperation.cs",
@@ -729,7 +766,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "SessionUserPut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\SessionUserPut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\SessionUserPut.cs",
@@ -741,7 +778,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "NotificationsSinceSequencePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\NotificationsSinceSequencePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\NotificationsSinceSequencePost.cs",
@@ -753,7 +790,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "StatePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\StatePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\StatePost.cs",
@@ -765,7 +802,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "LanguagePreferencePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\LanguagePreferencePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\LanguagePreferencePost.cs",
@@ -777,7 +814,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\FrontEnd\\appsettings.json",
               "RelativeDocumentMoniker": "FrontEnd\\appsettings.json",
@@ -789,7 +826,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "MixRoutes.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\MixRoutes.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\MixRoutes.cs",
@@ -801,7 +838,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "Config.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\FrontEnd\\Config.cs",
               "RelativeDocumentMoniker": "FrontEnd\\Config.cs",
@@ -813,7 +850,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "ChatThreadGagMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadGagMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadGagMessagePut.cs",
@@ -825,7 +862,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "FriendshipTrustDeletePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipTrustDeletePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipTrustDeletePost.cs",
@@ -837,7 +874,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "FriendshipRecommendPost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipRecommendPost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipRecommendPost.cs",
@@ -849,7 +886,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "FriendshipPut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipPut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipPut.cs",
@@ -861,7 +898,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 43,
               "Title": "FriendshipInvitationPut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipInvitationPut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipInvitationPut.cs",
@@ -873,7 +910,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 44,
               "Title": "FriendshipInvitationDeletePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipInvitationDeletePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipInvitationDeletePost.cs",
@@ -885,7 +922,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 45,
               "Title": "FriendshipDeletePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\FriendshipDeletePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\FriendshipDeletePost.cs",
@@ -897,7 +934,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 46,
               "Title": "DisplaynamePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\DisplaynamePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\DisplaynamePut.cs",
@@ -909,7 +946,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 47,
               "Title": "ChatThreadVideoMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadVideoMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadVideoMessagePut.cs",
@@ -921,7 +958,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 48,
               "Title": "ChatThreadTextMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadTextMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadTextMessagePut.cs",
@@ -933,7 +970,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 49,
               "Title": "ChatThreadStickerMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadStickerMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadStickerMessagePut.cs",
@@ -945,7 +982,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 50,
               "Title": "ChatThreadPut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadPut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadPut.cs",
@@ -957,7 +994,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 51,
               "Title": "ChatThreadPost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadPost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadPost.cs",
@@ -969,7 +1006,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 52,
               "Title": "ChatThreadPhotoMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadPhotoMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadPhotoMessagePut.cs",
@@ -981,7 +1018,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 53,
               "Title": "ChatThreadMessagesRecentPost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadMessagesRecentPost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadMessagesRecentPost.cs",
@@ -993,7 +1030,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 54,
               "Title": "ChatThreadMessagesBySequenceRangePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadMessagesBySequenceRangePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadMessagesBySequenceRangePost.cs",
@@ -1005,7 +1042,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 55,
               "Title": "ChatThreadGameStateMessagePut.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\ChatThreadGameStateMessagePut.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\ChatThreadGameStateMessagePut.cs",
@@ -1017,7 +1054,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 56,
               "Title": "RegistrationTextPost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\RegistrationTextPost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\RegistrationTextPost.cs",
@@ -1029,7 +1066,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 57,
               "Title": "DataBaseModels.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\Common\\Utils\\DataBaseModels.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\DataBaseModels.cs",
@@ -1041,7 +1078,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 58,
               "Title": "SessionUserDeletePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\SessionUserDeletePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\SessionUserDeletePost.cs",
@@ -1053,7 +1090,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 59,
               "Title": "SearchDisplaynamePost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\SearchDisplaynamePost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\SearchDisplaynamePost.cs",
@@ -1065,7 +1102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 60,
               "Title": "OfficialAccountAllPost.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Mix\\routes\\OfficialAccountAllPost.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Mix\\routes\\OfficialAccountAllPost.cs",
@@ -1077,19 +1114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "RoomUtils.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\RoomUtils.cs",
-              "RelativeDocumentMoniker": "DumbFox\\Utils\\RoomUtils.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\RoomUtils.cs",
-              "RelativeToolTip": "DumbFox\\Utils\\RoomUtils.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAABBwDAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T21:46:46.671Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "DatabaseTest.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\DatabaseTest.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\DatabaseTest.cs",
@@ -1101,7 +1126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "ItemSubmissionOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\ItemSubmissionOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\ItemSubmissionOperation.cs",
@@ -1113,7 +1138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "ItemPurchaseOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\ItemPurchaseOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\ItemPurchaseOperation.cs",
@@ -1125,7 +1150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "GetUserStatsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetUserStatsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetUserStatsOperation.cs",
@@ -1137,7 +1162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "GetCatalogCategoryOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogCategoryOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogCategoryOperation.cs",
@@ -1149,7 +1174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "GetCatalogPopularOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogPopularOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogPopularOperation.cs",
@@ -1161,7 +1186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 67,
               "Title": "GetCatalogFriendsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogFriendsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogFriendsOperation.cs",
@@ -1173,7 +1198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 68,
               "Title": "GetCatalogRecentOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogRecentOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetCatalogRecentOperation.cs",
@@ -1185,7 +1210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 69,
               "Title": "GetCurrentThemeOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\catalog\\GetCurrentThemeOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\catalog\\GetCurrentThemeOperation.cs",
@@ -1197,7 +1222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 70,
               "Title": "CreateCustomEquipmentOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\CreateCustomEquipmentOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\CreateCustomEquipmentOperation.cs",
@@ -1209,7 +1234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 76,
               "Title": "LogIn.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\LogIn.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\LogIn.cs",
@@ -1221,7 +1246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 75,
               "Title": "GetOnlinePlayersBySwidsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetOnlinePlayersBySwidsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetOnlinePlayersBySwidsOperation.cs",
@@ -1233,7 +1258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 73,
               "Title": "GetOtherPlayerDataBySwidsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataBySwidsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataBySwidsOperation.cs",
@@ -1245,7 +1270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 74,
               "Title": "GetOtherPlayerDataBySwidOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataBySwidOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataBySwidOperation.cs",
@@ -1257,7 +1282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 71,
               "Title": "GetOtherPlayerDataByDisplayNamesOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataByDisplayNamesOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataByDisplayNamesOperation.cs",
@@ -1269,7 +1294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 72,
               "Title": "GetOtherPlayerDataByDisplayNameOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataByDisplayNameOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\penguin\\GetOtherPlayerDataByDisplayNameOperation.cs",
@@ -1281,7 +1306,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 78,
               "Title": "GetProfile.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\GetProfile.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\GetProfile.cs",
@@ -1293,7 +1318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 83,
               "Title": "CreateRefreshQueueItem.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\CreateRefreshQueueItem.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\CreateRefreshQueueItem.cs",
@@ -1305,7 +1330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 82,
               "Title": "GetEncryptionKeyOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\chat\\GetEncryptionKeyOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\chat\\GetEncryptionKeyOperation.cs",
@@ -1317,7 +1342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 79,
               "Title": "Register0.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\Register0.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\Register0.cs",
@@ -1329,7 +1354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 86,
               "Title": "GetSiteConfiguration.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\GetSiteConfiguration.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\GetSiteConfiguration.cs",
@@ -1341,7 +1366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 84,
               "Title": "GuestControllerErrorLists.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\GuestControllerErrorLists.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\GuestControllerErrorLists.cs",
@@ -1353,7 +1378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 87,
               "Title": "PCSessionStartOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\iapp\\PCSessionStartOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\iapp\\PCSessionStartOperation.cs",
@@ -1365,7 +1390,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 88,
               "Title": "GetProductsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\iapp\\GetProductsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\iapp\\GetProductsOperation.cs",
@@ -1377,7 +1402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 81,
               "Title": "ClaimPreregistrationRewardOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\reward\\ClaimPreregistrationRewardOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\reward\\ClaimPreregistrationRewardOperation.cs",
@@ -1389,7 +1414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 89,
               "Title": "Validate.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\Validate.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\Validate.cs",
@@ -1401,7 +1426,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 80,
               "Title": "ClaimServerAddedRewardsOperation.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Game\\routes\\reward\\ClaimServerAddedRewardsOperation.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Game\\routes\\reward\\ClaimServerAddedRewardsOperation.cs",
@@ -1413,7 +1438,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 85,
               "Title": "GetApiKeyImmediately.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\Jgc\\routes\\GetApiKeyImmediately.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\Jgc\\routes\\GetApiKeyImmediately.cs",
@@ -1425,7 +1450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 77,
               "Title": "ResponseHelper.cs",
               "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\WebAPI\\Api\\ResponseHelper.cs",
               "RelativeDocumentMoniker": "WebAPI\\Api\\ResponseHelper.cs",
@@ -1434,30 +1459,6 @@
               "ViewState": "AgIAAAQAAAAAAAAAAABBwBAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-22T19:41:00.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 88,
-              "Title": "SfsWire.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsWire.cs",
-              "RelativeDocumentMoniker": "DumbFox\\Utils\\SfsWire.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsWire.cs",
-              "RelativeToolTip": "DumbFox\\Utils\\SfsWire.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAABRwA8AAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T23:06:42.339Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 89,
-              "Title": "SfsRead.cs",
-              "DocumentMoniker": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsRead.cs",
-              "RelativeDocumentMoniker": "DumbFox\\Utils\\SfsRead.cs",
-              "ToolTip": "D:\\CPI2023\\WebApiAsync\\DumbFox\\DumbFox\\Utils\\SfsRead.cs",
-              "RelativeToolTip": "DumbFox\\Utils\\SfsRead.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-21T00:25:42.579Z"
             }
           ]
         }
