@@ -25,7 +25,8 @@ public static class DumbFoxServer
 			while (!ct.IsCancellationRequested)
 			{
 				TcpClient client = await listener.AcceptTcpClientAsync(ct);
-				_ = ClientManager.HandleClient(client, ct);
+                client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+                _ = ClientManager.HandleClient(client, ct);
 			}
 		}
 		catch (OperationCanceledException)

@@ -1,6 +1,7 @@
+using Common.Utils.Game;
 using Sfs2X.Entities.Variables;
-using System.Net.WebSockets;
 using System.Net.Sockets;
+using System.Net.WebSockets;
 namespace Common.Utils;
 
 public sealed class Session(TcpClient? client)
@@ -9,15 +10,38 @@ public sealed class Session(TcpClient? client)
     public NetworkStream? Stream { get; } = client != null ? client.GetStream() : null;
     public WebSocket? Socket { get; }
 
+    public DateTime LastPongUtc { get; set; } = DateTime.UtcNow;
+    public bool IsDisconnected { get; set; }
+
     public Session(WebSocket socket) : this((TcpClient?)null)
     {
         Socket = socket;
+    
     }
 
     public int UserId { get; set; }
 	public string Swid { get; set; } = "";
 	public byte[]? AesKey { get; set; }
 	public string UserName { get; set; } = "";
+    public string ActivQuest { get; set; } = "";
+    public List<QuestStateCollection> Quest { get; set; } = [
+        new QuestStateCollection{
+        questId = "AAC001Q001LeakyShip",
+        status = (int)QuestStatus.COMPLETED,
+        completedObjectives = ["Obj0FSM", "Obj2FSM ", "Obj3FSM ", "Obj4FSM", "Obj5FSM", "Obj6FSM", "Obj8FSM", "Obj9FSM", "Obj10FSM", "Obj11FSM"],
+        timesCompleted = 1
+    },new QuestStateCollection{
+        questId = "RHC001Q001TreasureQuest",
+        status = (int)QuestStatus.AVAILABLE,
+    },new QuestStateCollection{
+        questId = "RKC001Q001Drop",
+        status = (int)QuestStatus.AVAILABLE,
+    },new QuestStateCollection{
+        questId = "DJC001Q001Plan",
+        status = (int)QuestStatus.AVAILABLE,
+    }
+        ];
+    public Dictionary<string, long> earnedRewards = new Dictionary<string, long>();
     public long SessionId { get; set; } = 1;
 
     public bool IsLoggedIn { get; set; }

@@ -1,6 +1,7 @@
-using DumbFox.Handlers;
 using Common.Utils;
+using DumbFox.Handlers;
 using Sfs2X.Entities.Data;
+using Sfs2X.Requests;
 using Sfs2X.Util;
 using System.Net.Sockets;
 using System.Net.WebSockets;
@@ -9,12 +10,99 @@ namespace DumbFox;
 
 public static class ClientManager
 {
-    public static Task HandleClient(TcpClient client, CancellationToken ct = default) =>
-        HandleClient(new Session(client), ct, () =>
+    private static void HandlePong(Session session)
+    {
+        session.LastPongUtc = DateTime.UtcNow;
+    }
+
+    private static async Task RunReadLoop(Session session, CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
         {
-            client.Close();
-            return Task.CompletedTask;
-        });
+            var pkt = await SfsRead.ReadPacketAsync(session, ct);
+
+            if (pkt is null)
+                break;
+
+            var (flags, payload) = pkt.Value;
+
+            SFSObject outer;
+            try
+            {
+                outer = SFSObject.NewFromBinaryData(new ByteArray(payload));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Decode error: {ex.Message}");
+                break;
+            }
+
+            if (!outer.ContainsKey("c") || !outer.ContainsKey("a") || !outer.ContainsKey("p"))
+            {
+                Console.WriteLine("Invalid packet: missing c/a/p");
+                break;
+            }
+
+            byte controller = outer.GetByte("c");
+            short action = outer.GetShort("a");
+            if (outer.GetSFSObject("p") is not SFSObject p)
+            {
+                Console.WriteLine("Invalid p object type");
+                return;
+            }
+
+            if (action == (short)RequestType.PingPong)
+            {
+                HandlePong(session);
+                continue;
+            }
+
+            await RequestHandler.HandleRequest(action, controller, p, session);
+        }
+    }
+
+    private static async Task RunHeartbeatSupervisor(Session session, CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            await Task.Delay(5000, ct);
+
+            if (DateTime.UtcNow - session.LastPongUtc > TimeSpan.FromSeconds(30))
+            {
+                session.IsDisconnected = true;
+                break;
+            }
+        }
+    }
+
+    public static async Task HandleClient(TcpClient client, CancellationToken ct = default)
+    {
+        client.Client.SetSocketOption(
+            SocketOptionLevel.Socket,
+            SocketOptionName.KeepAlive,
+            true);
+
+        var session = new Session(client);
+
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+
+        Task readTask = RunReadLoop(session, cts.Token);
+        Task heartbeatTask = RunHeartbeatSupervisor(session, cts.Token);
+
+        Task completed = await Task.WhenAny(readTask, heartbeatTask);
+
+        cts.Cancel();
+
+        Console.WriteLine("Session got aborted!!!");
+
+        session.Cleanup();
+        session.Client.Close();
+        session.Client.Dispose();
+        session.Stream.Dispose();
+        session.Stream.Close();
+        client.Dispose();
+        client.Close();
+    }
 
     public static Task HandleClient(WebSocket socket, CancellationToken ct = default) =>
         HandleClient(new Session(socket), ct, async () =>

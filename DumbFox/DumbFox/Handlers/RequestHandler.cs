@@ -1,8 +1,10 @@
 using Common.Utils;
+using Common.Utils.Game;
 using DumbFox.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
+using System.Text.Json;
 
 namespace DumbFox.Handlers;
 
@@ -18,7 +20,7 @@ public static class RequestHandler
             RequestType.Login           => HandleLogin(parameters, session),
             RequestType.JoinRoom        => HandleJoin(parameters, session),
             RequestType.CallExtension   => HandleCallExtension(parameters, session),
-            RequestType.PingPong        => HandlePingPong(session),
+            RequestType.PingPong        => HandlePingPong(session) ,
             RequestType.SetUserVariables=> HandleSetUserVariables(parameters, session),
 
             _ => LogUnhandled(controller, action, requestType)
@@ -63,12 +65,28 @@ public static class RequestHandler
         session.UserName = user;
         session.SessionId = cpSessionId;
         session.Swid = joinRoomData.GetUtfString("swid");
+        session.Quest = JsonSerializer.Deserialize<List<QuestStateCollection>>(playerRoomData.GetSFSArray("quests").ToJson()) ?? new List<QuestStateCollection>();
+        session.earnedRewards = JsonSerializer.Deserialize<Dictionary<string, long>>(data.GetSFSObject("earnedRewards").ToJson()) ?? new Dictionary<string, long>();
         session.IsLoggedIn = true;
         
         session.SetUserVar(new SFSUserVariable("sess", session.SessionId.ToString()));
         session.SetUserVar(new SFSUserVariable("tube", playerRoomData.GetInt("selectedTubeId")));
         session.SetUserVar(new SFSUserVariable("colour", playerRoomData.GetSFSObject("profile").GetInt("colour")));
         session.SetUserVar(new SFSUserVariable("outfit", playerRoomData.GetSFSObject("outfit").ToJson()));
+
+        foreach (var quest in session.Quest)
+        {
+            if (quest.status == 1)
+            {
+                session.ActivQuest = quest.questId;
+                if (session.ActivQuest.Contains("DJC")) session.SetUserVar(new SFSUserVariable("on_quest", "DJCadence"));
+                if (session.ActivQuest.Contains("RHC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rockhopper")); 
+                if (session.ActivQuest.Contains("AAC")) session.SetUserVar(new SFSUserVariable("on_quest", "AuntArctic"));
+                if (session.ActivQuest.Contains("RKC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rookie"));
+            }
+        }
+
+
 
         World.SessionsByUserId[userId] = session;
         
@@ -117,6 +135,8 @@ public static class RequestHandler
 
     private static Task HandlePingPong(Session session)
     {
+        session.LastPongUtc = DateTime.UtcNow;
+
         SFSObject res = new SFSObject();
         return SfsWire.WriteMessageAsync(session, controller: 0, action: (short)RequestType.PingPong, parameters: res);
     }

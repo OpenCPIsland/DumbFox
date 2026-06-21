@@ -341,7 +341,7 @@ namespace Common.Utils.Game
     {
         public string questId { get; set; } = "AAC001Q001LeakyShip";
         public int status { get; set; } = (int)QuestStatus.AVAILABLE;
-        public List<string> completedObjectives { get; set; } = new List<string>();
+        public string[] completedObjectives { get; set; } = []; 
         public int timesCompleted { get; set; } = 0;
         public long? unlockTime { get; set; }
     }

@@ -1,7 +1,15 @@
-using System.Text.Json;
 using Common.Utils;
+using Microsoft.Extensions.Options;
+using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using Sfs2X.Exceptions;
 using Sfs2X.Requests;
+using Sfs2X.Util;
+using System.Collections.Concurrent;
+using System.IO;
+using System.Text.Json;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DumbFox.Handlers;
 
@@ -13,6 +21,7 @@ public static class CommandHandler
         {
             ":ac" => AddCoins(session, args),
             ":help" => HelpCommand(session, args),
+            ":users" => GetUsersinRoom(session, args),
             _ => Task.Run(() => Console.WriteLine($"Unhandled command: {command}"))
         });
     }
@@ -77,6 +86,109 @@ public static class CommandHandler
         
     }
 
+    private static async Task GetUsersinRoom(Session session, string[] args)
+    {
+        int roomId = session.CurrentRoomId??0;
+        if (!Common.Utils.World.RoomsById.TryGetValue(roomId, out var room))
+        {
+            Console.WriteLine($"Room {roomId} not found.");
+        }
+
+        var err = new SFSObject();
+
+        err.PutShort("ec", (short)SFSErrorCode.LOGIN_BAD_ZONENAME);
+        err.PutUtfString("em", $"Zone does not exist");
+
+        var ep = new SFSArray();
+        ep.AddUtfString("ClubPenguin");
+
+        err.PutSFSArray("ep", ep);
+
+
+        Console.WriteLine($"In Current RoomId {roomId} are " + room.Users.Count.ToString() + " Users Online.");
+
+        SFSArray u = new SFSArray();
+        u.AddInt(1);
+        u.AddUtfString("Bot1");
+        u.AddShort(0);
+        u.AddShort(0);
+        SFSArray u2 = new SFSArray();
+        SFSArray usess = new SFSArray();
+        SFSArray ucolor = new SFSArray();
+        SFSArray utube = new SFSArray();
+        SFSArray uoutfit = new SFSArray();
+
+        usess.AddUtfString("sess");
+        usess.AddByte(4);
+        usess.AddUtfString("1");
+        usess.AddBool(false);
+        ucolor.AddUtfString("colour");
+        ucolor.AddByte(2);
+        ucolor.AddInt(0);
+        ucolor.AddBool(false);
+        utube.AddUtfString("tube");
+        utube.AddByte(2);
+        utube.AddInt(0);
+        utube.AddBool(false);
+        uoutfit.AddUtfString("outfit");
+        uoutfit.AddByte(4);
+        uoutfit.AddUtfString("{\"parts\":[]}");
+        uoutfit.AddBool(false);
+
+        u2.AddSFSArray(usess);
+        u2.AddSFSArray(ucolor);
+        u2.AddSFSArray(utube);
+        u2.AddSFSArray(uoutfit);
+
+        u.AddSFSArray(u2);
+        u.AddFloatArray([session.PosX, session.PosY, session.PosZ]);
+
+        SFSObject joinedPayload = new SFSObject();
+        joinedPayload.PutInt("r", session.CurrentRoomId ?? 0);
+        joinedPayload.PutSFSArray("u", u);
+
+        SFSArray u3 = new SFSArray();
+        u3.AddSFSArray(u);
+        SFSObject joinedPayload2 = new SFSObject();
+        joinedPayload2.PutSFSArray("p", u3);
+        joinedPayload2.PutInt("r", session.CurrentRoomId ?? 0);
+
+    //    await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.SetUserPosition, joinedPayload2);
+     //   await SfsWire.WriteMessageAsync(session, 0, 1000, joinedPayload);
+
+
+        SFSObject resMsg = new SFSObject();
+        SFSObject resData = new SFSObject();
+        resMsg.PutLong("senderSessionId", 1L);
+        resMsg.PutInt("emotion", 0);
+        resMsg.PutBool("moderated", false);
+        resMsg.PutUtfString("message", $"In Current RoomId {roomId} are " + room.Users.Count.ToString()+ " Users Online.");
+        resData.PutUtfString("msg", resMsg.ToJson());
+        resData.PutInt("senderId", 1);
+
+        //await ExtensionHandler.SendExtensionResponse(session, "chat.msg", session.CurrentRoomId ?? 0, resData);
+
+
+        if (!World.RoomsById.TryGetValue(session.CurrentRoomId??0, out Common.Utils.Room? room2))
+        {
+            Console.WriteLine($"Room {roomId} not found.");
+            return;
+        }
+        
+
+        foreach (KeyValuePair<int, Session> kv in room2.Users)
+        {
+            Session target = kv.Value;
+            Console.WriteLine($"Room {target} not found.");
+            Console.WriteLine($"Room {kv.Value} not found.");
+            await SfsWire.WriteMessageAsync(target, 0, (short)RequestType.SetUserPosition, joinedPayload2);
+            await SfsWire.WriteMessageAsync(target, 0, 1000, joinedPayload);
+            await ExtensionHandler.SendExtensionResponse(target, "chat.msg", session.CurrentRoomId??0, resData);
+        }
+
+        await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.Login, err);
+    }
+
     private static async Task HelpCommand(Session session, string[] args)
     {
         SFSArray u = new SFSArray();
@@ -134,7 +246,7 @@ public static class CommandHandler
 		resMsg.PutLong("senderSessionId", 1L);
 		resMsg.PutInt("emotion", 0);
 		resMsg.PutBool("moderated", false);
-		resMsg.PutUtfString("message", "Commands: !ac coins amount");
+		resMsg.PutUtfString("message", "Commands: :ac coins amount");
 		resData.PutUtfString("msg", resMsg.ToJson());
 		resData.PutInt("senderId", 1);
 

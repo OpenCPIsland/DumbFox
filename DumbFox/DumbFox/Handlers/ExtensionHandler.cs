@@ -1,8 +1,12 @@
 using Common.Utils;
+using Common.Utils.Game;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
+using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Text.Json;
 
 namespace DumbFox.Handlers;
 
@@ -120,9 +124,9 @@ public static class ExtensionHandler
 
 	private static async Task HandleRoomLeave(Session session, int roomId)
 	{
-		World.RoomsById[roomId].Users.TryRemove(session.UserId, out _);
+        World.RoomsById[roomId].Users.TryRemove(session.UserId, out _);
 
-		SFSObject res = new SFSObject();
+        SFSObject res = new SFSObject();
 		res.PutText("zn", "ClubPenguin");
 		await SfsWire.WriteMessageAsync(session, 0, 2, res);
 
@@ -139,8 +143,7 @@ public static class ExtensionHandler
 		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
 			await SfsWire.WriteMessageAsync(ji.Value, 0, 1001, userCountPayload);
 
-
-	}
+    }
 
 	private static async Task HandleChatActivity(Session session, int roomId, SFSObject parameters)
 	{
@@ -212,25 +215,20 @@ public static class ExtensionHandler
 	private static async Task HandleTaskPickup(Session session, int roomId, SFSObject parameters)
 	{
 		Console.WriteLine($"[Task Pickedup] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Task Pickedup] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
 		SFSObject fakesignedresponse = new SFSObject();
 
 		SFSObject collectivesBody = new SFSObject();
-		SFSObject collectives = new SFSObject();
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL", 1540286340239L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (24)", 1540286586641L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (23)", 1540636009143L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/Seaweed/explorationCollectible_Seaweed (11)", 1539929560017L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (22)", 1540636009058L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (8)", 1540286587766L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/Seaweed/explorationCollectible_Seaweed (7)", 1539929557830L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (7)", 1540286586046L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (6)", 1540286587907L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (1)", 1540285971405L);
-		collectives.PutLong("/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL (25)", 1540636009416L);
-		collectivesBody.PutUtfString("room", "Boardwalk");
+
+        SFSObject collectives = new SFSObject();
+
+        foreach (var kvp in session.earnedRewards)
+        {
+            collectives.PutLong(kvp.Key, kvp.Value);
+        }
+
+        collectives.PutLong(parameters.GetUtfString("id"), DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+        collectivesBody.PutUtfString("room", "Boardwalk");
 		collectivesBody.PutSFSObject("collected", collectives);
 
 		SFSObject reward = new SFSObject();
@@ -255,11 +253,23 @@ public static class ExtensionHandler
 		fakesignedresponse.PutLong("goodUntil", 0L);
 		fakesignedresponse.PutNull("signature");
 		fakesignedresponse.PutNull("swid");
-		fakesignedresponse.PutUtfStringArray("data", []);
+
+        foreach (var quest in session.Quest)
+        {
+            if (quest.status == 1)
+            {
+                quest.completedObjectives =
+				(quest.completedObjectives ?? Array.Empty<string>())
+				.Append(parameters.GetUtfString("obj"))
+				.ToArray();
+                fakesignedresponse.PutUtfStringArray("data", quest.completedObjectives);
+            }
+        }
+
 
 		data.PutUtfString("data", fakesignedresponse.ToJson());
 
-		await SendExtensionResponse(session, "quest.s_obj", roomId, data);
+        await SendExtensionResponse(session, "quest.s_obj", roomId, data);
 
 		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
@@ -272,12 +282,79 @@ public static class ExtensionHandler
 	private static async Task HandleQuestStateStates(Session session, int roomId, SFSObject parameters)
 	{
 		Console.WriteLine($"[Quest Set States] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Quest Set States] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
 		SFSObject data = new SFSObject();
 
-		await SendExtensionResponse(session, "quest.set", roomId, data);
+        /*string json = parameters.GetUtfString("data");
+
+        var response = JsonSerializer.Deserialize<QuestSetResponse>(json);
+
+        if (response?.data != null)
+        {
+            foreach (var incomingQuest in response.data)
+            {
+                var existingQuest = session.Quest
+                    .FirstOrDefault(q => q.questId == incomingQuest.questId);
+
+                if (existingQuest != null)
+                {
+                    existingQuest.status = incomingQuest.status;
+                    existingQuest.completedObjectives = incomingQuest.completedObjectives;
+                }
+            }
+        }*/
+
+        string json = parameters.GetUtfString("data");
+        using JsonDocument doc = JsonDocument.Parse(json);
+
+        var incomingQuests = JsonSerializer.Deserialize<List<QuestStateCollection>>(
+            doc.RootElement.GetProperty("data").GetRawText()
+        );
+
+        if (incomingQuests != null)
+        {
+            foreach (var incomingQuest in incomingQuests)
+            {
+                var existingQuest = session.Quest
+                    .FirstOrDefault(q => q.questId == incomingQuest.questId);
+
+                if (existingQuest != null)
+                {
+                    existingQuest.status = incomingQuest.status;
+                    existingQuest.completedObjectives = incomingQuest.completedObjectives;
+                    existingQuest.unlockTime = incomingQuest.unlockTime;
+                    existingQuest.timesCompleted = incomingQuest.timesCompleted;
+
+                    if (existingQuest.status == 1)
+                    {
+                        session.ActivQuest = existingQuest.questId;
+                        if (session.ActivQuest.Contains("DJC")) session.SetUserVar(new SFSUserVariable("on_quest", "DJCadence"));
+                        if (session.ActivQuest.Contains("RHC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rockhopper"));
+                        if (session.ActivQuest.Contains("AAC")) session.SetUserVar(new SFSUserVariable("on_quest", "AuntArctic")); 
+                        if (session.ActivQuest.Contains("RKC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rookie"));
+					}
+					else
+					{
+                        session.SetUserVar(new SFSUserVariable("on_quest", null));
+                    }
+                }
+                else
+                {
+
+                    session.Quest.Add(incomingQuest);
+
+                    if (incomingQuest.status == 1)
+                    {
+                        session.ActivQuest = incomingQuest.questId;
+                        if (session.ActivQuest.Contains("DJC")) session.SetUserVar(new SFSUserVariable("on_quest", "DJCadence"));
+                        if (session.ActivQuest.Contains("RHC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rockhopper"));
+                        if (session.ActivQuest.Contains("AAC")) session.SetUserVar(new SFSUserVariable("on_quest", "AuntArctic"));
+                        if (session.ActivQuest.Contains("RKC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rookie"));
+                    }
+                }
+            }
+        }
+
+        await SendExtensionResponse(session, "quest.set", roomId, data);
 
 		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 

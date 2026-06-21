@@ -1,4 +1,5 @@
 using Common.Utils;
+using DumbFox.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Util;
 using Sfs2X.WebSocketSharp;
@@ -11,8 +12,10 @@ namespace DumbFox;
 public static class SfsWire
 {
 	private const byte FlagBinary = 0x80;
+	private const byte BigSized = 8;
 
-	public static Task WriteMessageAsync(
+
+    public static Task WriteMessageAsync(
 		Session session,
 		byte controller,
 		short action,
@@ -68,7 +71,7 @@ public static class SfsWire
             Console.ResetColor();
             Console.WriteLine(" ");
             header = new byte[5];
-            header[0] = FlagBinary; // replace with actual big-sized flag when known
+            header[0] = BigSized; // replace with actual big-sized flag when known
             BinaryPrimitives.WriteUInt32BigEndian(header.AsSpan(1, 4), (uint)len);
         }
 

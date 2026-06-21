@@ -12,7 +12,7 @@ public static class UserVarHandler
 		string name = var.Name;
 		await (name switch
 		{
-			"loc" or "awayfromkeyboard" or "bubble" or "con" => BasicVar(session, var),
+			"loc" or "awayfromkeyboard" or "bubble" or "con" or "tempheadstatus" => BasicVar(session, var),
 			"tube" => TubeVar(session, var),
 			"colour" => ColourVar(session, var),
 			"outfit" => OutfitVar(session, var),
@@ -41,7 +41,7 @@ public static class UserVarHandler
 		await SendUserVarUpdate(session, colour);
 	}
 
-	private static async Task OutfitVar(Session session, UserVariable var)
+    private static async Task OutfitVar(Session session, UserVariable var)
 	{
 		ISFSObject originalValue = SFSObject.NewFromJsonData((string)var.Value);
 		UserVariable outfit = new SFSUserVariable("outfit", originalValue.GetSFSObject("data").ToJson());
