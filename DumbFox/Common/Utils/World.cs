@@ -8,6 +8,7 @@ public static class World
     public static ConcurrentDictionary<int, Session> SessionsByUserId { get; } = new();
 
     public static ConcurrentDictionary<int, Room> RoomsById { get; } = new();
+
     public static Room GetOrCrateRoom(string name)
     {
         Room? room = RoomsById.FirstOrDefault((roomPair) => roomPair.Value.Name == name).Value;

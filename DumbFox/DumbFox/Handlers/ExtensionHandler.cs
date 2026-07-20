@@ -5,8 +5,11 @@ using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DumbFox.Handlers;
 
@@ -44,6 +47,22 @@ public static class ExtensionHandler
 		});
 	}
 
+    private static string GetBaseRoomName(string roomName)
+    {
+        // Remove metadata
+        string clean = roomName.Split("::")[0];
+
+        // Split room parts
+        string[] parts = clean.Split(':');
+
+        // Format: Region:language:Room
+        if (parts.Length >= 3 && !string.IsNullOrEmpty(parts[2]))
+            return parts[2];
+
+        // Format: Room:language
+        return parts[0];
+    }
+    
 	private static async Task HandleTimeGet(Session session, int roomId, SFSObject parameters)
 	{
 		long ct = parameters.ContainsKey("ct") ? parameters.GetLong("ct") : 0L;
@@ -85,44 +104,101 @@ public static class ExtensionHandler
 		await SendExtensionResponse(session, "encryption.get", roomId, resPayload);
 	}
 
-	private static async Task HandleLocomotionAction(Session sender, int roomId, SFSObject req)
-	{
-		SFSObject data = new SFSObject();
+    private static async Task HandleLocomotionAction(Session sender, int roomId, SFSObject req)
+    {
+        SFSObject data = new();
 
-		data.PutFloatArray("p", req.GetFloatArray("p"));
-		data.PutByte("a", req.GetByte("a"));
+        float[]? pos = req.GetFloatArray("p");
 
-		data.PutInt("senderId", sender.UserId);
-		data.PutLong("t", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-		if (req.ContainsKey("d"))
-			data.PutFloatArray("d", req.GetFloatArray("d"));
-		if (req.ContainsKey("v"))
-			data.PutFloatArray("v", req.GetFloatArray("v"));
-		if (req.ContainsKey("o"))
-			data.PutUtfString("o", req.GetUtfString("o"));
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room))
-		{
-			await SendExtensionResponse(sender, "l.a", roomId, data);
-			return;
-		}
+        data.PutFloatArray("p", pos);
+        data.PutByte("a", req.GetByte("a"));
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			await SendExtensionResponse(kv.Value, "l.a", roomId, data);
-		}
+        data.PutInt("senderId", sender.UserId);
+        data.PutLong("t", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-		float[]? pos = req.GetFloatArray("p");
-		if (pos is { Length: >= 3 })
-		{
-			sender.PosX = pos[0];
-			sender.PosY = pos[1];
-			sender.PosZ = pos[2];
-		}
-	}
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room2)) return;
+        string currentRoom = GetBaseRoomName(room2.Name);
 
-	private static async Task HandleRoomLeave(Session session, int roomId)
+        if (req.ContainsKey("d"))
+            data.PutFloatArray("d", req.GetFloatArray("d"));
+
+        if (req.ContainsKey("v"))
+            data.PutFloatArray("v", req.GetFloatArray("v"));
+
+        if (req.ContainsKey("o"))
+        {
+            data.PutUtfString("o", req.GetUtfString("o"));
+            string oJson = req.GetUtfString("o");
+            var interaction = JsonSerializer.Deserialize<InteractionData>(oJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
+
+            if (interaction != null)
+            {
+                var pickup = PickupableManager.Pickupables
+                    .FirstOrDefault(x => string.Equals(x.Path, interaction.Id,StringComparison.OrdinalIgnoreCase));
+
+                if (pickup != null && pos is { Length: >= 3 })
+                {
+                    if (IsNearPickup(pos, pickup))
+                    {
+                        SFSObject fakesignedresponse = new SFSObject();
+                        SFSObject collectivesBody = new SFSObject();
+                        string taskId = interaction.Id;
+                        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                        sender.earnedRewards[taskId] = timestamp;
+
+                        SFSObject collectives = new SFSObject();
+                        foreach (var kvp in sender.earnedRewards)
+                        {
+                            collectives.PutLong(kvp.Key, kvp.Value);
+                        }
+
+                        collectivesBody.PutUtfString("room", currentRoom);
+                        collectivesBody.PutSFSObject("collected", collectives);
+
+                        SFSObject reward = new SFSObject();
+
+                        fakesignedresponse.PutLong("goodUntil", 0L);
+                        fakesignedresponse.PutNull("signature");
+                        fakesignedresponse.PutNull("swid");
+                        fakesignedresponse.PutSFSObject("data", collectivesBody);
+
+                        reward.PutUtfString("reward", fakesignedresponse.ToJson());
+
+                        await SendExtensionResponse(sender, "reward.room", roomId, reward);
+                        Console.WriteLine("[Task Pickedup] Received from "+sender.UserName+": {\"id\":\"" + pickup.Path + "\",\"t\":\"" + pickup.Tag + "\",\"p\":[" + pos[0]+ "," + pos[1] + "," + pos[2] + "]}");
+                    }
+                }
+            }
+        }
+
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room))
+        {
+            await SendExtensionResponse(sender, "l.a", roomId, data);
+            return;
+        }
+
+        foreach (Session session in room.Users.Values)
+            await SendExtensionResponse(session, "l.a", roomId, data);
+
+        if (pos is not { Length: >= 3 })
+            return;
+
+        sender.PosX = pos[0];
+        sender.PosY = pos[1];
+        sender.PosZ = pos[2];
+    }
+    private static bool IsNearPickup(float[] pos, PickupableData pickup)
+    {
+        float dx = pos[0] - pickup.MinBounds.x;
+        float dy = pos[1] - pickup.MinBounds.y;
+        float dz = pos[2] - pickup.MinBounds.z;
+
+        return dx * dx + dy * dy + dz * dz <= 4.0f; // 2 unit radius
+    }
+
+    private static async Task HandleRoomLeave(Session session, int roomId)
 	{
         World.RoomsById[roomId].Users.TryRemove(session.UserId, out _);
 
@@ -212,36 +288,39 @@ public static class ExtensionHandler
 		}
 	}
 
-	private static async Task HandleTaskPickup(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Task Pickedup] Received from {session.UserName}: {parameters.ToJson()}");
-		SFSObject fakesignedresponse = new SFSObject();
-
-		SFSObject collectivesBody = new SFSObject();
+    private static async Task HandleTaskPickup(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Task Pickedup] Received from {session.UserName}: {parameters.ToJson()}");
+        SFSObject fakesignedresponse = new SFSObject();
+        SFSObject collectivesBody = new SFSObject();
+        string taskId = parameters.GetUtfString("id");
+        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        session.earnedRewards[taskId] = timestamp;
 
         SFSObject collectives = new SFSObject();
-
         foreach (var kvp in session.earnedRewards)
         {
             collectives.PutLong(kvp.Key, kvp.Value);
         }
 
-        collectives.PutLong(parameters.GetUtfString("id"), DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        string currentRoom = GetBaseRoomName(room.Name);
 
-        collectivesBody.PutUtfString("room", "Boardwalk");
-		collectivesBody.PutSFSObject("collected", collectives);
+        collectivesBody.PutUtfString("room", currentRoom);
+        collectivesBody.PutSFSObject("collected", collectives);
 
-		SFSObject reward = new SFSObject();
+        SFSObject reward = new SFSObject();
 
-		fakesignedresponse.PutLong("goodUntil", 0L);
-		fakesignedresponse.PutNull("signature");
-		fakesignedresponse.PutNull("swid");
-		fakesignedresponse.PutSFSObject("data", collectivesBody);
-		reward.PutUtfString("reward", fakesignedresponse.ToJson());
+        fakesignedresponse.PutLong("goodUntil", 0L);
+        fakesignedresponse.PutNull("signature");
+        fakesignedresponse.PutNull("swid");
+        fakesignedresponse.PutSFSObject("data", collectivesBody);
 
-		await SendExtensionResponse(session, "reward.room", roomId, reward);
-	}
-	private static async Task HandleQuestCompleteObjective(Session session, int roomId, SFSObject parameters)
+        reward.PutUtfString("reward", fakesignedresponse.ToJson());
+
+        await SendExtensionResponse(session, "reward.room", roomId, reward);
+    }
+    private static async Task HandleQuestCompleteObjective(Session session, int roomId, SFSObject parameters)
 	{
 		Console.WriteLine($"[Quest Complete Objectiv] Received from {session.UserName}: {parameters.ToJson()}");
 		Console.ForegroundColor = ConsoleColor.Yellow;
@@ -402,7 +481,7 @@ public static class ExtensionHandler
 		data.PutUtfString("type", "durable");
 
 		UserVariable con = new SFSUserVariable("con", data);
-		await UserVarHandler.SendUserVarUpdate(session, con);
+		await UserVarHandler.SendUserVarConUpdate(session, con, data.GetInt("propId"), gearName);
 	}
 
 	private static async Task HandleEquipDispensable(Session session, int roomId, SFSObject parameters)
@@ -443,8 +522,8 @@ public static class ExtensionHandler
 		data.PutUtfString("type", "durable");
 
 		UserVariable con = new SFSUserVariable("con", data);
-		await UserVarHandler.SendUserVarUpdate(session, con);
-	}
+        await UserVarHandler.SendUserVarConUpdate(session, con, type, gearName);
+    }
 
 private static async Task HandleConsumableUse(Session session, int roomId, SFSObject parameters)
 	{
@@ -459,7 +538,7 @@ private static async Task HandleConsumableUse(Session session, int roomId, SFSOb
 
 		SFSObject data = new SFSObject();
 		data.PutInt("senderId", session.UserId);
-		data.PutInt("partialCount", 3);
+		//data.PutInt("partialCount", 3);
 		data.PutUtfString("type", cmd);
 
 		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
@@ -469,7 +548,17 @@ private static async Task HandleConsumableUse(Session session, int roomId, SFSOb
 			Session target = kv.Value;
 			await SendExtensionResponse(target, "con.use", roomId, data);
 		}
-	}
+
+		if(cmd == "PizzaPlanetGroup")
+		{
+            SFSObject data2 = new SFSObject();
+            data2.PutUtfString("name", "PizzaPlanetGroup");
+            data2.PutUtfString("type", "consum");
+
+            UserVariable con = new SFSUserVariable("con", data2);
+            await UserVarHandler.SendUserVarConUpdate(session, con, 0, cmd);
+        }
+    }
 
 	private static async Task HandleConsumableReuse(Session session, int roomId, SFSObject parameters)
 	{

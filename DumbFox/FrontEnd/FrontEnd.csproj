@@ -13,6 +13,12 @@
       <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
     </ItemGroup>
 
+	<ItemGroup>
+		<None Update="Config\pickupables.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
     <ItemGroup>
       <Folder Include="CDN\" />
       <Folder Include="www\" />

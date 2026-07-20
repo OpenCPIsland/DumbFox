@@ -1,10 +1,13 @@
 using Common.Utils;
 using DumbFox.Handlers;
+using Microsoft.AspNetCore.Http;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
 using Sfs2X.Util;
+using System.Net;
 using System.Net.Sockets;
 using System.Net.WebSockets;
+using System.Text;
 
 namespace DumbFox;
 
@@ -14,6 +17,8 @@ public static class ClientManager
     {
         session.LastPongUtc = DateTime.UtcNow;
     }
+
+
 
     private static async Task RunReadLoop(Session session, CancellationToken ct)
     {
@@ -73,6 +78,17 @@ public static class ClientManager
                 break;
             }
         }
+    }
+
+    public static async Task<Task> HandlePacket(UdpClient server, IPEndPoint remote, byte[] buffer, CancellationToken ct)
+    {
+        string message = Encoding.UTF8.GetString(buffer);
+
+        Console.WriteLine($"UDP Received from {remote}: {message}");
+
+        await server.SendAsync(buffer, remote, ct);
+
+        return Task.CompletedTask;
     }
 
     public static async Task HandleClient(TcpClient client, CancellationToken ct = default)

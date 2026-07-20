@@ -3,6 +3,7 @@ using Sfs2X.Requests;
 using SFSLitJson;
 using System.Numerics;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
 namespace Common.Utils
@@ -14,6 +15,45 @@ namespace Common.Utils
         public string? swid { get; set; }
         public T? data { get; set; }
         public string? signature { get; set; }
+    }
+
+    public class InteractionData
+    {
+        [JsonPropertyName("type")]
+        public int Type { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = "";
+        [JsonPropertyName("tag")]
+        public string Tag { get; set; } = "";
+    }
+    public class PickupableData
+    {
+        public string Room { get; set; } = "";
+        public string Path { get; set; } = "";
+        public string Tag { get; set; } = "";
+        public int Type { get; set; }
+
+        public BoundsData MinBounds { get; set; } = new();
+        public BoundsData MaxBounds { get; set; } = new();
+
+        public RewardData Reward { get; set; } = new();
+    }
+    public class BoundsData
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get; set; }
+    }
+    public class RewardData
+    {
+        public int Coins { get; set; }
+        public Dictionary<string, int> CollectibleCurrency { get; set; } = new();
+        public int IglooSlots { get; set; }
+    }
+
+    public class PropShareableData
+    {
+        public string actionCount { get; set; } = "6";
     }
 }
 

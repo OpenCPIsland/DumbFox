@@ -195,3 +195,4 @@ d:\CPI2023\WebApiAsync\DumbFoxAI\FrontEnd\obj\Debug\net9.0\refint\FrontEnd.dll
 d:\CPI2023\WebApiAsync\DumbFoxAI\FrontEnd\obj\Debug\net9.0\FrontEnd.pdb
 d:\CPI2023\WebApiAsync\DumbFoxAI\FrontEnd\obj\Debug\net9.0\FrontEnd.genruntimeconfig.cache
 d:\CPI2023\WebApiAsync\DumbFoxAI\FrontEnd\obj\Debug\net9.0\ref\FrontEnd.dll
+D:\CPI2023\WebApiAsync\DumbFox\FrontEnd\bin\Debug\net9.0\Config\pickupables.json

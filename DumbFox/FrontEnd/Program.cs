@@ -16,6 +16,8 @@ AppConfig config = configuration.Get<AppConfig>()!;
 
 DatabaseManager.Configure(config.Database.ConnectionString);
 
+PickupableManager.Load("Config/pickupables.json");
+
 List<Task> tasks = new();
 
 if (config.Servers.WebApi.Enabled)
@@ -33,6 +35,7 @@ if (config.Servers.PublicApi.Enabled)
 if (config.Servers.Tcp.Enabled)
 {
     tasks.Add(DumbFoxServer.RunAsync(config.Servers.Tcp.Port,cts.Token));
+    tasks.Add(DumbFoxServer.RunUdpAsync(config.Servers.Tcp.Port, cts.Token));
 }
 
 if (config.Servers.WebSocket.Enabled)

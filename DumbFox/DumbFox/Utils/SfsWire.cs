@@ -12,7 +12,10 @@ namespace DumbFox;
 public static class SfsWire
 {
 	private const byte FlagBinary = 0x80;
-	private const byte BigSized = 8;
+	private const byte FlagEncrypted = 0x40;
+	private const byte FlagCompressed = 0x20;
+	private const byte FlagBlueBoxed = 0x10;
+	private const byte FlagBigSized = 8;
 
 
     public static Task WriteMessageAsync(
@@ -71,7 +74,7 @@ public static class SfsWire
             Console.ResetColor();
             Console.WriteLine(" ");
             header = new byte[5];
-            header[0] = BigSized; // replace with actual big-sized flag when known
+            header[0] = FlagBigSized; // replace with actual big-sized flag when known
             BinaryPrimitives.WriteUInt32BigEndian(header.AsSpan(1, 4), (uint)len);
         }
 

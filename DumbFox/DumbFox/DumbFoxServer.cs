@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Common.Utils;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ public static class DumbFoxServer
 		Console.WriteLine($"DumbFox SFS2x API TCP Server started on port {port}");
 		Console.WriteLine($" ");
 
-		try
+        try
 		{
 			while (!ct.IsCancellationRequested)
 			{
@@ -40,7 +41,28 @@ public static class DumbFoxServer
 		}
 	}
 
-	public static async Task RunWebSocketAsync(int wsPort, int wssPort, CancellationToken ct = default)
+    public static async Task RunUdpAsync(int port, CancellationToken ct = default)
+    {
+        using UdpClient listener = new(port);
+
+        Console.WriteLine($"DumbFox SFS2x API UDP Server started on port {port}");
+        Console.WriteLine();
+
+        try
+        {
+            while (!ct.IsCancellationRequested)
+            {
+                UdpReceiveResult result = await listener.ReceiveAsync(ct);
+                _ = ClientManager.HandlePacket(listener, result.RemoteEndPoint, result.Buffer, ct);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Expected
+        }
+    }
+
+    public static async Task RunWebSocketAsync(int wsPort, int wssPort, CancellationToken ct = default)
 	{
 		WebApplicationBuilder builder = WebApplication.CreateBuilder(new WebApplicationOptions
 		{

@@ -22,6 +22,7 @@ public static class CommandHandler
             ":ac" => AddCoins(session, args),
             ":help" => HelpCommand(session, args),
             ":users" => GetUsersinRoom(session, args),
+            ":mmoitem" => RoomStateTester(session, args),
             _ => Task.Run(() => Console.WriteLine($"Unhandled command: {command}"))
         });
     }
@@ -94,15 +95,15 @@ public static class CommandHandler
             Console.WriteLine($"Room {roomId} not found.");
         }
 
-        var err = new SFSObject();
+       // var err = new SFSObject();
 
-        err.PutShort("ec", (short)SFSErrorCode.LOGIN_BAD_ZONENAME);
-        err.PutUtfString("em", $"Zone does not exist");
+       // err.PutShort("ec", (short)SFSErrorCode.LOGIN_BAD_ZONENAME);
+      //  err.PutUtfString("em", $"Zone does not exist");
 
-        var ep = new SFSArray();
-        ep.AddUtfString("ClubPenguin");
+      //  var ep = new SFSArray();
+      //  ep.AddUtfString("ClubPenguin");
 
-        err.PutSFSArray("ep", ep);
+       // err.PutSFSArray("ep", ep);
 
 
         Console.WriteLine($"In Current RoomId {roomId} are " + room.Users.Count.ToString() + " Users Online.");
@@ -186,7 +187,97 @@ public static class CommandHandler
             await ExtensionHandler.SendExtensionResponse(target, "chat.msg", session.CurrentRoomId??0, resData);
         }
 
-        await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.Login, err);
+        //await SfsWire.WriteMessageAsync(session, 0, (short)RequestType.Login, err);
+    }
+
+    private static async Task RoomStateTester(Session session, string[] args)
+    {
+        SFSObject joinedPayload2 = new SFSObject();
+        joinedPayload2.PutInt("r", session.CurrentRoomId ?? 0);
+
+        SFSArray u3 = new SFSArray();
+        SFSArray u = new SFSArray();
+
+        u.AddUtfString("statetimestamp");
+        u.AddByte(4);
+        u.AddUtfString(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());
+        u.AddBool(false);
+
+        SFSArray u2 = new SFSArray();
+        u2.AddUtfString("scheduledworldobjectstate");
+        u2.AddByte(2);
+        u2.AddInt(int.Parse(args[0])); // 0 1 2
+        u2.AddBool(false);
+
+        u3.AddSFSArray(u);
+        u3.AddSFSArray(u2);
+
+        joinedPayload2.PutSFSArray("v", u3);
+        joinedPayload2.PutInt("i", int.Parse(args[1])); //16887
+
+        SFSObject payload = new SFSObject();
+        SFSArray items = new SFSArray();
+        SFSArray itemData = new SFSArray();
+        itemData.AddInt(int.Parse(args[1]));
+        SFSArray variables = new SFSArray();
+        AddVariable(variables,"path", args[2]);// /Minigames/AquaFunHut/GeyserLocations/GeyserLocation02
+        AddVariable(variables, "creator", -1);
+        AddVariable(variables, "statetimestamp", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());
+        AddVariable(variables, "position", new float[] { session.PosX, session.PosY, session.PosZ });
+        AddVariable(variables, "category", 2);
+        AddVariable(variables, "scheduledworldobjectstate", int.Parse(args[0]));
+        itemData.AddSFSArray(variables);
+        itemData.AddFloatArray([session.PosX, session.PosY, session.PosZ]);
+        items.AddSFSArray(itemData);
+
+        payload.PutInt("r", session.CurrentRoomId ?? 0);
+        payload.PutSFSArray("q", items);
+
+        if (!World.RoomsById.TryGetValue(session.CurrentRoomId ?? 0, out Common.Utils.Room? room))
+        {
+            return;
+        }
+
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+            await SfsWire.WriteMessageAsync(target, 0, (short)30, payload);
+            await SfsWire.WriteMessageAsync(target, 0, (short)1007, joinedPayload2);
+        }
+    }
+
+    private static void AddVariable(
+    SFSArray array,
+    string name,
+    object value)
+    {
+        SFSArray variable = new SFSArray();
+
+        variable.AddUtfString(name);
+
+        switch (value)
+        {
+            case int i:
+                variable.AddByte(2);
+                variable.AddInt(i);
+                break;
+
+            case string s:
+                variable.AddByte(4);
+                variable.AddUtfString(s);
+                break;
+
+            case float[] f:
+                variable.AddByte(6);
+                SFSArray inner = new SFSArray();
+                inner.AddFloatArray(f);
+                variable.AddSFSArray(inner);
+                break;
+        }
+
+        variable.AddBool(false);
+
+        array.AddSFSArray(variable);
     }
 
     private static async Task HelpCommand(Session session, string[] args)
