@@ -1,5 +1,5 @@
 # DumbFox
-Internal development and testing.
+An extremely unfinished Game Server and GameAPI for OpenCPI (Club Penguin Island).
 ```
  ├─(90%) Sfs2xAPI ──(35%)→ CPI ───────────────┐
  │                                            │
