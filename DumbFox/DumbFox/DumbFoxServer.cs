@@ -96,8 +96,14 @@ public static class DumbFoxServer
 			}
 
 			var socket = await context.WebSockets.AcceptWebSocketAsync();
-			await ClientManager.HandleClient(socket, ct);
-		});
+            var session = new Session(socket)
+            {
+                RemoteEndPoint = new IPEndPoint(context.Connection.RemoteIpAddress!, context.Connection.RemotePort),
+                LocalEndPoint = new IPEndPoint(context.Connection.LocalIpAddress!, context.Connection.LocalPort)
+            };
+
+            await ClientManager.HandleClient(session, ct);
+        });
 
 		await app.StartAsync(ct);
 

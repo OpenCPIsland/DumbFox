@@ -98,7 +98,11 @@ public static class ClientManager
             SocketOptionName.KeepAlive,
             true);
 
-        var session = new Session(client);
+        var session = new Session(client)
+        {
+            RemoteEndPoint = (IPEndPoint?)client.Client.RemoteEndPoint,
+            LocalEndPoint = (IPEndPoint?)client.Client.LocalEndPoint
+        };
 
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
 
@@ -109,6 +113,7 @@ public static class ClientManager
 
         cts.Cancel();
 
+		session.Cleanup();
         Console.WriteLine("Session got aborted!!!");
 
         session.Cleanup();
@@ -120,15 +125,22 @@ public static class ClientManager
         client.Close();
     }
 
-    public static Task HandleClient(WebSocket socket, CancellationToken ct = default) =>
-        HandleClient(new Session(socket), ct, async () =>
+    public static Task HandleClient(Session session, CancellationToken ct = default) =>
+        HandleClient(session, ct, async () =>
         {
-            try
+            if (session.Socket is { } ws)
             {
-                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Server close", CancellationToken.None);
+                try
+                {
+                    await ws.CloseAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "Server close",
+                        CancellationToken.None);
+                }
+                catch { }
+
+                ws.Dispose();
             }
-            catch { /* ignore */ }
-            socket.Dispose();
         });
 
     private static async Task HandleClient(Session session, CancellationToken ct, Func<Task> closeConnection)
@@ -146,6 +158,7 @@ public static class ClientManager
                 (byte flags, byte[] payload)? pkt = await SfsRead.ReadPacketAsync(session, ct);
                 if (pkt == null)
                 {
+                    session.Cleanup();
                     Console.WriteLine($"{transport} client disconnected (EOF)");
                     break;
                 }
@@ -184,22 +197,27 @@ public static class ClientManager
         }
         catch (OperationCanceledException)
         {
+            session.Cleanup();
             Console.WriteLine($"{transport} client manager canceled");
         }
         catch (IOException ex)
         {
+            session.Cleanup();
             Console.WriteLine($"IO error: {ex.Message}");
         }
         catch (SocketException ex)
         {
+            session.Cleanup();
             Console.WriteLine($"Socket error: {ex.Message}");
         }
         catch (WebSocketException ex)
         {
+            session.Cleanup();
             Console.WriteLine($"WebSocket error: {ex.Message}");
         }
         catch (Exception ex)
         {
+            session.Cleanup();
             Console.WriteLine($"Unhandled client error: {ex}");
         }
         finally

@@ -1,5 +1,6 @@
 using Common.Utils.Game;
 using Sfs2X.Entities.Variables;
+using System.Net;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 namespace Common.Utils;
@@ -9,6 +10,8 @@ public sealed class Session(TcpClient? client)
     public TcpClient? Client { get; } = client;
     public NetworkStream? Stream { get; } = client != null ? client.GetStream() : null;
     public WebSocket? Socket { get; }
+    public IPEndPoint? RemoteEndPoint { get; set; }
+    public IPEndPoint? LocalEndPoint { get; set; }
 
     public DateTime LastPongUtc { get; set; } = DateTime.UtcNow;
     public bool IsDisconnected { get; set; }

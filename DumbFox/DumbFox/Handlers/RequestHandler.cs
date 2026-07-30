@@ -4,6 +4,8 @@ using DumbFox.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.Json;
 
 namespace DumbFox.Handlers;
@@ -59,7 +61,9 @@ public static class RequestHandler
         
         long cpSessionId = joinRoomSessionId ?? DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-        int userId = Environment.TickCount;
+        Console.WriteLine($"{session.LocalEndPoint.Address}: {session.LocalEndPoint.Port}");
+        Console.WriteLine($"{session.RemoteEndPoint.Address}: {session.RemoteEndPoint.Port}");
+        int userId = session.RemoteEndPoint.Port; //Environment.TickCount;
 
         session.UserId = userId;
         session.UserName = user;
