@@ -1,0 +1,17 @@
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\Common.deps.json
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\Common.pdb
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\SmartFox2X.dll
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\websocket-sharp.dll
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\SmartFox2X.pdb
+D:\CPI2023\WebApiAsync\DumbFox10\Common\bin\Debug\net10.0\websocket-sharp.pdb
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.csproj.AssemblyReference.cache
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.AssemblyInfoInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.AssemblyInfo.cs
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.csproj.CoreCompileInputs.cache
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.csproj.Up2Date
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\refint\Common.dll
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\Common.pdb
+D:\CPI2023\WebApiAsync\DumbFox10\Common\obj\Debug\net10.0\ref\Common.dll

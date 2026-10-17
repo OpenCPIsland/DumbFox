@@ -11,7 +11,7 @@
  Target Server Version : 110202 (11.2.2-MariaDB)
  File Encoding         : 65001
 
- Date: 07/06/2026 21:28:32
+ Date: 16/10/2026 20:42:57
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,13 @@ CREATE TABLE `accounts`  (
   `birthday` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1970-01-01',
   `region` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of accounts
+-- ----------------------------
+INSERT INTO `accounts` VALUES (1, '999999999999999', '999999999999997', 'test@opencpi.com', '$2a$10$zGyx5XzuV0N014x.ZjlyCO/4VwlBrAv6HdHJg4SBoJ.PFlwft2JlW', 'ACTIVE', 'TestPlayer', 'TestPlayer', 'NONE', '2016-11-28T12:11:01.100+0100', 0, 'CHILD', '1970-01-01', 'US');
+INSERT INTO `accounts` VALUES (2, 'Fake Friend', 'Bot-0', 'test@opencpi.com', '$2a$10$zGyx5XzuV0N014x.ZjlyCO/4VwlBrAv6HdHJg4SBoJ.PFlwft2JlW', 'ACTIVE', 'Mixbot', 'Mixbot', 'NONE', '2017-03-31T12:05:35.070Z', 0, 'CHILD', '1970-01-01', 'US');
 
 -- ----------------------------
 -- Table structure for alerts
@@ -84,7 +90,8 @@ CREATE TABLE `chatthreadchats`  (
   PRIMARY KEY (`msgid`) USING BTREE,
   INDEX `id`(`id` ASC) USING BTREE,
   CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `chatthreads` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 255 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Table structure for chatthreads
@@ -100,7 +107,7 @@ CREATE TABLE `chatthreads`  (
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 30 day),
   `seq` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for chatthreadsusers
@@ -140,6 +147,10 @@ CREATE TABLE `clothingcatalogthemeinvcostus`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of clothingcatalogthemeinvcostus
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for clothingcatalogthemeinvs
 -- ----------------------------
 DROP TABLE IF EXISTS `clothingcatalogthemeinvs`;
@@ -156,7 +167,8 @@ CREATE TABLE `clothingcatalogthemeinvs`  (
   `datetimecreated` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`clothingcatalogitemid`) USING BTREE,
   INDEX `swid`(`swid` ASC, `clothingcatalogitemid` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Table structure for clothingcatalogthemes
@@ -167,6 +179,11 @@ CREATE TABLE `clothingcatalogthemes`  (
   `usersubmissionclothingcatalogid` bigint NOT NULL DEFAULT 0,
   `coins` bigint NOT NULL DEFAULT 20
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of clothingcatalogthemes
+-- ----------------------------
+INSERT INTO `clothingcatalogthemes` VALUES (578, 0, 20);
 
 -- ----------------------------
 -- Table structure for friends
@@ -185,7 +202,7 @@ CREATE TABLE `friends`  (
   `timestamp` bigint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_friends_me_lookup`(`meID` ASC, `isfriend` ASC, `isdeleted` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 133 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for inventorycostumes
@@ -222,7 +239,7 @@ CREATE TABLE `inventorys`  (
   `iswearing` tinyint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `swid`(`swid` ASC, `id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for profiles
@@ -300,6 +317,11 @@ CREATE TABLE `profiles`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of profiles
+-- ----------------------------
+INSERT INTO `profiles` VALUES ('999999999999999', 1480331514000, 1, 'en-US', 'DefaultIgloo', 'Alpine', '', 0, 0, 0, 0, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, '', '3', 17, '0.0', '0.0', '15', 0, '0.0', '0.0', '9', 0, '0.0', '0.00417972784489393', '54', 11, '0.0', '0.0121355056762695', '69', 7, '0.0', '0.0', '106', 0, '0.0', '0.0116169452667236', '194', 0, '-0.00126063823699951', '0.0', '123', 9, '0.0', '0.0', '0', 0, '0.0', '0.0');
+INSERT INTO `profiles` VALUES ('Fake Friend', 0, 1, 'en-US', 'DefaultIgloo', 'Alpine', '', 15, 0, 0, 0, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, '', '3', 17, '0.0', '0.0', '15', 0, '0.0', '0.0', '9', 0, '0.0', '0.00417972784489393', '54', 11, '0.0', '0.0121355056762695', '69', 7, '0.0', '0.0', '106', 0, '0.0', '0.0116169452667236', '194', 0, '-0.00126063823699951', '0.0', '123', 9, '0.0', '0.0', '0', 0, '0.0', '0.0');
+-- ----------------------------
 -- Table structure for quests
 -- ----------------------------
 DROP TABLE IF EXISTS `quests`;
@@ -312,7 +334,32 @@ CREATE TABLE `quests`  (
   `timesCompleted` tinyint NOT NULL DEFAULT 0,
   `unlockTime` varchar(13) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of quests
+-- ----------------------------
+INSERT INTO `quests` VALUES (1, '999999999999999', 'AAC001Q001LeakyShip', 0, '', 0, '');
+INSERT INTO `quests` VALUES (2, '999999999999999', 'RHC001Q001TreasureQuest', 0, '', 0, '');
+INSERT INTO `quests` VALUES (3, '999999999999999', 'RKC001Q001Drop', 0, '', 0, '');
+INSERT INTO `quests` VALUES (4, '999999999999999', 'DJC001Q001Plan', 0, '', 0, '');
+INSERT INTO `quests` VALUES (5, 'Fake Friend', 'AAC001Q001LeakyShip', 0, '', 0, '');
+INSERT INTO `quests` VALUES (6, 'Fake Friend', 'RHC001Q001TreasureQuest', 0, '', 0, '');
+INSERT INTO `quests` VALUES (7, 'Fake Friend', 'RKC001Q001Drop', 0, '', 0, '');
+INSERT INTO `quests` VALUES (8, 'Fake Friend', 'DJC001Q001Plan', 0, '', 0, '');
+
+-- ----------------------------
+-- Table structure for room_collectives
+-- ----------------------------
+DROP TABLE IF EXISTS `room_collectives`;
+CREATE TABLE `room_collectives`  (
+  `swid` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '999999999999999',
+  `room` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Boardwalk',
+  `string` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '/Collectibles/Exploration Bits Container/SeaShells/explorationCollectible_SeaShell_FINAL',
+  `long` bigint NOT NULL DEFAULT 0,
+  PRIMARY KEY (`string`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Table structure for room_users
@@ -335,7 +382,11 @@ CREATE TABLE `room_users`  (
   `awayfromkeyboard` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tempheadstatus` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of room_users
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rooms
@@ -363,6 +414,10 @@ CREATE TABLE `rooms`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of rooms
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for serversettings
 -- ----------------------------
 DROP TABLE IF EXISTS `serversettings`;
@@ -384,7 +439,11 @@ CREATE TABLE `sessions`  (
   `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `expires_at` datetime NULL DEFAULT (current_timestamp() + interval 1 day),
   PRIMARY KEY (`seeid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sessions
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sessionusers
@@ -409,6 +468,10 @@ CREATE TABLE `sessionusers`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of sessionusers
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for worlds
 -- ----------------------------
 DROP TABLE IF EXISTS `worlds`;
@@ -422,152 +485,153 @@ CREATE TABLE `worlds`  (
   `httpsport` int NOT NULL DEFAULT 8443,
   `wsport` int NOT NULL DEFAULT 8080,
   `wssport` int NOT NULL DEFAULT 8443,
+  `wshost` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '127.0.0.1',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 141 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of worlds
 -- ----------------------------
-INSERT INTO `worlds` VALUES (1, 'Alpine', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (2, 'Frostbite', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (3, 'Parka', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (4, 'Snow Globe', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (5, 'Toboggan', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (6, 'Yeti', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (7, 'Permafrost', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (8, 'Snow Day', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (9, 'Snowfall', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (10, 'Summit', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (11, 'Zipline', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (12, 'Aurora', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (13, 'Flurry', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (14, 'Snowtrekker', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (15, 'Down Under', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (16, 'Migrator', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (17, 'Crunch', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (18, 'Fog', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (19, 'Ice Age', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (20, 'Marshmallow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (21, 'Hibernate', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (22, 'Glacier', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (23, 'Sparkle', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (24, 'Tuxedo', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (25, 'Rocky Road', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (26, 'Skates', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (27, 'Mittens', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (28, 'White Out', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (29, 'Avalanche', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (30, 'Snowball', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (31, 'Mammoth', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (32, 'Frosty', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (33, 'Wind Chill', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (34, 'Wool Socks', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (35, 'Vanilla', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (36, 'Coconut', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (37, 'Great White', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (38, 'Flipper', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (39, 'Caribou', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (40, 'Patagonia', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (41, 'Yukon', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (42, 'Polar Bear', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (43, 'Mountain', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (44, 'Matterhorn', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (45, 'Outback', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (46, 'Rainbow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (47, 'Cream Soda', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (48, 'Cod', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (49, 'Snow Plow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (50, 'Sasquatch', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (51, 'Sabertooth', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (52, 'Slushy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (53, 'Hockey', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (54, 'Grizzly', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (55, 'Ice Rink', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (56, 'Cozy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (57, 'Antarctic', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (58, 'Fjord', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (59, 'Tea', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (60, 'Walrus', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (61, 'Snow Fort', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (62, 'South Pole', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (63, 'Oyster', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (64, 'Iceberg', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (65, 'Slippers', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (66, 'Icicle', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (67, 'Arctic', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (68, 'Jackhammer', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (69, 'Tundra', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (70, 'Cloudy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (71, 'Blizzard', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (72, 'Klondike', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (73, 'Mullet', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (74, 'Sled', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (75, 'Sleet', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (76, 'Freezer', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (77, 'Mamute', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (78, 'Aventura', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (79, 'Sardinha', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (80, 'Friaca', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (81, 'Tudo Branco', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (82, 'Neblina', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (83, 'Zero Grau', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (84, 'Patagônia', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (85, 'Ventilador', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (86, 'Geleira', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (87, 'Boreal', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (88, 'Sorvete', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (89, 'Patins', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (90, 'Chá', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (91, 'Flocon', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (92, 'Sardine', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (93, 'Aurore Boréale', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (94, 'Patinoire', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (95, 'Super', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (96, 'Patins à glace', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (97, 'Glacière', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (98, 'Jour de neige', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (99, 'Cascade', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (100, 'Altitude', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (101, 'Bonzo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (102, 'Estrella polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (103, 'Dulce o truco', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (104, 'Elemento Ninja', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (105, 'Hielo seco', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (106, 'Nieve rosada', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (107, 'Polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (108, 'Bola de nieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (109, 'Sardinas enlatadas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (110, 'Elevación', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (111, 'Pingüinera', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (112, 'Ola surfera', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (113, 'Botas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (114, 'Aguanieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (115, 'Cubo de Hielo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (116, 'Estalactita', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (117, 'Taladrando', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (118, 'Fiesta', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (119, 'Divertinguin', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (120, 'Chapoteo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (121, 'Deshielo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (122, 'Patines', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (123, 'Isla Pirata', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (124, 'Oso polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (125, 'Pufflelandia', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (126, 'DJ Aletas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (127, 'Bajo Cero', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (128, 'Movimento Ninja', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (129, 'Nevisca', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (130, 'Saltamontes', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (131, 'Nevado', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (132, 'Avalancha', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (133, 'Isla secreta', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (134, 'Nebulosa', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (135, 'Trineo de nieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (136, 'Puffito de agua', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (137, 'Andino', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (138, 'Polo sur', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (139, 'Pizzarock', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
-INSERT INTO `worlds` VALUES (140, 'Mejor amigo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443);
+INSERT INTO `worlds` VALUES (1, 'Alpine', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (2, 'Frostbite', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (3, 'Parka', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (4, 'Snow Globe', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (5, 'Toboggan', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (6, 'Yeti', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (7, 'Permafrost', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (8, 'Snow Day', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (9, 'Snowfall', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (10, 'Summit', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (11, 'Zipline', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (12, 'Aurora', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (13, 'Flurry', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (14, 'Snowtrekker', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (15, 'Down Under', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (16, 'Migrator', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (17, 'Crunch', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (18, 'Fog', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (19, 'Ice Age', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (20, 'Marshmallow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (21, 'Hibernate', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (22, 'Glacier', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (23, 'Sparkle', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (24, 'Tuxedo', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (25, 'Rocky Road', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (26, 'Skates', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (27, 'Mittens', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (28, 'White Out', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (29, 'Avalanche', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (30, 'Snowball', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (31, 'Mammoth', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (32, 'Frosty', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (33, 'Wind Chill', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (34, 'Wool Socks', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (35, 'Vanilla', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (36, 'Coconut', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (37, 'Great White', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (38, 'Flipper', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (39, 'Caribou', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (40, 'Patagonia', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (41, 'Yukon', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (42, 'Polar Bear', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (43, 'Mountain', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (44, 'Matterhorn', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (45, 'Outback', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (46, 'Rainbow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (47, 'Cream Soda', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (48, 'Cod', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (49, 'Snow Plow', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (50, 'Sasquatch', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (51, 'Sabertooth', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (52, 'Slushy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (53, 'Hockey', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (54, 'Grizzly', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (55, 'Ice Rink', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (56, 'Cozy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (57, 'Antarctic', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (58, 'Fjord', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (59, 'Tea', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (60, 'Walrus', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (61, 'Snow Fort', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (62, 'South Pole', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (63, 'Oyster', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (64, 'Iceberg', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (65, 'Slippers', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (66, 'Icicle', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (67, 'Arctic', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (68, 'Jackhammer', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (69, 'Tundra', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (70, 'Cloudy', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (71, 'Blizzard', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (72, 'Klondike', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (73, 'Mullet', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (74, 'Sled', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (75, 'Sleet', 1, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (76, 'Freezer', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (77, 'Mamute', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (78, 'Aventura', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (79, 'Sardinha', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (80, 'Friaca', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (81, 'Tudo Branco', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (82, 'Neblina', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (83, 'Zero Grau', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (84, 'Patagônia', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (85, 'Ventilador', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (86, 'Geleira', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (87, 'Boreal', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (88, 'Sorvete', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (89, 'Patins', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (90, 'Chá', 2, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (91, 'Flocon', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (92, 'Sardine', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (93, 'Aurore Boréale', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (94, 'Patinoire', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (95, 'Super', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (96, 'Patins à glace', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (97, 'Glacière', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (98, 'Jour de neige', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (99, 'Cascade', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (100, 'Altitude', 4, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (101, 'Bonzo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (102, 'Estrella polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (103, 'Dulce o truco', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (104, 'Elemento Ninja', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (105, 'Hielo seco', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (106, 'Nieve rosada', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (107, 'Polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (108, 'Bola de nieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (109, 'Sardinas enlatadas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (110, 'Elevación', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (111, 'Pingüinera', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (112, 'Ola surfera', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (113, 'Botas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (114, 'Aguanieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (115, 'Cubo de Hielo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (116, 'Estalactita', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (117, 'Taladrando', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (118, 'Fiesta', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (119, 'Divertinguin', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (120, 'Chapoteo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (121, 'Deshielo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (122, 'Patines', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (123, 'Isla Pirata', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (124, 'Oso polar', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (125, 'Pufflelandia', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (126, 'DJ Aletas', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (127, 'Bajo Cero', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (128, 'Movimento Ninja', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (129, 'Nevisca', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (130, 'Saltamontes', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (131, 'Nevado', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (132, 'Avalancha', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (133, 'Isla secreta', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (134, 'Nebulosa', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (135, 'Trineo de nieve', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (136, 'Puffito de agua', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (137, 'Andino', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (138, 'Polo sur', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (139, 'Pizzarock', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
+INSERT INTO `worlds` VALUES (140, 'Mejor amigo', 8, 0, '127.0.0.1', 9933, 8443, 8080, 8443, '127.0.0.1');
 
 -- ----------------------------
 -- Event structure for cleanup_sessions

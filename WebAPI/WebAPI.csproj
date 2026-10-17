@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Update="Config\ApiConfiguration.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Api\Game\routes\moderation\" />
+      <Folder Include="Api\Game\routes\minigame\" />
+      <Folder Include="Api\Game\routes\disneystore\" />
+      <Folder Include="Api\Game\routes\diagnostics\" />
+      <Folder Include="Api\Game\routes\consumable\" />
+      <Folder Include="Api\Game\routes\captcha\" />
+      <Folder Include="Api\Game\routes\breadcrumb\" />
+      <Folder Include="Api\Game\routes\newsfeed\" />
+      <Folder Include="Api\Game\routes\quest\" />
+      <Folder Include="Api\Game\routes\tutorial\" />
+      <Folder Include="Api\Game\routes\task\" />
+      <Folder Include="Api\Game\routes\scheduledevent\" />
+      <Folder Include="Api\Game\routes\savedoutfit\" />
+      <Folder Include="CDN\" />
+      <Folder Include="www\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj" />
+    </ItemGroup>
+</Project>

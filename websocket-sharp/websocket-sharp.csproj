@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+		<RootNamespace>Sfs2X</RootNamespace>
+		<AssemblyName>websocket-sharp</AssemblyName>
+		<PackageId>websocket-sharp</PackageId>
+		<Version>1.0.2</Version>
+		<Description>A C# implementation of the WebSocket protocol client and server</Description>
+		<Copyright>sta.blockhead</Copyright>
+		<Product>websocket-sharp</Product>
+		<Company />
+		<Authors>sta.blockhead</Authors>
+		<PackageProjectUrl>https://github.com/sta/websocket-sharp</PackageProjectUrl>
+    </PropertyGroup>
+	
+    <ItemGroup>
+      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+</Project>
