@@ -140,7 +140,7 @@ public static class ExtensionHandler
                 var pickup = PickupableManager.Pickupables
                     .FirstOrDefault(x => string.Equals(x.Path, interaction.Id, StringComparison.OrdinalIgnoreCase));
 
-                if (pickup != null && pos is { Length: >= 25 })
+                if (pickup != null && pos is { Length: >= 3 })
                 {
                     if (IsNearPickup(pos, pickup))
                     {
@@ -181,7 +181,7 @@ public static class ExtensionHandler
             return;
         }
 
-        if (pos is { Length: >= 25 })
+        if (pos is { Length: >= 3 })
         {
             sender.PosX = pos[0];
             sender.PosY = pos[1];
