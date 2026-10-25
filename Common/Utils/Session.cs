@@ -56,6 +56,14 @@ public sealed class Session(TcpClient? client)
     public float PosX { get; set; }
     public float PosY { get; set; }
     public float PosZ { get; set; }
+    public float LastLocoX { get; set; }
+    public float LastLocoZ { get; set; }
+    public DateTime LastLocoSampleUtc { get; set; }
+    public int LastLocoRoomId { get; set; }
+    public int FastLocoSamples { get; set; }
+    public int SlowLocoSamples { get; set; }
+    public bool InferredSprinting { get; set; }
+    public bool SendsLegacySprintAction { get; set; }
 
     public List<SFSUserVariable> UserVars { get; set; } = [];
 
