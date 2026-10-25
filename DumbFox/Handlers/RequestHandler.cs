@@ -70,6 +70,13 @@ public static class RequestHandler
         session.SessionId = cpSessionId;
         session.Swid = joinRoomData.GetUtfString("swid");
         session.Quest = JsonSerializer.Deserialize<List<QuestStateCollection>>(playerRoomData.GetSFSArray("quests").ToJson()) ?? new List<QuestStateCollection>();
+        if (playerRoomData.ContainsKey("consumableInventory"))
+        {
+            ConsumableInventory? inventory = JsonSerializer.Deserialize<ConsumableInventory>(
+                playerRoomData.GetSFSObject("consumableInventory").ToJson());
+            if (inventory?.inventoryMap is not null)
+                session.Consumables = inventory.inventoryMap;
+        }
         session.earnedRewards = JsonSerializer.Deserialize<Dictionary<string, long>>(data.GetSFSObject("earnedRewards").ToJson()) ?? new Dictionary<string, long>();
         session.IsLoggedIn = true;
         session.LastPongUtc = DateTime.UtcNow;

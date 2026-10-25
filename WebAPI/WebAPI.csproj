@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -26,7 +26,6 @@
       <Folder Include="Api\Game\routes\minigame\" />
       <Folder Include="Api\Game\routes\disneystore\" />
       <Folder Include="Api\Game\routes\diagnostics\" />
-      <Folder Include="Api\Game\routes\consumable\" />
       <Folder Include="Api\Game\routes\captcha\" />
       <Folder Include="Api\Game\routes\breadcrumb\" />
       <Folder Include="Api\Game\routes\newsfeed\" />

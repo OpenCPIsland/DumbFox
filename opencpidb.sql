@@ -11,7 +11,7 @@
  Target Server Version : 110202 (11.2.2-MariaDB)
  File Encoding         : 65001
 
- Date: 16/10/2026 20:42:57
+ Date: 25/10/2026 13:50:56
 */
 
 SET NAMES utf8mb4;
@@ -37,14 +37,13 @@ CREATE TABLE `accounts`  (
   `birthday` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1970-01-01',
   `region` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
 INSERT INTO `accounts` VALUES (1, '999999999999999', '999999999999997', 'test@opencpi.com', '$2a$10$zGyx5XzuV0N014x.ZjlyCO/4VwlBrAv6HdHJg4SBoJ.PFlwft2JlW', 'ACTIVE', 'TestPlayer', 'TestPlayer', 'NONE', '2016-11-28T12:11:01.100+0100', 0, 'CHILD', '1970-01-01', 'US');
 INSERT INTO `accounts` VALUES (2, 'Fake Friend', 'Bot-0', 'test@opencpi.com', '$2a$10$zGyx5XzuV0N014x.ZjlyCO/4VwlBrAv6HdHJg4SBoJ.PFlwft2JlW', 'ACTIVE', 'Mixbot', 'Mixbot', 'NONE', '2017-03-31T12:05:35.070Z', 0, 'CHILD', '1970-01-01', 'US');
-
 -- ----------------------------
 -- Table structure for alerts
 -- ----------------------------
@@ -57,7 +56,7 @@ CREATE TABLE `alerts`  (
   `timestamp` bigint NOT NULL DEFAULT 0,
   `hasseen` tinyint NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for chatthreadchats
@@ -91,7 +90,6 @@ CREATE TABLE `chatthreadchats`  (
   INDEX `id`(`id` ASC) USING BTREE,
   CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `chatthreads` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 
 -- ----------------------------
 -- Table structure for chatthreads
@@ -169,7 +167,6 @@ CREATE TABLE `clothingcatalogthemeinvs`  (
   INDEX `swid`(`swid` ASC, `clothingcatalogitemid` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-
 -- ----------------------------
 -- Table structure for clothingcatalogthemes
 -- ----------------------------
@@ -184,6 +181,33 @@ CREATE TABLE `clothingcatalogthemes`  (
 -- Records of clothingcatalogthemes
 -- ----------------------------
 INSERT INTO `clothingcatalogthemes` VALUES (578, 0, 20);
+
+-- ----------------------------
+-- Table structure for consumable_uses
+-- ----------------------------
+DROP TABLE IF EXISTS `consumable_uses`;
+CREATE TABLE `consumable_uses`  (
+  `token` char(64) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `swid` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `expires_at` bigint NOT NULL,
+  PRIMARY KEY (`token`) USING BTREE,
+  INDEX `consumable_uses_expiry`(`expires_at` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for consumables
+-- ----------------------------
+DROP TABLE IF EXISTS `consumables`;
+CREATE TABLE `consumables`  (
+  `swid` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `item_count` int NOT NULL DEFAULT 0,
+  `partial_count` int NOT NULL DEFAULT 0,
+  `last_purchase_timestamp` bigint NOT NULL DEFAULT 0,
+  PRIMARY KEY (`swid`, `type`) USING BTREE,
+  CONSTRAINT `consumables_profile` FOREIGN KEY (`swid`) REFERENCES `profiles` (`swid`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for friends
@@ -240,6 +264,26 @@ CREATE TABLE `inventorys`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `swid`(`swid` ASC, `id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for party_blaster_reward_claims
+-- ----------------------------
+DROP TABLE IF EXISTS `party_blaster_reward_claims`;
+CREATE TABLE `party_blaster_reward_claims`  (
+  `swid` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `source_id` varchar(32) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `session_id` bigint NULL DEFAULT NULL,
+  `claim_token` char(64) CHARACTER SET latin1 COLLATE latin1_bin NULL DEFAULT NULL,
+  `coins` bigint NOT NULL,
+  `expires_at` bigint NOT NULL,
+  PRIMARY KEY (`swid`, `source_id`) USING BTREE,
+  INDEX `party_blaster_reward_claims_expiry`(`expires_at` ASC) USING BTREE,
+  INDEX `party_blaster_reward_claims_session_source`(`session_id` ASC, `source_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of party_blaster_reward_claims
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for profiles
@@ -321,6 +365,7 @@ CREATE TABLE `profiles`  (
 -- ----------------------------
 INSERT INTO `profiles` VALUES ('999999999999999', 1480331514000, 1, 'en-US', 'DefaultIgloo', 'Alpine', '', 0, 0, 0, 0, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, '', '3', 17, '0.0', '0.0', '15', 0, '0.0', '0.0', '9', 0, '0.0', '0.00417972784489393', '54', 11, '0.0', '0.0121355056762695', '69', 7, '0.0', '0.0', '106', 0, '0.0', '0.0116169452667236', '194', 0, '-0.00126063823699951', '0.0', '123', 9, '0.0', '0.0', '0', 0, '0.0', '0.0');
 INSERT INTO `profiles` VALUES ('Fake Friend', 0, 1, 'en-US', 'DefaultIgloo', 'Alpine', '', 15, 0, 0, 0, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, '', '3', 17, '0.0', '0.0', '15', 0, '0.0', '0.0', '9', 0, '0.0', '0.00417972784489393', '54', 11, '0.0', '0.0121355056762695', '69', 7, '0.0', '0.0', '106', 0, '0.0', '0.0116169452667236', '194', 0, '-0.00126063823699951', '0.0', '123', 9, '0.0', '0.0', '0', 0, '0.0', '0.0');
+
 -- ----------------------------
 -- Table structure for quests
 -- ----------------------------
@@ -360,7 +405,6 @@ CREATE TABLE `room_collectives`  (
   PRIMARY KEY (`string`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-
 -- ----------------------------
 -- Table structure for room_users
 -- ----------------------------
@@ -382,7 +426,7 @@ CREATE TABLE `room_users`  (
   `awayfromkeyboard` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tempheadstatus` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of room_users
@@ -442,10 +486,6 @@ CREATE TABLE `sessions`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sessions
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sessionusers
 -- ----------------------------
 DROP TABLE IF EXISTS `sessionusers`;
@@ -466,10 +506,6 @@ CREATE TABLE `sessionusers`  (
   INDEX `test`(`seeid` ASC) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`seeid`) REFERENCES `sessions` (`seeid`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sessionusers
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for worlds

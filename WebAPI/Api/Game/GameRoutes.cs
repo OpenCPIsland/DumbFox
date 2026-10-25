@@ -66,6 +66,7 @@ public static class GameRoutes
             await ResponseHelper.WriteJsonAsync(ctx, new BaseCodeError { }, 401);
             return null;
         }
+        ctx.Items["authenticated-session"] = session;
         sw.Stop();
         ctx.Response.Headers["X-Execution-Time"] = $"{sw.Elapsed.TotalMilliseconds:F0}";
         var result = await next(context);

@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Emit;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using static Common.Utils.Game.DecorationLayout;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -355,6 +356,258 @@ public static class DatabaseManager
         }
 
         return null;
+    }
+
+    public static async Task<ConsumableInventory> GetConsumableInventory(string swid)
+    {
+        ConsumableInventory inventory = new ConsumableInventory();
+        await using var conn = await OpenConnectionAsync();
+        await using var cmd = new MySqlCommand(
+            "SELECT type, item_count, partial_count, last_purchase_timestamp FROM consumables WHERE swid = @swid;",
+            conn);
+        cmd.Parameters.AddWithValue("@swid", swid);
+
+        await using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            inventory.inventoryMap[reader.GetString("type")] = new InventoryItemStock
+            {
+                itemCount = reader.GetInt32("item_count"),
+                partialCount = reader.GetInt32("partial_count"),
+                lastPurchaseTimestamp = reader.GetInt64("last_purchase_timestamp")
+            };
+        }
+
+        return inventory;
+    }
+
+    public static async Task<(ConsumableInventory Inventory, long Coins)> PurchaseConsumable(
+        string swid,
+        string type,
+        int count,
+        int unitCost,
+        bool memberOnly)
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var transaction = await conn.BeginTransactionAsync();
+        try
+        {
+            long coins;
+            bool member;
+            await using (var profileCommand = new MySqlCommand(
+                "SELECT coins, member FROM profiles WHERE swid = @swid FOR UPDATE;",
+                conn,
+                transaction))
+            {
+                profileCommand.Parameters.AddWithValue("@swid", swid);
+                await using var reader = await profileCommand.ExecuteReaderAsync();
+                if (!await reader.ReadAsync())
+                    throw new InvalidOperationException("Player profile was not found.");
+                coins = reader.GetInt64("coins");
+                member = reader.GetBoolean("member");
+            }
+
+            if (!member && memberOnly)
+                throw new UnauthorizedAccessException("Membership is required to purchase this consumable.");
+
+            long totalCost = checked((long)unitCost * count);
+            if (coins < totalCost)
+                throw new InvalidOperationException("Not enough coins.");
+
+            await using (var updateCoins = new MySqlCommand(
+                "UPDATE profiles SET coins = coins - @cost WHERE swid = @swid;",
+                conn,
+                transaction))
+            {
+                updateCoins.Parameters.AddWithValue("@cost", totalCost);
+                updateCoins.Parameters.AddWithValue("@swid", swid);
+                await updateCoins.ExecuteNonQueryAsync();
+            }
+
+            long purchaseTimestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            await using (var updateInventory = new MySqlCommand(
+                @"INSERT INTO consumables (swid, type, item_count, partial_count, last_purchase_timestamp)
+                  VALUES (@swid, @type, @count, 0, @timestamp)
+                  ON DUPLICATE KEY UPDATE item_count = item_count + VALUES(item_count), partial_count = 0, last_purchase_timestamp = VALUES(last_purchase_timestamp);",
+                conn,
+                transaction))
+            {
+                updateInventory.Parameters.AddWithValue("@swid", swid);
+                updateInventory.Parameters.AddWithValue("@type", type);
+                updateInventory.Parameters.AddWithValue("@count", count);
+                updateInventory.Parameters.AddWithValue("@timestamp", purchaseTimestamp);
+                await updateInventory.ExecuteNonQueryAsync();
+            }
+
+            await transaction.CommitAsync();
+            return (await GetConsumableInventory(swid), coins - totalCost);
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
+
+    public static async Task<(int PartialCount, string AuthorizationToken, long GoodUntil)> UseConsumable(string swid, string type)
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var transaction = await conn.BeginTransactionAsync();
+        try
+        {
+            int itemCount;
+            int partialCount;
+            await using (var readInventory = new MySqlCommand(
+                "SELECT item_count, partial_count FROM consumables WHERE swid = @swid AND type = @type FOR UPDATE;",
+                conn,
+                transaction))
+            {
+                readInventory.Parameters.AddWithValue("@swid", swid);
+                readInventory.Parameters.AddWithValue("@type", type);
+                await using var reader = await readInventory.ExecuteReaderAsync();
+                if (!await reader.ReadAsync())
+                    throw new InvalidOperationException("Consumable is not in the player's inventory.");
+                itemCount = reader.GetInt32("item_count");
+                partialCount = reader.GetInt32("partial_count");
+            }
+
+            if (itemCount <= 0 && partialCount <= 0)
+                throw new InvalidOperationException("Consumable is not in the player's inventory.");
+
+            if (partialCount > 0)
+            {
+                await using var clearPartial = new MySqlCommand(
+                    "UPDATE consumables SET partial_count = 0 WHERE swid = @swid AND type = @type;",
+                    conn,
+                    transaction);
+                clearPartial.Parameters.AddWithValue("@swid", swid);
+                clearPartial.Parameters.AddWithValue("@type", type);
+                await clearPartial.ExecuteNonQueryAsync();
+            }
+            else if (itemCount > 1)
+            {
+                await using var decrement = new MySqlCommand(
+                    "UPDATE consumables SET item_count = item_count - 1 WHERE swid = @swid AND type = @type;",
+                    conn,
+                    transaction);
+                decrement.Parameters.AddWithValue("@swid", swid);
+                decrement.Parameters.AddWithValue("@type", type);
+                await decrement.ExecuteNonQueryAsync();
+            }
+            else
+            {
+                await using var consumeLast = new MySqlCommand(
+                    "UPDATE consumables SET item_count = 0 WHERE swid = @swid AND type = @type;",
+                    conn,
+                    transaction);
+                consumeLast.Parameters.AddWithValue("@swid", swid);
+                consumeLast.Parameters.AddWithValue("@type", type);
+                await consumeLast.ExecuteNonQueryAsync();
+            }
+
+            string authorizationToken = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+            long goodUntil = DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeMilliseconds();
+            await using (var clearExpiredUses = new MySqlCommand(
+                "DELETE FROM consumable_uses WHERE expires_at <= @now;",
+                conn,
+                transaction))
+            {
+                clearExpiredUses.Parameters.AddWithValue("@now", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                await clearExpiredUses.ExecuteNonQueryAsync();
+            }
+
+            await using (var issueUse = new MySqlCommand(
+                @"INSERT INTO consumable_uses (token, swid, type, expires_at)
+                  VALUES (@token, @swid, @type, @expiresAt);",
+                conn,
+                transaction))
+            {
+                issueUse.Parameters.AddWithValue("@token", authorizationToken);
+                issueUse.Parameters.AddWithValue("@swid", swid);
+                issueUse.Parameters.AddWithValue("@type", type);
+                issueUse.Parameters.AddWithValue("@expiresAt", goodUntil);
+                await issueUse.ExecuteNonQueryAsync();
+            }
+
+            await transaction.CommitAsync();
+            return (partialCount, authorizationToken, goodUntil);
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
+
+    public static async Task<bool> ConsumeConsumableUseAuthorization(string swid, string type, string token)
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var consume = new MySqlCommand(
+            "DELETE FROM consumable_uses WHERE token = @token AND swid = @swid AND type = @type AND expires_at > @now;",
+            conn);
+        consume.Parameters.AddWithValue("@token", token);
+        consume.Parameters.AddWithValue("@swid", swid);
+        consume.Parameters.AddWithValue("@type", type);
+        consume.Parameters.AddWithValue("@now", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        return await consume.ExecuteNonQueryAsync() == 1;
+    }
+
+    public static async Task<Dictionary<long, long>> AwardPartyBlasterRewards(
+        IEnumerable<(string Swid, long SessionId, long InitialCoins, long Coins)> rewards)
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var transaction = await conn.BeginTransactionAsync();
+        try
+        {
+            Dictionary<long, long> balances = new();
+            foreach ((string swid, long sessionId, long initialCoins, long coins) in rewards)
+            {
+                await using (var credit = new MySqlCommand(
+                    @"INSERT INTO profiles (swid, coins) VALUES (@swid, @initialCoins + @coins)
+                      ON DUPLICATE KEY UPDATE coins = GREATEST(coins, @initialCoins) + @coins;",
+                    conn,
+                    transaction))
+                {
+                    credit.Parameters.AddWithValue("@swid", swid);
+                    credit.Parameters.AddWithValue("@initialCoins", initialCoins);
+                    credit.Parameters.AddWithValue("@coins", coins);
+                    if (await credit.ExecuteNonQueryAsync() < 1)
+                        throw new InvalidOperationException($"Player profile could not be credited for party blaster reward: {swid}.");
+                }
+
+                await using var readBalance = new MySqlCommand(
+                    "SELECT coins FROM profiles WHERE swid = @swid;",
+                    conn,
+                    transaction);
+                readBalance.Parameters.AddWithValue("@swid", swid);
+                object? result = await readBalance.ExecuteScalarAsync();
+                if (result is null || result is DBNull)
+                    throw new InvalidOperationException($"Player profile was not found after party blaster reward: {swid}.");
+                balances.Add(sessionId, Convert.ToInt64(result));
+            }
+
+            await transaction.CommitAsync();
+            return balances;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
+
+    public static async Task StoreConsumablePartial(string swid, string type, int partialCount)
+    {
+        await using var conn = await OpenConnectionAsync();
+        await using var save = new MySqlCommand(
+            @"INSERT INTO consumables (swid, type, item_count, partial_count, last_purchase_timestamp)
+              VALUES (@swid, @type, 0, @partialCount, 0)
+              ON DUPLICATE KEY UPDATE partial_count = @partialCount;",
+            conn);
+        save.Parameters.AddWithValue("@swid", swid);
+        save.Parameters.AddWithValue("@type", type);
+        save.Parameters.AddWithValue("@partialCount", partialCount);
+        await save.ExecuteNonQueryAsync();
     }
 
     public static async Task<long> InsertCustomEquipment(string swid, CustomEquipment equipment, string displayname)

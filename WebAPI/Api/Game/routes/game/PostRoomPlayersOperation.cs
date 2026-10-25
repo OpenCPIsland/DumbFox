@@ -71,6 +71,7 @@ public static class PostRoomPlayersOperation
                     playerRoomData = new PlayerRoomData
                     {
                         member = loadedProfile.Member,
+                        consumableInventory = await DatabaseManager.GetConsumableInventory(loadedProfile.Swid),
                         outfit = new PlayerOutfitDetails
                         {
                             sessionId = (long)session["sessionId"],
@@ -142,6 +143,7 @@ public static class PostRoomPlayersOperation
                 playerRoomData = new PlayerRoomData
                 {
                     member = loadedProfile.Member,
+                    consumableInventory = await DatabaseManager.GetConsumableInventory(loadedProfile.Swid),
                     outfit = new PlayerOutfitDetails
                     {
                         sessionId = (long)session["sessionId"],

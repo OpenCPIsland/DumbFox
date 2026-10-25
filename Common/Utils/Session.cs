@@ -49,6 +49,8 @@ public sealed class Session(TcpClient? client)
     public Dictionary<string, long> earnedRewards = new Dictionary<string, long>();
     public long SessionId { get; set; } = 1;
 
+    public long InitialCoins { get; set; }
+
     public bool IsLoggedIn { get; set; }
     public int? CurrentRoomId { get; set; }
     public float PosX { get; set; }
@@ -56,6 +58,12 @@ public sealed class Session(TcpClient? client)
     public float PosZ { get; set; }
 
     public List<SFSUserVariable> UserVars { get; set; } = [];
+
+    public SemaphoreSlim ConsumableGate { get; } = new(1, 1);
+    public Dictionary<string, InventoryItemStock> Consumables { get; set; } = new(StringComparer.Ordinal);
+    public string? ActiveShareableConsumable { get; set; }
+    public int ShareableConsumableCount { get; set; }
+    public bool ShareableConsumableExhausted { get; set; }
 
     public void Cleanup()
     {
