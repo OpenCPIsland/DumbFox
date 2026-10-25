@@ -1,5 +1,6 @@
 using Common.Utils;
 using Common.Utils.Game;
+using DumbFox.Utils;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
 using Sfs2X.Requests;
@@ -16,7 +17,12 @@ namespace DumbFox.Handlers;
 public static class ExtensionHandler
 {
     private static long _lastPartyBlasterId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000;
-    
+    private const byte LocomotionMoveAction = 0;
+    private const byte LocomotionSprintAction = 13;
+    private const double SprintSpeedThreshold = 3.9;
+    private const double JogSpeedThreshold = 3.4;
+
+
     public static async Task HandleExtensionAsync(string command, int roomId, Session session, SFSObject parameters)
 	{
 		await (command switch
@@ -186,7 +192,13 @@ public static class ExtensionHandler
             sender.PosX = pos[0];
             sender.PosY = pos[1];
             sender.PosZ = pos[2];
+
+            byte action = req.GetByte("a");
+            if (action == LocomotionSprintAction)
+                sender.SendsLegacySprintAction = true;
         }
+
+        byte locomotionAction = req.GetByte("a");
 
         if (req.GetByte("a") == (byte)GameLocomotionAction.Interact
             && playerInteraction?.Type == (int)InteractionObjectType.Player)
@@ -201,7 +213,98 @@ public static class ExtensionHandler
         foreach (Session session in room.Users.Values)
             await SendExtensionResponse(session, "l.a", roomId, data);
 
+        if (locomotionAction == LocomotionMoveAction && pos is { Length: >= 3 })
+            await UpdateInferredSprintState(sender, room, roomId, pos);
+
     }
+
+    private static async Task UpdateInferredSprintState(Session sender, Room room, int roomId, float[] position)
+    {
+        DateTime now = DateTime.UtcNow;
+        if (sender.LastLocoRoomId != roomId)
+        {
+            sender.LastLocoRoomId = roomId;
+            sender.LastLocoSampleUtc = default;
+            sender.FastLocoSamples = 0;
+            sender.SlowLocoSamples = 0;
+            sender.InferredSprinting = false;
+        }
+
+        UserVariable? locomotionState = sender.UserVars.FirstOrDefault(variable => variable.Name == "loc");
+        if (sender.SendsLegacySprintAction
+            || (locomotionState is not null && locomotionState.Value is int state && state != 0))
+        {
+            sender.LastLocoX = position[0];
+            sender.LastLocoZ = position[2];
+            sender.LastLocoSampleUtc = now;
+            return;
+        }
+
+        if (sender.LastLocoSampleUtc == default)
+        {
+            sender.LastLocoX = position[0];
+            sender.LastLocoZ = position[2];
+            sender.LastLocoSampleUtc = now;
+            return;
+        }
+
+        double elapsed = (now - sender.LastLocoSampleUtc).TotalSeconds;
+        double dx = position[0] - sender.LastLocoX;
+        double dz = position[2] - sender.LastLocoZ;
+        sender.LastLocoX = position[0];
+        sender.LastLocoZ = position[2];
+        sender.LastLocoSampleUtc = now;
+
+        if (elapsed <= 0.05 || elapsed > 0.75 || dx * dx + dz * dz > 25)
+        {
+            sender.FastLocoSamples = 0;
+            sender.SlowLocoSamples = 0;
+            if (sender.InferredSprinting)
+            {
+                sender.InferredSprinting = false;
+                await BroadcastInferredSprintToggle(sender, room, roomId, position);
+            }
+            return;
+        }
+
+        double speed = Math.Sqrt(dx * dx + dz * dz) / elapsed;
+        if (speed >= SprintSpeedThreshold)
+        {
+            sender.FastLocoSamples++;
+            sender.SlowLocoSamples = 0;
+            if (!sender.InferredSprinting && sender.FastLocoSamples >= 2)
+            {
+                sender.InferredSprinting = true;
+                await BroadcastInferredSprintToggle(sender, room, roomId, position);
+            }
+        }
+        else if (speed <= JogSpeedThreshold)
+        {
+            sender.SlowLocoSamples++;
+            sender.FastLocoSamples = 0;
+            if (sender.InferredSprinting && sender.SlowLocoSamples >= 2)
+            {
+                sender.InferredSprinting = false;
+                await BroadcastInferredSprintToggle(sender, room, roomId, position);
+            }
+        }
+    }
+
+    private static async Task BroadcastInferredSprintToggle(Session sender, Room room, int roomId, float[] position)
+    {
+        SFSObject sprintEvent = new();
+        sprintEvent.PutFloatArray("p", position);
+        sprintEvent.PutByte("a", LocomotionSprintAction);
+        sprintEvent.PutInt("senderId", sender.UserId);
+        sprintEvent.PutLong("t", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+        foreach (Session target in room.Users.Values)
+        {
+            if (target.UserId != sender.UserId)
+                await SendExtensionResponse(target, "l.a", roomId, sprintEvent);
+        }
+    }
+
     private static bool IsNearPickup(float[] pos, PickupableData pickup)
     {
         float dx = pos[0] - pickup.MinBounds.x;
@@ -231,7 +334,6 @@ public static class ExtensionHandler
 
 		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
 			await SfsWire.WriteMessageAsync(ji.Value, 0, 1001, userCountPayload);
-
     }
 
 	private static async Task HandleChatActivity(Session session, int roomId, SFSObject parameters)
