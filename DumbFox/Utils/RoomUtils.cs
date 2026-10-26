@@ -60,9 +60,18 @@ public static class RoomUtils
 	
 	public static async Task SendJoinRoom(Room room, string groupId, Session session)
     {
+        if (session.CurrentRoomId is int previousRoomId
+            && previousRoomId != room.RoomId
+            && World.RoomsById.TryGetValue(previousRoomId, out Room? previousRoom))
+        {
+            await RemoveSessionFromRoom(previousRoom, session);
+        }
+
         session.CurrentRoomId = room.RoomId;
-        
-        room.Users[session.UserId] = session;
+
+        bool isNewMember = room.Users.TryAdd(session.UserId, session);
+        if (!isNewMember)
+            room.Users[session.UserId] = session;
         
         SFSArray roomDesc = RoomUtils.FromRoomState(room, groupId, maxUsers: 39, maxSpectators: 100);
 
@@ -71,14 +80,40 @@ public static class RoomUtils
         content.PutSFSArray("ul", new SFSArray());
 
         await SfsWire.WriteMessageAsync(session, controller: 0, action: 4, parameters: content);
-        
+
         foreach (KeyValuePair<int, Session> kv in room.Users)
             await UserVariables.SendUserVariablesTo(session, kv.Value);
-        
-        await SendOnUserJoinedRoom(room, session);
+
+        await SendOnUserJoinedRoom(room, session, isNewMember);
     }
 
-    private static async Task SendOnUserJoinedRoom(Room room, Session joined)
+    public static async Task RemoveSessionFromRoom(Session session)
+    {
+        if (session.CurrentRoomId is int roomId && World.RoomsById.TryGetValue(roomId, out Room? room))
+            await RemoveSessionFromRoom(room, session);
+    }
+
+    public static async Task RemoveSessionFromRoom(Room room, Session session)
+    {
+        if (!room.Users.TryRemove(session.UserId, out _)) return;
+
+        session.CurrentRoomId = null;
+        SFSObject removePayload = new SFSObject();
+        removePayload.PutInt("r", room.RoomId);
+        removePayload.PutIntArray("m", [session.UserId]);
+
+        SFSObject userCountPayload = new SFSObject();
+        userCountPayload.PutInt("r", room.RoomId);
+        userCountPayload.PutShort("uc", (short)Math.Clamp(room.Users.Count, 0, short.MaxValue));
+
+        foreach (Session target in room.Users.Values)
+        {
+            await SfsWire.WriteMessageAsync(target, 0, (short)RequestType.SetUserPosition, removePayload);
+            await SfsWire.WriteMessageAsync(target, 0, 1001, userCountPayload);
+        }
+    }
+
+    private static async Task SendOnUserJoinedRoom(Room room, Session joined, bool isNewMember)
     {
         SFSArray positionsPayload = new SFSArray();
         foreach (KeyValuePair<int, Session> ji in room.Users)
@@ -89,10 +124,10 @@ public static class RoomUtils
 		
         await SfsWire.WriteMessageAsync(joined, 0, (short)RequestType.SetUserPosition, setUserPositionRequest);
         
-        await HandleUserJoinedNotifications(room, joined);
+        await HandleUserJoinedNotifications(room, joined, isNewMember);
     }
     
-    private static async Task HandleUserJoinedNotifications(Room room, Session joined)
+    private static async Task HandleUserJoinedNotifications(Room room, Session joined, bool isNewMember)
     {
         SFSObject joinedPayload = new SFSObject();
         joinedPayload.PutInt("r", room.RoomId);
@@ -112,12 +147,13 @@ public static class RoomUtils
             syncNewPlayerPosRequest.PutSFSArray("p", newPlayerPositionPayload);
             syncNewPlayerPosRequest.PutInt("r", room.RoomId);
 		
-            if (target.UserId == joined.UserId) continue;
+            if (target.UserId == joined.UserId || !isNewMember) continue;
             await SfsWire.WriteMessageAsync(target, 0, (short)RequestType.SetUserPosition, syncNewPlayerPosRequest);
             await SfsWire.WriteMessageAsync(target, 0, 1000, joinedPayload);
             await SfsWire.WriteMessageAsync(target, 0, 1001, parameters: userCountPayload);
-            
+
             await UserVariables.SendUserVariablesTo(target, joined);
         }
+
     }
 }

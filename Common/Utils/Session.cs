@@ -21,13 +21,13 @@ public sealed class Session(TcpClient? client)
     public Session(WebSocket socket) : this((TcpClient?)null)
     {
         Socket = socket;
-    
+
     }
 
     public int UserId { get; set; }
-	public string Swid { get; set; } = "";
-	public byte[]? AesKey { get; set; }
-	public string UserName { get; set; } = "";
+    public string Swid { get; set; } = "";
+    public byte[]? AesKey { get; set; }
+    public string UserName { get; set; } = "";
     public string ActivQuest { get; set; } = "";
     public List<QuestStateCollection> Quest { get; set; } = [
         new QuestStateCollection{

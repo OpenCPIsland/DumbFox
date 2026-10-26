@@ -22,38 +22,82 @@ public static class ExtensionHandler
     private const double SprintSpeedThreshold = 3.9;
     private const double JogSpeedThreshold = 3.4;
 
+    public static async Task BroadcastServerRestartMessageAsync(string messageToken = "GlobalUI.ErrorMessages.ServerRestarting")
+    {
+        Task[] sends = World.SessionsByUserId.Values
+            .Where(session => session.IsLoggedIn && !session.IsDisconnected)
+            .Select(async session =>
+            {
+                try
+                {
+                    SFSObject payload = new();
+                    payload.PutUtfString("message", messageToken);
+                    await SendExtensionResponse(session, "server.restarting", session.CurrentRoomId ?? 0, payload);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[SERVER RESTART NOTICE] Could not notify {session.UserName}: {ex.Message}");
+                }
+            })
+            .ToArray();
+
+        await Task.WhenAll(sends);
+    }
+
+    public static async Task BroadcastServerAlertAsync(string message)
+    {
+        Task[] sends = World.SessionsByUserId.Values
+            .Where(session => session.IsLoggedIn && !session.IsDisconnected)
+            .Select(async session =>
+            {
+                try
+                {
+                    SFSObject payload = new();
+                    payload.PutUtfString("message", message);
+                    await SendExtensionResponse(session, "server.alert", session.CurrentRoomId ?? 0, payload);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[SERVER ALERT] Could not notify {session.UserName}: {ex.Message}");
+                }
+            })
+            .ToArray();
+
+        await Task.WhenAll(sends);
+    }
+
 
     public static async Task HandleExtensionAsync(string command, int roomId, Session session, SFSObject parameters)
-	{
-		await (command switch
-		{
-			"time.get" => HandleTimeGet(session, roomId, parameters),
-			"encryption.get" => HandleEncryptionGet(session, roomId, parameters),
-			"l.a" => HandleLocomotionAction(session, roomId, parameters),
-			"zone.logout" => HandleRoomLeave(session, roomId),
-			"chat.msg" => HandleChatMessage(session, roomId, parameters),
-			"chat.activity" => HandleChatActivity(session, roomId, parameters),
-			"chat.activity_cancel" => HandleChatActivityCancel(session, roomId, parameters),
-			"task.p" => HandleTaskPickup(session, roomId, parameters),
-			"quest.c_obj" => HandleQuestCompleteObjective(session, roomId, parameters),
-			"quest.set" => HandleQuestStateStates(session, roomId, parameters),
-			"durable.equip" => HandleEquipDurable(session, roomId, parameters),
-			"dispensable.equip" => HandleEquipDispensable(session, roomId, parameters),
-			"con.use" => HandleConsumableUse(session, roomId, parameters),
-			//after con.use is all not coded but see whats in parameters are
-			"con.reuse" => HandleConsumableReuse(session, roomId, parameters),
-			"con.set" => HandleConsumableInventorySet(session, roomId, parameters),
-			"validate.state" => HandleGetSignedState(session, roomId, parameters),
-			"reward.broadcast" => HandleSendEarnedRewards(session, roomId, parameters),
-			"membership.refresh" => HandleMembershipRefresh(session, roomId, parameters),
-			"proto" => HandlePrototype(session, roomId, parameters),
-			"zone.player_location" => HandleGetPenguinLocation(session, roomId, parameters),
-			"pgame.message" => HandlePartyGameMessage(session, roomId, parameters),
-			"room.igloo_updated" => HandleIglooUpdate(session, roomId, parameters),
-			//"wsevent.{0}" => HandleWebServerEvents(session, roomId, parameters), not sure how that works
-			_ => Task.Run(() => Console.WriteLine($"Unhandled command: {command}"))
-		});
-	}
+    {
+        await (command switch
+        {
+            "time.get" => HandleTimeGet(session, roomId, parameters),
+            "encryption.get" => HandleEncryptionGet(session, roomId, parameters),
+            "l.a" => HandleLocomotionAction(session, roomId, parameters),
+            "zone.logout" => HandleRoomLeave(session, roomId),
+            "chat.msg" => HandleChatMessage(session, roomId, parameters),
+            "chat.activity" => HandleChatActivity(session, roomId, parameters),
+            "chat.activity_cancel" => HandleChatActivityCancel(session, roomId, parameters),
+            "task.p" => HandleTaskPickup(session, roomId, parameters),
+            "quest.c_obj" => HandleQuestCompleteObjective(session, roomId, parameters),
+            "quest.set" => HandleQuestStateStates(session, roomId, parameters),
+            "durable.equip" => HandleEquipDurable(session, roomId, parameters),
+            "dispensable.equip" => HandleEquipDispensable(session, roomId, parameters),
+            "con.use" => HandleConsumableUse(session, roomId, parameters),
+            //after con.use is all not coded but see whats in parameters are
+            "con.reuse" => HandleConsumableReuse(session, roomId, parameters),
+            "con.set" => HandleConsumableInventorySet(session, roomId, parameters),
+            "validate.state" => HandleGetSignedState(session, roomId, parameters),
+            "reward.broadcast" => HandleSendEarnedRewards(session, roomId, parameters),
+            "membership.refresh" => HandleMembershipRefresh(session, roomId, parameters),
+            "proto" => HandlePrototype(session, roomId, parameters),
+            "zone.player_location" => HandleGetPenguinLocation(session, roomId, parameters),
+            "pgame.message" => HandlePartyGameMessage(session, roomId, parameters),
+            "room.igloo_updated" => HandleIglooUpdate(session, roomId, parameters),
+            //"wsevent.{0}" => HandleWebServerEvents(session, roomId, parameters), not sure how that works
+            _ => Task.Run(() => Console.WriteLine($"Unhandled command: {command}"))
+        });
+    }
 
     private static string GetBaseRoomName(string roomName)
     {
@@ -65,47 +109,47 @@ public static class ExtensionHandler
 
         return parts[0];
     }
-    
-	private static async Task HandleTimeGet(Session session, int roomId, SFSObject parameters)
-	{
-		long ct = parameters.ContainsKey("ct") ? parameters.GetLong("ct") : 0L;
 
-		long st = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+    private static async Task HandleTimeGet(Session session, int roomId, SFSObject parameters)
+    {
+        long ct = parameters.ContainsKey("ct") ? parameters.GetLong("ct") : 0L;
 
-		SFSObject data = new SFSObject();
-		data.PutLong("ct", ct);
-		data.PutLong("st", st);
+        long st = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-		await SendExtensionResponse(session, "time.get", roomId, data);
-	}
+        SFSObject data = new SFSObject();
+        data.PutLong("ct", ct);
+        data.PutLong("st", st);
 
-	private static async Task HandleEncryptionGet(Session session, int roomId, SFSObject reqParams)
-	{
-		Console.WriteLine("Encryption request received: " + reqParams.ToJson());
+        await SendExtensionResponse(session, "time.get", roomId, data);
+    }
 
-		string pkmB64 = reqParams.GetUtfString("pkm");
-		string pkeB64 = reqParams.GetUtfString("pke");
+    private static async Task HandleEncryptionGet(Session session, int roomId, SFSObject reqParams)
+    {
+        Console.WriteLine("Encryption request received: " + reqParams.ToJson());
 
-		byte[] modulus = Convert.FromBase64String(pkmB64);
-		byte[] exponent = Convert.FromBase64String(pkeB64);
+        string pkmB64 = reqParams.GetUtfString("pkm");
+        string pkeB64 = reqParams.GetUtfString("pke");
 
-		byte[] aesKey = DumbfoxEncryption.RandomAes256Key();
+        byte[] modulus = Convert.FromBase64String(pkmB64);
+        byte[] exponent = Convert.FromBase64String(pkeB64);
 
-		byte[] encrypted;
-		using (RSA rsa = DumbfoxEncryption.BuildRsaFromModExp(modulus, exponent))
-		{
-			encrypted = DumbfoxEncryption.RsaEncryptPkcs1(rsa, aesKey);
-		}
+        byte[] aesKey = DumbfoxEncryption.RandomAes256Key();
 
-		string ekB64 = Convert.ToBase64String(encrypted);
+        byte[] encrypted;
+        using (RSA rsa = DumbfoxEncryption.BuildRsaFromModExp(modulus, exponent))
+        {
+            encrypted = DumbfoxEncryption.RsaEncryptPkcs1(rsa, aesKey);
+        }
 
-		session.AesKey = aesKey;
+        string ekB64 = Convert.ToBase64String(encrypted);
 
-		SFSObject resPayload = new SFSObject();
-		resPayload.PutUtfString("ek", ekB64);
+        session.AesKey = aesKey;
 
-		await SendExtensionResponse(session, "encryption.get", roomId, resPayload);
-	}
+        SFSObject resPayload = new SFSObject();
+        resPayload.PutUtfString("ek", ekB64);
+
+        await SendExtensionResponse(session, "encryption.get", roomId, resPayload);
+    }
 
     private static async Task HandleLocomotionAction(Session sender, int roomId, SFSObject req)
     {
@@ -139,7 +183,7 @@ public static class ExtensionHandler
 
             playerInteraction = interaction;
 
-            Console.WriteLine("[Task Pickedup] Received id: " + playerInteraction.Id+ " Type: "+ playerInteraction.Type + " Tag: "+ playerInteraction.Tag);
+            Console.WriteLine("[Task Pickedup] Received id: " + playerInteraction.Id + " Type: " + playerInteraction.Type + " Tag: " + playerInteraction.Tag);
 
             if (interaction != null)
             {
@@ -315,93 +359,94 @@ public static class ExtensionHandler
     }
 
     private static async Task HandleRoomLeave(Session session, int roomId)
-	{
+    {
         World.RoomsById[roomId].Users.TryRemove(session.UserId, out _);
 
         SFSObject res = new SFSObject();
-		res.PutText("zn", "ClubPenguin");
-		await SfsWire.WriteMessageAsync(session, 0, 2, res);
+        res.PutText("zn", "ClubPenguin");
+        await SfsWire.WriteMessageAsync(session, 0, 2, res);
 
-		SFSObject userCountPayload = new SFSObject();
-		userCountPayload.PutInt("r", roomId);
-		userCountPayload.PutShort("uc", (short)Math.Clamp(World.RoomsById[roomId].Users.Count, 0, short.MaxValue));
+        SFSObject userCountPayload = new SFSObject();
+        userCountPayload.PutInt("r", roomId);
+        userCountPayload.PutShort("uc", (short)Math.Clamp(World.RoomsById[roomId].Users.Count, 0, short.MaxValue));
 
-		SFSObject setUserPosition = new SFSObject();
-		setUserPosition.PutInt("r", roomId);
-		setUserPosition.PutIntArray("m", [session.UserId]);
-		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
-			await SfsWire.WriteMessageAsync(ji.Value, 0, 30, setUserPosition);
+        SFSObject setUserPosition = new SFSObject();
+        setUserPosition.PutInt("r", roomId);
+        setUserPosition.PutIntArray("m", [session.UserId]);
+        foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
+            await SfsWire.WriteMessageAsync(ji.Value, 0, 30, setUserPosition);
 
-		foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
-			await SfsWire.WriteMessageAsync(ji.Value, 0, 1001, userCountPayload);
+        foreach (KeyValuePair<int, Session> ji in World.RoomsById[roomId].Users)
+            await SfsWire.WriteMessageAsync(ji.Value, 0, 1001, userCountPayload);
     }
 
-	private static async Task HandleChatActivity(Session session, int roomId, SFSObject parameters)
-	{
+    private static async Task HandleChatActivity(Session session, int roomId, SFSObject parameters)
+    {
 
-		SFSObject data = new SFSObject();
-		data.PutInt("senderId", session.UserId);
+        SFSObject data = new SFSObject();
+        data.PutInt("senderId", session.UserId);
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			Session target = kv.Value;
-			await SendExtensionResponse(target, "chat.activity", roomId, data);
-		}
-	}
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+            await SendExtensionResponse(target, "chat.activity", roomId, data);
+        }
+    }
 
-	private static async Task HandleChatActivityCancel(Session session, int roomId, SFSObject parameters)
-	{
-		SFSObject data = new SFSObject();
-		data.PutInt("senderId", session.UserId);
+    private static async Task HandleChatActivityCancel(Session session, int roomId, SFSObject parameters)
+    {
+        SFSObject data = new SFSObject();
+        data.PutInt("senderId", session.UserId);
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			Session target = kv.Value;
-			await SendExtensionResponse(target, "chat.activity_cancel", roomId, data);
-		}
-	}
-	private static async Task HandleChatMessage(Session sender, int roomId, SFSObject req)
-	{
-		Console.WriteLine($"[CHAT] Received from {sender.UserName}: {req.ToJson()}");
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+            await SendExtensionResponse(target, "chat.activity_cancel", roomId, data);
+        }
+    }
+    private static async Task HandleChatMessage(Session sender, int roomId, SFSObject req)
+    {
+        Console.WriteLine($"[CHAT] Received from {sender.UserName}: {req.ToJson()}");
 
-		string decrypted = DumbfoxEncryption.DecryptIvPrependedBase64(req.GetUtfString("msg"), sender.AesKey);
-		Console.WriteLine($"[CHAT] Decrypted: {decrypted}");
-		ISFSObject reqData = SFSObject.NewFromJsonData(decrypted).GetSFSObject("data");
+        string decrypted = DumbfoxEncryption.DecryptIvPrependedBase64(req.GetUtfString("msg"), sender.AesKey);
+        Console.WriteLine($"[CHAT] Decrypted: {decrypted}");
+        ISFSObject reqData = SFSObject.NewFromJsonData(decrypted).GetSFSObject("data");
 
-		int emotion = reqData.GetInt("emotion");
-		bool moderated = reqData.GetBool("moderated");
-		string message = reqData.GetUtfString("message");
+        int emotion = reqData.GetInt("emotion");
+        bool moderated = reqData.GetBool("moderated");
+        string message = reqData.GetUtfString("message");
 
-		if (message.StartsWith(':'))
-		{
-			string[] args = message.Split(" ");
-			string cmd = args[0];
-			args = args.Skip(1).ToArray();
-			await CommandHandler.HandleCommandAsync(cmd, args, sender);
-			return;
-		}
+        if (message.StartsWith(':'))
+        {
+            string[] args = message.Split(" ");
+            string cmd = args[0];
+            args = args.Skip(1).ToArray();
+            await CommandHandler.HandleCommandAsync(cmd, args, sender);
+            return;
+        }
 
-		SFSObject resData = new SFSObject();
-		SFSObject resMsg = new SFSObject();
-		resMsg.PutLong("senderSessionId", sender.SessionId);
-		resMsg.PutInt("emotion", emotion);
-		resMsg.PutBool("moderated", moderated);
-		resMsg.PutUtfString("message", message);
-		resData.PutUtfString("msg", resMsg.ToJson());
-		resData.PutInt("senderId", sender.UserId);
+        SFSObject resData = new SFSObject();
+        SFSObject resMsg = new SFSObject();
+        resMsg.PutLong("senderSessionId", sender.SessionId);
+        resMsg.PutInt("emotion", emotion);
+        resMsg.PutBool("moderated", moderated);
+        resMsg.PutUtfString("message", message);
+        resMsg.PutUtfString("userName", sender.UserName);
+        resData.PutUtfString("msg", resMsg.ToJson());
+        resData.PutInt("senderId", sender.UserId);
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			Session target = kv.Value;
-			await SendExtensionResponse(target, "chat.msg", roomId, resData);
-		}
-	}
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+            await SendExtensionResponse(target, "chat.msg", roomId, resData);
+        }
+    }
 
     private static async Task HandleTaskPickup(Session session, int roomId, SFSObject parameters)
     {
@@ -436,47 +481,47 @@ public static class ExtensionHandler
         await SendExtensionResponse(session, "reward.room", roomId, reward);
     }
     private static async Task HandleQuestCompleteObjective(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Quest Complete Objectiv] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Quest Complete Objectiv] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-		SFSObject data = new SFSObject();
-		SFSObject fakesignedresponse = new SFSObject();
+    {
+        Console.WriteLine($"[Quest Complete Objectiv] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Quest Complete Objectiv] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+        SFSObject data = new SFSObject();
+        SFSObject fakesignedresponse = new SFSObject();
 
-		fakesignedresponse.PutLong("goodUntil", 0L);
-		fakesignedresponse.PutNull("signature");
-		fakesignedresponse.PutNull("swid");
+        fakesignedresponse.PutLong("goodUntil", 0L);
+        fakesignedresponse.PutNull("signature");
+        fakesignedresponse.PutNull("swid");
 
         foreach (var quest in session.Quest)
         {
             if (quest.status == 1)
             {
                 quest.completedObjectives =
-				(quest.completedObjectives ?? Array.Empty<string>())
-				.Append(parameters.GetUtfString("obj"))
-				.ToArray();
+                (quest.completedObjectives ?? Array.Empty<string>())
+                .Append(parameters.GetUtfString("obj"))
+                .ToArray();
                 fakesignedresponse.PutUtfStringArray("data", quest.completedObjectives);
             }
         }
 
 
-		data.PutUtfString("data", fakesignedresponse.ToJson());
+        data.PutUtfString("data", fakesignedresponse.ToJson());
 
         await SendExtensionResponse(session, "quest.s_obj", roomId, data);
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			Session target = kv.Value;
-		}
-	}
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+        }
+    }
 
-	private static async Task HandleQuestStateStates(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Quest Set States] Received from {session.UserName}: {parameters.ToJson()}");
-		SFSObject data = new SFSObject();
+    private static async Task HandleQuestStateStates(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Quest Set States] Received from {session.UserName}: {parameters.ToJson()}");
+        SFSObject data = new SFSObject();
 
         /*string json = parameters.GetUtfString("data");
 
@@ -523,11 +568,11 @@ public static class ExtensionHandler
                         session.ActivQuest = existingQuest.questId;
                         if (session.ActivQuest.Contains("DJC")) session.SetUserVar(new SFSUserVariable("on_quest", "DJCadence"));
                         if (session.ActivQuest.Contains("RHC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rockhopper"));
-                        if (session.ActivQuest.Contains("AAC")) session.SetUserVar(new SFSUserVariable("on_quest", "AuntArctic")); 
+                        if (session.ActivQuest.Contains("AAC")) session.SetUserVar(new SFSUserVariable("on_quest", "AuntArctic"));
                         if (session.ActivQuest.Contains("RKC")) session.SetUserVar(new SFSUserVariable("on_quest", "Rookie"));
-					}
-					else
-					{
+                    }
+                    else
+                    {
                         session.SetUserVar(new SFSUserVariable("on_quest", null));
                     }
                 }
@@ -550,93 +595,93 @@ public static class ExtensionHandler
 
         await SendExtensionResponse(session, "quest.set", roomId, data);
 
-		if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
+        if (!World.RoomsById.TryGetValue(roomId, out Room? room)) return;
 
-		foreach (KeyValuePair<int, Session> kv in room.Users)
-		{
-			Session target = kv.Value;
-		}
-	}
+        foreach (KeyValuePair<int, Session> kv in room.Users)
+        {
+            Session target = kv.Value;
+        }
+    }
 
-	private static async Task HandleEquipDurable(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Equip Durable] Received from {session.UserName}: {parameters.ToJson()}");
-		ISFSObject reqData2 = SFSObject.NewFromJsonData(parameters.GetUtfString("type"));
+    private static async Task HandleEquipDurable(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Equip Durable] Received from {session.UserName}: {parameters.ToJson()}");
+        ISFSObject reqData2 = SFSObject.NewFromJsonData(parameters.GetUtfString("type"));
 
 
-		Dictionary<int, string> gearNames = new Dictionary<int, string>
-		{
-			{11, "GearDrums"},
-			{12, "GearFirstAidKit"},
-			{13, "GearFishDogMultiTool"},
-			{14, "GearGuitar"},
-			{15, "GearJackhammer"},
-			{16, "GearKeytar"},
-			{17, "GearPirateKit"},
-			{18, "GearScepter"},
-			{19, "GearShield"},
-			{20, "GearSword"},
-			{66, "GearTrafficSign"},
-			{71, "GearPomPomsBlue"},
-			{72, "GearPomPomsRed"},
-			{73, "GearGaryGear"},
-			{77, "GearCPSNCamera"},
-			{86, "GearDance"},
-			{101, "AcousticGuitarGear"},
-			{103, "MicrophoneGear"},
-			{105, "BongoDrumsGear"},
-			{129, "GearFlowerWand"},
-			{154, "MedievalGear"}
-		};
+        Dictionary<int, string> gearNames = new Dictionary<int, string>
+        {
+            {11, "GearDrums"},
+            {12, "GearFirstAidKit"},
+            {13, "GearFishDogMultiTool"},
+            {14, "GearGuitar"},
+            {15, "GearJackhammer"},
+            {16, "GearKeytar"},
+            {17, "GearPirateKit"},
+            {18, "GearScepter"},
+            {19, "GearShield"},
+            {20, "GearSword"},
+            {66, "GearTrafficSign"},
+            {71, "GearPomPomsBlue"},
+            {72, "GearPomPomsRed"},
+            {73, "GearGaryGear"},
+            {77, "GearCPSNCamera"},
+            {86, "GearDance"},
+            {101, "AcousticGuitarGear"},
+            {103, "MicrophoneGear"},
+            {105, "BongoDrumsGear"},
+            {129, "GearFlowerWand"},
+            {154, "MedievalGear"}
+        };
 
-		gearNames.TryGetValue(reqData2.GetSFSObject("data").GetInt("propId"), out string? gearName);
-		gearName ??= "GearSword";
-		SFSObject data = new SFSObject();
-		data.PutUtfString("name", gearName);
-		data.PutUtfString("type", "durable");
+        gearNames.TryGetValue(reqData2.GetSFSObject("data").GetInt("propId"), out string? gearName);
+        gearName ??= "GearSword";
+        SFSObject data = new SFSObject();
+        data.PutUtfString("name", gearName);
+        data.PutUtfString("type", "durable");
 
-		UserVariable con = new SFSUserVariable("con", data);
-		await UserVarHandler.SendUserVarConUpdate(session, con, data.GetInt("propId"), gearName);
-	}
+        UserVariable con = new SFSUserVariable("con", data);
+        await UserVarHandler.SendUserVarConUpdate(session, con, data.GetInt("propId"), gearName);
+    }
 
-	private static async Task HandleEquipDispensable(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Equip Dispensable] Received from {session.UserName}: {parameters.ToJson()}");
+    private static async Task HandleEquipDispensable(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Equip Dispensable] Received from {session.UserName}: {parameters.ToJson()}");
 
-		Dictionary<int, string> gearNames = new Dictionary<int, string>
-		{
-   			{4, "Dance"},
-   			{5, "Drums"},
- 		    {7, "FirstAidKit"},
-	        {8, "FishDogMultiTool"},
+        Dictionary<int, string> gearNames = new Dictionary<int, string>
+        {
+               {4, "Dance"},
+               {5, "Drums"},
+             {7, "FirstAidKit"},
+            {8, "FishDogMultiTool"},
             {9, "FishingRod"},
             {43, "Sword"},
-    		{21, "Guitar"},
-    		{26, "Keytar"},
-			{31, "PirateKit"},
-    		{36, "ScepterProp"},
-    		{37, "Shield"},
-			{57, "JackHammer"},
-			{70, "CPSNCamera"},
-    		{74, "PomPomsRed"},
-    		{75, "PomPomsBlue"},
-    		{76, "GaryGear"},
-    		{78, "YetiRescueKit"},
-    		{100, "AcousticGuitar"},
-    		{102, "Microphone"},
-    		{104, "BongoDrums"},
-			{154, "MedievalGear"}
-		};
+            {21, "Guitar"},
+            {26, "Keytar"},
+            {31, "PirateKit"},
+            {36, "ScepterProp"},
+            {37, "Shield"},
+            {57, "JackHammer"},
+            {70, "CPSNCamera"},
+            {74, "PomPomsRed"},
+            {75, "PomPomsBlue"},
+            {76, "GaryGear"},
+            {78, "YetiRescueKit"},
+            {100, "AcousticGuitar"},
+            {102, "Microphone"},
+            {104, "BongoDrums"},
+            {154, "MedievalGear"}
+        };
 
-		int type = (int)parameters.GetLong("type");
+        int type = (int)parameters.GetLong("type");
 
-		gearNames.TryGetValue(type, out string? gearName);
-		gearName ??= "JackHammer";
-		SFSObject data = new SFSObject();
-		data.PutUtfString("name", gearName);
-		data.PutUtfString("type", "durable");
+        gearNames.TryGetValue(type, out string? gearName);
+        gearName ??= "JackHammer";
+        SFSObject data = new SFSObject();
+        data.PutUtfString("name", gearName);
+        data.PutUtfString("type", "durable");
 
-		UserVariable con = new SFSUserVariable("con", data);
+        UserVariable con = new SFSUserVariable("con", data);
         await UserVarHandler.SendUserVarConUpdate(session, con, type, gearName);
     }
 
@@ -1005,68 +1050,68 @@ public static class ExtensionHandler
     }
 
     private static async Task HandlePrototype(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Prototype] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Prototype] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    {
+        Console.WriteLine($"[Prototype] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Prototype] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandleGetSignedState(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Get Signed State] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Get Signed State] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandleGetSignedState(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Get Signed State] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Get Signed State] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandleMembershipRefresh(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Membership Refresh] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Membership Refresh] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandleMembershipRefresh(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Membership Refresh] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Membership Refresh] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandleSendEarnedRewards(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Send Earned Rewards] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Send Earned Rewards] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandleSendEarnedRewards(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Send Earned Rewards] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Send Earned Rewards] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandleGetPenguinLocation(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Get Penguin Location] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Get Penguin Location] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandleGetPenguinLocation(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Get Penguin Location] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Get Penguin Location] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandlePartyGameMessage(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Party Game Message] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Party Game Message] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandlePartyGameMessage(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Party Game Message] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Party Game Message] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	private static async Task HandleIglooUpdate(Session session, int roomId, SFSObject parameters)
-	{
-		Console.WriteLine($"[Igloo Update] Received from {session.UserName}: {parameters.ToJson()}");
-		Console.ForegroundColor = ConsoleColor.Yellow;
-		Console.WriteLine($"[Igloo Update] WARN: Is not code properly/ or implated yet!!!!");
-		Console.ResetColor();
-	}
+    private static async Task HandleIglooUpdate(Session session, int roomId, SFSObject parameters)
+    {
+        Console.WriteLine($"[Igloo Update] Received from {session.UserName}: {parameters.ToJson()}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"[Igloo Update] WARN: Is not code properly/ or implated yet!!!!");
+        Console.ResetColor();
+    }
 
-	public static async Task SendExtensionResponse(Session session, string cmd, int roomId, SFSObject payload)
-	{
-		SFSObject res = new SFSObject();
-		res.PutUtfString("c", cmd);
-		res.PutInt("r", roomId);
-		res.PutSFSObject("p", payload);
+    public static async Task SendExtensionResponse(Session session, string cmd, int roomId, SFSObject payload)
+    {
+        SFSObject res = new SFSObject();
+        res.PutUtfString("c", cmd);
+        res.PutInt("r", roomId);
+        res.PutSFSObject("p", payload);
 
-		await SfsWire.WriteMessageAsync(session, controller: 1, action: (short)RequestType.CallExtension, parameters: res);
-	}
+        await SfsWire.WriteMessageAsync(session, controller: 1, action: (short)RequestType.CallExtension, parameters: res);
+    }
 }

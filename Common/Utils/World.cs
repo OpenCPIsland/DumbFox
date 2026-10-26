@@ -7,6 +7,10 @@ public static class World
 	public static List<Session> Sessions = [];
     public static ConcurrentDictionary<int, Session> SessionsByUserId { get; } = new();
 
+    public static Action? RequestShutdown { get; set; }
+
+    public static HashSet<int> AlertCommandUserIds { get; set; } = [];
+
     public static ConcurrentDictionary<int, Room> RoomsById { get; } = new();
 
     public static Room GetOrCrateRoom(string name)

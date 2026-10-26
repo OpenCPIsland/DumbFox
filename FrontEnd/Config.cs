@@ -26,6 +26,7 @@ namespace FrontEnd
         public bool IsIntimate { get; set; }
         public string hostname { get; set; } = "127.0.0.1";
         public string WSHostname { get; set; } = "127.0.0.1";
+        public List<int> AlertCommandUserIds { get; set; } = [];
     }
 
     public class WebApiConfig
