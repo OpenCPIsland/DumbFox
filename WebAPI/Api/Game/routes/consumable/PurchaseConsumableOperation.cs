@@ -41,6 +41,7 @@ public class PurchaseConsumableOperation
             || !int.TryParse(ctx.Request.RouteValues["count"]?.ToString(), out int count)
             || count is < 1 or > 100)
         {
+            Console.WriteLine($"Purchase Failed");
             await ResponseHelper.WriteJsonAsync(ctx, new BaseCodeError { Code = 3 }, 400);
             return;
         }
