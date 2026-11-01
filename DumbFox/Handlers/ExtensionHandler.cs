@@ -19,7 +19,7 @@ public static class ExtensionHandler
     private static long _lastPartyBlasterId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000;
     private const byte LocomotionMoveAction = 0;
     private const byte LocomotionSprintAction = 13;
-    private const double SprintSpeedThreshold = 3.9;
+    private const double SprintSpeedThreshold = 3.65;
     private const double JogSpeedThreshold = 3.4;
 
     public static async Task BroadcastServerRestartMessageAsync(string messageToken = "GlobalUI.ErrorMessages.ServerRestarting")
